@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// Restrained elevation. Aafiatak is surface-led, not shadow-led.
+/// Restrained elevation from the Burgundy Monochrome v2.1 High-Fidelity tokens.
 abstract final class AafiatakElevation {
   const AafiatakElevation._();
 
@@ -9,10 +9,31 @@ abstract final class AafiatakElevation {
   static const double level2 = 3;
 
   static const List<BoxShadow> none = <BoxShadow>[];
+
+  /// 0 2 10 rgba(26,26,26,.055)
   static const List<BoxShadow> card = <BoxShadow>[
-    BoxShadow(color: Color(0x0F171519), blurRadius: 8, offset: Offset(0, 2)),
+    BoxShadow(
+      color: Color(0x0E1A1A1A),
+      blurRadius: 10,
+      offset: Offset(0, 2),
+    ),
   ];
+
+  /// 0 14 34 rgba(26,26,26,.11)
   static const List<BoxShadow> overlay = <BoxShadow>[
-    BoxShadow(color: Color(0x17171519), blurRadius: 24, offset: Offset(0, 8)),
+    BoxShadow(
+      color: Color(0x1C1A1A1A),
+      blurRadius: 34,
+      offset: Offset(0, 14),
+    ),
+  ];
+
+  /// 0 12 26 rgba(128,0,32,.20)
+  static const List<BoxShadow> brand = <BoxShadow>[
+    BoxShadow(
+      color: Color(0x33800020),
+      blurRadius: 26,
+      offset: Offset(0, 12),
+    ),
   ];
 }

@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 
 import 'aafiatak_colors.dart';
 
-/// Approved Aafiatak type roles.
+/// Approved Aafiatak typography roles from the High-Fidelity handoff.
 ///
-/// Font assets are intentionally not bundled in this starter delivery. Add the
-/// approved licensed assets later without changing this token API.
+/// The canonical Flutter font-family key is `IBMPlexSansArabic`. The supplied
+/// family includes Arabic and Latin glyphs, so a second project font family is
+/// not required. Font binaries are registered separately in `pubspec.yaml`.
 abstract final class AafiatakTypography {
   const AafiatakTypography._();
 
-  static const String arabicFamily = 'IBM Plex Sans Arabic';
-  static const String latinFamily = 'IBM Plex Sans';
+  static const String arabicFamily = 'IBMPlexSansArabic';
   static const List<String> fallbackFamilies = <String>[
-    latinFamily,
+    'IBM Plex Sans Arabic',
     'Noto Sans Arabic',
     'Noto Sans',
   ];

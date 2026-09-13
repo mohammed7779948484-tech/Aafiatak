@@ -29,11 +29,25 @@ class AafiatakCard extends StatelessWidget {
             child: content,
           );
 
+    Widget card = Card(clipBehavior: clipBehavior, child: cardChild);
+
+    // High-Fidelity uses the restrained e1 shadow only for interactive cards;
+    // static content surfaces remain border-led and flat.
+    if (onTap != null) {
+      card = DecoratedBox(
+        decoration: const BoxDecoration(
+          borderRadius: AafiatakRadii.card,
+          boxShadow: AafiatakElevation.card,
+        ),
+        child: card,
+      );
+    }
+
     return Semantics(
       container: true,
       button: onTap != null,
       label: semanticLabel,
-      child: Card(clipBehavior: clipBehavior, child: cardChild),
+      child: card,
     );
   }
 }

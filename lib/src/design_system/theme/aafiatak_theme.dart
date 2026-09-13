@@ -26,15 +26,18 @@ abstract final class AafiatakTheme {
 
     return base.copyWith(
       appBarTheme: AppBarThemeData(
-        backgroundColor: AafiatakColors.canvas,
+        backgroundColor: scheme.surface,
         foregroundColor: scheme.onSurface,
         surfaceTintColor: Colors.transparent,
         elevation: 0,
         scrolledUnderElevation: 0,
-        centerTitle: false,
+        centerTitle: true,
         iconTheme: const IconThemeData(size: AafiatakSizes.iconDefault),
         actionsIconTheme: const IconThemeData(size: AafiatakSizes.iconDefault),
-        titleTextStyle: textTheme.titleLarge,
+        titleTextStyle: textTheme.titleMedium?.copyWith(
+          color: scheme.onSurface,
+          fontWeight: FontWeight.w600,
+        ),
       ),
       iconTheme: IconThemeData(
         color: scheme.onSurface,
@@ -42,7 +45,10 @@ abstract final class AafiatakTheme {
       ),
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
-          minimumSize: const Size(0, AafiatakSizes.buttonHeight),
+          minimumSize: const Size(
+            AafiatakSizes.buttonMinWidth,
+            AafiatakSizes.buttonHeight,
+          ),
           padding: const EdgeInsetsDirectional.symmetric(
             horizontal: AafiatakSpacing.xl,
             vertical: AafiatakSpacing.sm,
@@ -56,7 +62,10 @@ abstract final class AafiatakTheme {
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           foregroundColor: scheme.primary,
-          minimumSize: const Size(0, AafiatakSizes.buttonHeight),
+          minimumSize: const Size(
+            AafiatakSizes.buttonMinWidth,
+            AafiatakSizes.buttonHeight,
+          ),
           padding: const EdgeInsetsDirectional.symmetric(
             horizontal: AafiatakSpacing.xl,
             vertical: AafiatakSpacing.sm,
@@ -66,7 +75,7 @@ abstract final class AafiatakTheme {
           ),
           side: BorderSide(
             color: scheme.outline,
-            width: AafiatakBorders.subtle,
+            width: AafiatakBorders.strong,
           ),
           textStyle: textTheme.labelLarge,
         ),
@@ -74,12 +83,15 @@ abstract final class AafiatakTheme {
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: scheme.primary,
-          minimumSize: const Size(0, AafiatakSizes.minimumTouchTarget),
+          minimumSize: const Size(
+            AafiatakSizes.buttonMinWidth,
+            AafiatakSizes.minimumTouchTarget,
+          ),
           padding: const EdgeInsetsDirectional.symmetric(
             horizontal: AafiatakSpacing.md,
             vertical: AafiatakSpacing.xs,
           ),
-          shape: const RoundedRectangleBorder(borderRadius: AafiatakRadii.md),
+          shape: const RoundedRectangleBorder(borderRadius: AafiatakRadii.sm),
           textStyle: textTheme.labelLarge,
         ),
       ),
@@ -104,7 +116,10 @@ abstract final class AafiatakTheme {
       ),
       inputDecorationTheme: InputDecorationThemeData(
         filled: true,
-        fillColor: scheme.surface,
+        // The scaffold handoff used a translucent darker fill. We keep the
+        // approved low-neutral surface here so #6E6E6E labels/hints remain
+        // above the 4.5:1 contrast target.
+        fillColor: scheme.surfaceContainerLow,
         floatingLabelBehavior: FloatingLabelBehavior.always,
         helperMaxLines: 3,
         errorMaxLines: 3,
@@ -131,14 +146,14 @@ abstract final class AafiatakTheme {
         border: OutlineInputBorder(
           borderRadius: AafiatakRadii.input,
           borderSide: BorderSide(
-            color: scheme.outlineVariant,
+            color: scheme.outline,
             width: AafiatakBorders.subtle,
           ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: AafiatakRadii.input,
           borderSide: BorderSide(
-            color: scheme.outlineVariant,
+            color: scheme.outline,
             width: AafiatakBorders.subtle,
           ),
         ),
@@ -171,7 +186,7 @@ abstract final class AafiatakTheme {
         ),
       ),
       cardTheme: CardThemeData(
-        color: scheme.surface,
+        color: scheme.surfaceContainerLow,
         surfaceTintColor: Colors.transparent,
         elevation: AafiatakElevation.level0,
         margin: EdgeInsets.zero,
@@ -193,14 +208,14 @@ abstract final class AafiatakTheme {
         height: AafiatakSizes.navigationBarHeight,
         backgroundColor: scheme.surface,
         surfaceTintColor: Colors.transparent,
-        indicatorColor: scheme.primaryContainer,
-        elevation: 0,
+        indicatorColor: scheme.secondaryContainer,
+        elevation: 8,
         labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
         labelTextStyle: WidgetStateProperty.resolveWith<TextStyle?>((states) {
           final selected = states.contains(WidgetState.selected);
-          return textTheme.labelMedium?.copyWith(
+          return textTheme.labelSmall?.copyWith(
             color: selected ? scheme.primary : scheme.onSurfaceVariant,
-            fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
+            fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
           );
         }),
         iconTheme: WidgetStateProperty.resolveWith<IconThemeData?>((states) {
@@ -211,18 +226,34 @@ abstract final class AafiatakTheme {
           );
         }),
       ),
+      listTileTheme: ListTileThemeData(
+        contentPadding: const EdgeInsetsDirectional.symmetric(
+          horizontal: AafiatakSpacing.md,
+          vertical: AafiatakSpacing.xxs,
+        ),
+        shape: const RoundedRectangleBorder(
+          borderRadius: AafiatakRadii.md,
+        ),
+        visualDensity: VisualDensity.comfortable,
+        titleTextStyle: textTheme.titleMedium?.copyWith(
+          fontWeight: FontWeight.w600,
+        ),
+        subtitleTextStyle: textTheme.bodyMedium?.copyWith(
+          color: scheme.onSurfaceVariant,
+        ),
+      ),
       chipTheme: ChipThemeData(
-        backgroundColor: scheme.surface,
+        backgroundColor: scheme.surfaceContainerLow,
         selectedColor: scheme.primaryContainer,
-        secondarySelectedColor: scheme.secondaryContainer,
+        secondarySelectedColor: scheme.primaryContainer,
         disabledColor: scheme.onSurface.withValues(alpha: 0.08),
         side: BorderSide(color: scheme.outlineVariant),
-        shape: const RoundedRectangleBorder(borderRadius: AafiatakRadii.sm),
+        shape: const RoundedRectangleBorder(borderRadius: AafiatakRadii.full),
         labelStyle: textTheme.labelMedium,
         secondaryLabelStyle: textTheme.labelMedium,
         padding: const EdgeInsetsDirectional.symmetric(
           horizontal: AafiatakSpacing.sm,
-          vertical: AafiatakSpacing.xxs,
+          vertical: AafiatakSpacing.xs,
         ),
         showCheckmark: true,
       ),
@@ -239,17 +270,17 @@ abstract final class AafiatakTheme {
             RoundedRectangleBorder(borderRadius: AafiatakRadii.md),
           ),
           side: WidgetStatePropertyAll<BorderSide>(
-            BorderSide(color: scheme.outlineVariant),
+            BorderSide(color: scheme.outline),
           ),
           backgroundColor: WidgetStateProperty.resolveWith<Color?>((states) {
             if (states.contains(WidgetState.selected)) {
-              return scheme.primaryContainer;
+              return scheme.secondaryContainer;
             }
-            return scheme.surface;
+            return scheme.surfaceContainerLow;
           }),
           foregroundColor: WidgetStateProperty.resolveWith<Color?>((states) {
             if (states.contains(WidgetState.selected)) {
-              return scheme.onPrimaryContainer;
+              return scheme.onSecondaryContainer;
             }
             return scheme.onSurfaceVariant;
           }),
@@ -262,7 +293,7 @@ abstract final class AafiatakTheme {
           color: scheme.onInverseSurface,
         ),
         actionTextColor: scheme.inversePrimary,
-        elevation: AafiatakElevation.level1,
+        elevation: 4,
         shape: const RoundedRectangleBorder(borderRadius: AafiatakRadii.md),
         insetPadding: const EdgeInsets.fromLTRB(
           AafiatakSpacing.md,
@@ -274,9 +305,11 @@ abstract final class AafiatakTheme {
       dialogTheme: DialogThemeData(
         backgroundColor: scheme.surface,
         surfaceTintColor: Colors.transparent,
-        elevation: AafiatakElevation.level2,
+        elevation: 0,
         shape: const RoundedRectangleBorder(borderRadius: AafiatakRadii.dialog),
-        titleTextStyle: textTheme.titleLarge,
+        titleTextStyle: textTheme.titleLarge?.copyWith(
+          fontWeight: FontWeight.w700,
+        ),
         contentTextStyle: textTheme.bodyMedium,
       ),
       bottomSheetTheme: BottomSheetThemeData(
@@ -284,8 +317,8 @@ abstract final class AafiatakTheme {
         surfaceTintColor: Colors.transparent,
         modalBackgroundColor: scheme.surface,
         modalBarrierColor: scheme.scrim,
-        elevation: AafiatakElevation.level2,
-        modalElevation: AafiatakElevation.level2,
+        elevation: 0,
+        modalElevation: 0,
         showDragHandle: true,
         shape: const RoundedRectangleBorder(
           borderRadius: AafiatakRadii.bottomSheet,
@@ -293,7 +326,9 @@ abstract final class AafiatakTheme {
       ),
       searchBarTheme: SearchBarThemeData(
         elevation: const WidgetStatePropertyAll<double>(0),
-        backgroundColor: WidgetStatePropertyAll<Color>(scheme.surface),
+        backgroundColor: WidgetStatePropertyAll<Color>(
+          scheme.surfaceContainerLow,
+        ),
         surfaceTintColor: const WidgetStatePropertyAll<Color>(
           Colors.transparent,
         ),
@@ -301,14 +336,14 @@ abstract final class AafiatakTheme {
           BorderSide(color: scheme.outlineVariant),
         ),
         shape: const WidgetStatePropertyAll<OutlinedBorder>(
-          RoundedRectangleBorder(borderRadius: AafiatakRadii.md),
+          RoundedRectangleBorder(borderRadius: AafiatakRadii.search),
         ),
         padding: const WidgetStatePropertyAll<EdgeInsetsGeometry>(
           EdgeInsetsDirectional.symmetric(horizontal: AafiatakSpacing.md),
         ),
         textStyle: WidgetStatePropertyAll<TextStyle?>(textTheme.bodyMedium),
         hintStyle: WidgetStatePropertyAll<TextStyle?>(
-          textTheme.bodyMedium?.copyWith(color: scheme.onSurfaceVariant),
+          textTheme.bodyLarge?.copyWith(color: scheme.onSurfaceVariant),
         ),
       ),
       progressIndicatorTheme: ProgressIndicatorThemeData(
@@ -322,7 +357,9 @@ abstract final class AafiatakTheme {
         selectionHandleColor: scheme.primary,
       ),
       checkboxTheme: CheckboxThemeData(
-        shape: const RoundedRectangleBorder(borderRadius: AafiatakRadii.sm),
+        shape: const RoundedRectangleBorder(
+          borderRadius: AafiatakRadii.control,
+        ),
         fillColor: WidgetStateProperty.resolveWith<Color?>((states) {
           if (states.contains(WidgetState.selected)) return scheme.primary;
           return null;
@@ -336,17 +373,19 @@ abstract final class AafiatakTheme {
       ),
       switchTheme: SwitchThemeData(
         thumbColor: WidgetStateProperty.resolveWith<Color?>((states) {
-          if (states.contains(WidgetState.selected)) return scheme.onPrimary;
+          if (states.contains(WidgetState.selected)) return scheme.primary;
           return scheme.outline;
         }),
         trackColor: WidgetStateProperty.resolveWith<Color?>((states) {
-          if (states.contains(WidgetState.selected)) return scheme.primary;
+          if (states.contains(WidgetState.selected)) {
+            return scheme.primaryContainer;
+          }
           return scheme.surfaceContainerHighest;
         }),
       ),
       tooltipTheme: TooltipThemeData(
         decoration: BoxDecoration(
-          color: scheme.inverseSurface,
+          color: scheme.inverseSurface.withValues(alpha: 0.9),
           borderRadius: AafiatakRadii.sm,
         ),
         textStyle: textTheme.labelSmall?.copyWith(
