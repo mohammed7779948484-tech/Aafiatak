@@ -45,7 +45,10 @@ abstract final class AafiatakTheme {
       ),
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
-          minimumSize: const Size(0, AafiatakSizes.buttonHeight),
+          minimumSize: const Size(
+            AafiatakSizes.buttonMinWidth,
+            AafiatakSizes.buttonHeight,
+          ),
           padding: const EdgeInsetsDirectional.symmetric(
             horizontal: AafiatakSpacing.xl,
             vertical: AafiatakSpacing.sm,
@@ -59,7 +62,10 @@ abstract final class AafiatakTheme {
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           foregroundColor: scheme.primary,
-          minimumSize: const Size(0, AafiatakSizes.buttonHeight),
+          minimumSize: const Size(
+            AafiatakSizes.buttonMinWidth,
+            AafiatakSizes.buttonHeight,
+          ),
           padding: const EdgeInsetsDirectional.symmetric(
             horizontal: AafiatakSpacing.xl,
             vertical: AafiatakSpacing.sm,
@@ -69,7 +75,7 @@ abstract final class AafiatakTheme {
           ),
           side: BorderSide(
             color: scheme.outline,
-            width: AafiatakBorders.subtle,
+            width: AafiatakBorders.strong,
           ),
           textStyle: textTheme.labelLarge,
         ),
@@ -77,12 +83,15 @@ abstract final class AafiatakTheme {
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: scheme.primary,
-          minimumSize: const Size(0, AafiatakSizes.minimumTouchTarget),
+          minimumSize: const Size(
+            AafiatakSizes.buttonMinWidth,
+            AafiatakSizes.minimumTouchTarget,
+          ),
           padding: const EdgeInsetsDirectional.symmetric(
             horizontal: AafiatakSpacing.md,
             vertical: AafiatakSpacing.xs,
           ),
-          shape: const RoundedRectangleBorder(borderRadius: AafiatakRadii.md),
+          shape: const RoundedRectangleBorder(borderRadius: AafiatakRadii.sm),
           textStyle: textTheme.labelLarge,
         ),
       ),
@@ -107,7 +116,7 @@ abstract final class AafiatakTheme {
       ),
       inputDecorationTheme: InputDecorationThemeData(
         filled: true,
-        fillColor: scheme.surfaceContainerLow,
+        fillColor: scheme.surfaceContainerHighest.withValues(alpha: 0.5),
         floatingLabelBehavior: FloatingLabelBehavior.always,
         helperMaxLines: 3,
         errorMaxLines: 3,
@@ -134,14 +143,14 @@ abstract final class AafiatakTheme {
         border: OutlineInputBorder(
           borderRadius: AafiatakRadii.input,
           borderSide: BorderSide(
-            color: scheme.outlineVariant,
+            color: scheme.outline,
             width: AafiatakBorders.subtle,
           ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: AafiatakRadii.input,
           borderSide: BorderSide(
-            color: scheme.outlineVariant,
+            color: scheme.outline,
             width: AafiatakBorders.subtle,
           ),
         ),
@@ -174,7 +183,7 @@ abstract final class AafiatakTheme {
         ),
       ),
       cardTheme: CardThemeData(
-        color: scheme.surface,
+        color: scheme.surfaceContainerLow,
         surfaceTintColor: Colors.transparent,
         elevation: AafiatakElevation.level0,
         margin: EdgeInsets.zero,
@@ -196,7 +205,7 @@ abstract final class AafiatakTheme {
         height: AafiatakSizes.navigationBarHeight,
         backgroundColor: scheme.surface,
         surfaceTintColor: Colors.transparent,
-        indicatorColor: scheme.primaryContainer,
+        indicatorColor: scheme.secondaryContainer,
         elevation: 8,
         labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
         labelTextStyle: WidgetStateProperty.resolveWith<TextStyle?>((states) {
@@ -223,8 +232,10 @@ abstract final class AafiatakTheme {
           borderRadius: AafiatakRadii.md,
         ),
         visualDensity: VisualDensity.comfortable,
-        titleTextStyle: textTheme.titleMedium,
-        subtitleTextStyle: textTheme.bodySmall?.copyWith(
+        titleTextStyle: textTheme.titleMedium?.copyWith(
+          fontWeight: FontWeight.w600,
+        ),
+        subtitleTextStyle: textTheme.bodyMedium?.copyWith(
           color: scheme.onSurfaceVariant,
         ),
       ),
@@ -239,7 +250,7 @@ abstract final class AafiatakTheme {
         secondaryLabelStyle: textTheme.labelMedium,
         padding: const EdgeInsetsDirectional.symmetric(
           horizontal: AafiatakSpacing.sm,
-          vertical: AafiatakSpacing.xxs,
+          vertical: AafiatakSpacing.xs,
         ),
         showCheckmark: true,
       ),
@@ -256,17 +267,17 @@ abstract final class AafiatakTheme {
             RoundedRectangleBorder(borderRadius: AafiatakRadii.md),
           ),
           side: WidgetStatePropertyAll<BorderSide>(
-            BorderSide(color: scheme.outlineVariant),
+            BorderSide(color: scheme.outline),
           ),
           backgroundColor: WidgetStateProperty.resolveWith<Color?>((states) {
             if (states.contains(WidgetState.selected)) {
-              return scheme.primaryContainer;
+              return scheme.secondaryContainer;
             }
             return scheme.surfaceContainerLow;
           }),
           foregroundColor: WidgetStateProperty.resolveWith<Color?>((states) {
             if (states.contains(WidgetState.selected)) {
-              return scheme.onPrimaryContainer;
+              return scheme.onSecondaryContainer;
             }
             return scheme.onSurfaceVariant;
           }),
@@ -279,7 +290,7 @@ abstract final class AafiatakTheme {
           color: scheme.onInverseSurface,
         ),
         actionTextColor: scheme.inversePrimary,
-        elevation: AafiatakElevation.level1,
+        elevation: 4,
         shape: const RoundedRectangleBorder(borderRadius: AafiatakRadii.md),
         insetPadding: const EdgeInsets.fromLTRB(
           AafiatakSpacing.md,
@@ -291,9 +302,11 @@ abstract final class AafiatakTheme {
       dialogTheme: DialogThemeData(
         backgroundColor: scheme.surface,
         surfaceTintColor: Colors.transparent,
-        elevation: AafiatakElevation.level2,
+        elevation: 0,
         shape: const RoundedRectangleBorder(borderRadius: AafiatakRadii.dialog),
-        titleTextStyle: textTheme.titleLarge,
+        titleTextStyle: textTheme.titleLarge?.copyWith(
+          fontWeight: FontWeight.w700,
+        ),
         contentTextStyle: textTheme.bodyMedium,
       ),
       bottomSheetTheme: BottomSheetThemeData(
@@ -301,8 +314,8 @@ abstract final class AafiatakTheme {
         surfaceTintColor: Colors.transparent,
         modalBackgroundColor: scheme.surface,
         modalBarrierColor: scheme.scrim,
-        elevation: AafiatakElevation.level2,
-        modalElevation: AafiatakElevation.level2,
+        elevation: 0,
+        modalElevation: 0,
         showDragHandle: true,
         shape: const RoundedRectangleBorder(
           borderRadius: AafiatakRadii.bottomSheet,
@@ -327,7 +340,7 @@ abstract final class AafiatakTheme {
         ),
         textStyle: WidgetStatePropertyAll<TextStyle?>(textTheme.bodyMedium),
         hintStyle: WidgetStatePropertyAll<TextStyle?>(
-          textTheme.bodyMedium?.copyWith(color: scheme.onSurfaceVariant),
+          textTheme.bodyLarge?.copyWith(color: scheme.onSurfaceVariant),
         ),
       ),
       progressIndicatorTheme: ProgressIndicatorThemeData(
@@ -341,7 +354,9 @@ abstract final class AafiatakTheme {
         selectionHandleColor: scheme.primary,
       ),
       checkboxTheme: CheckboxThemeData(
-        shape: const RoundedRectangleBorder(borderRadius: AafiatakRadii.sm),
+        shape: const RoundedRectangleBorder(
+          borderRadius: AafiatakRadii.control,
+        ),
         fillColor: WidgetStateProperty.resolveWith<Color?>((states) {
           if (states.contains(WidgetState.selected)) return scheme.primary;
           return null;
@@ -355,17 +370,19 @@ abstract final class AafiatakTheme {
       ),
       switchTheme: SwitchThemeData(
         thumbColor: WidgetStateProperty.resolveWith<Color?>((states) {
-          if (states.contains(WidgetState.selected)) return scheme.onPrimary;
+          if (states.contains(WidgetState.selected)) return scheme.primary;
           return scheme.outline;
         }),
         trackColor: WidgetStateProperty.resolveWith<Color?>((states) {
-          if (states.contains(WidgetState.selected)) return scheme.primary;
+          if (states.contains(WidgetState.selected)) {
+            return scheme.primaryContainer;
+          }
           return scheme.surfaceContainerHighest;
         }),
       ),
       tooltipTheme: TooltipThemeData(
         decoration: BoxDecoration(
-          color: scheme.inverseSurface,
+          color: scheme.inverseSurface.withValues(alpha: 0.9),
           borderRadius: AafiatakRadii.sm,
         ),
         textStyle: textTheme.labelSmall?.copyWith(
