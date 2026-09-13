@@ -116,7 +116,10 @@ abstract final class AafiatakTheme {
       ),
       inputDecorationTheme: InputDecorationThemeData(
         filled: true,
-        fillColor: scheme.surfaceContainerHighest.withValues(alpha: 0.5),
+        // The scaffold handoff used a translucent darker fill. We keep the
+        // approved low-neutral surface here so #6E6E6E labels/hints remain
+        // above the 4.5:1 contrast target.
+        fillColor: scheme.surfaceContainerLow,
         floatingLabelBehavior: FloatingLabelBehavior.always,
         helperMaxLines: 3,
         errorMaxLines: 3,
