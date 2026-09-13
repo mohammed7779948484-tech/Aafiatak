@@ -2,6 +2,7 @@ abstract final class AafiatakSizes {
   const AafiatakSizes._();
 
   static const double minimumTouchTarget = 48;
+  static const double buttonMinWidth = 88;
   static const double buttonHeight = 48;
   static const double inputMinHeight = 52;
   static const double inputVerticalPadding = 14;
