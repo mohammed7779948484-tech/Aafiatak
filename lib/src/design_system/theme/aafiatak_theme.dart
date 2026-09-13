@@ -26,15 +26,18 @@ abstract final class AafiatakTheme {
 
     return base.copyWith(
       appBarTheme: AppBarThemeData(
-        backgroundColor: AafiatakColors.canvas,
+        backgroundColor: scheme.surface,
         foregroundColor: scheme.onSurface,
         surfaceTintColor: Colors.transparent,
         elevation: 0,
         scrolledUnderElevation: 0,
-        centerTitle: false,
+        centerTitle: true,
         iconTheme: const IconThemeData(size: AafiatakSizes.iconDefault),
         actionsIconTheme: const IconThemeData(size: AafiatakSizes.iconDefault),
-        titleTextStyle: textTheme.titleLarge,
+        titleTextStyle: textTheme.titleMedium?.copyWith(
+          color: scheme.onSurface,
+          fontWeight: FontWeight.w600,
+        ),
       ),
       iconTheme: IconThemeData(
         color: scheme.onSurface,
@@ -104,7 +107,7 @@ abstract final class AafiatakTheme {
       ),
       inputDecorationTheme: InputDecorationThemeData(
         filled: true,
-        fillColor: scheme.surface,
+        fillColor: scheme.surfaceContainerLow,
         floatingLabelBehavior: FloatingLabelBehavior.always,
         helperMaxLines: 3,
         errorMaxLines: 3,
@@ -194,13 +197,13 @@ abstract final class AafiatakTheme {
         backgroundColor: scheme.surface,
         surfaceTintColor: Colors.transparent,
         indicatorColor: scheme.primaryContainer,
-        elevation: 0,
+        elevation: 8,
         labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
         labelTextStyle: WidgetStateProperty.resolveWith<TextStyle?>((states) {
           final selected = states.contains(WidgetState.selected);
-          return textTheme.labelMedium?.copyWith(
+          return textTheme.labelSmall?.copyWith(
             color: selected ? scheme.primary : scheme.onSurfaceVariant,
-            fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
+            fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
           );
         }),
         iconTheme: WidgetStateProperty.resolveWith<IconThemeData?>((states) {
@@ -211,13 +214,27 @@ abstract final class AafiatakTheme {
           );
         }),
       ),
+      listTileTheme: ListTileThemeData(
+        contentPadding: const EdgeInsetsDirectional.symmetric(
+          horizontal: AafiatakSpacing.md,
+          vertical: AafiatakSpacing.xxs,
+        ),
+        shape: const RoundedRectangleBorder(
+          borderRadius: AafiatakRadii.md,
+        ),
+        visualDensity: VisualDensity.comfortable,
+        titleTextStyle: textTheme.titleMedium,
+        subtitleTextStyle: textTheme.bodySmall?.copyWith(
+          color: scheme.onSurfaceVariant,
+        ),
+      ),
       chipTheme: ChipThemeData(
-        backgroundColor: scheme.surface,
+        backgroundColor: scheme.surfaceContainerLow,
         selectedColor: scheme.primaryContainer,
-        secondarySelectedColor: scheme.secondaryContainer,
+        secondarySelectedColor: scheme.primaryContainer,
         disabledColor: scheme.onSurface.withValues(alpha: 0.08),
         side: BorderSide(color: scheme.outlineVariant),
-        shape: const RoundedRectangleBorder(borderRadius: AafiatakRadii.sm),
+        shape: const RoundedRectangleBorder(borderRadius: AafiatakRadii.full),
         labelStyle: textTheme.labelMedium,
         secondaryLabelStyle: textTheme.labelMedium,
         padding: const EdgeInsetsDirectional.symmetric(
@@ -245,7 +262,7 @@ abstract final class AafiatakTheme {
             if (states.contains(WidgetState.selected)) {
               return scheme.primaryContainer;
             }
-            return scheme.surface;
+            return scheme.surfaceContainerLow;
           }),
           foregroundColor: WidgetStateProperty.resolveWith<Color?>((states) {
             if (states.contains(WidgetState.selected)) {
@@ -293,7 +310,9 @@ abstract final class AafiatakTheme {
       ),
       searchBarTheme: SearchBarThemeData(
         elevation: const WidgetStatePropertyAll<double>(0),
-        backgroundColor: WidgetStatePropertyAll<Color>(scheme.surface),
+        backgroundColor: WidgetStatePropertyAll<Color>(
+          scheme.surfaceContainerLow,
+        ),
         surfaceTintColor: const WidgetStatePropertyAll<Color>(
           Colors.transparent,
         ),
@@ -301,7 +320,7 @@ abstract final class AafiatakTheme {
           BorderSide(color: scheme.outlineVariant),
         ),
         shape: const WidgetStatePropertyAll<OutlinedBorder>(
-          RoundedRectangleBorder(borderRadius: AafiatakRadii.md),
+          RoundedRectangleBorder(borderRadius: AafiatakRadii.search),
         ),
         padding: const WidgetStatePropertyAll<EdgeInsetsGeometry>(
           EdgeInsetsDirectional.symmetric(horizontal: AafiatakSpacing.md),
