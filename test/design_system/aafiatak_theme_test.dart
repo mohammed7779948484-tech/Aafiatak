@@ -50,12 +50,15 @@ void main() {
       ]);
       expect(AafiatakSpacing.x3l, 40);
       expect(AafiatakRadii.xsValue, 4);
+      expect(AafiatakRadii.controlValue, 6);
       expect(AafiatakRadii.smValue, 8);
       expect(AafiatakRadii.mdValue, 12);
       expect(AafiatakRadii.lgValue, 16);
       expect(AafiatakRadii.xlValue, 24);
       expect(AafiatakRadii.searchValue, 28);
+      expect(AafiatakBorders.strong, 1.5);
       expect(AafiatakSizes.minimumTouchTarget, 48);
+      expect(AafiatakSizes.buttonMinWidth, 88);
       expect(AafiatakMotion.instant, const Duration(milliseconds: 80));
       expect(AafiatakMotion.fast, const Duration(milliseconds: 140));
       expect(AafiatakMotion.standard, const Duration(milliseconds: 220));
