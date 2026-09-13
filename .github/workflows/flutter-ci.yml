@@ -47,7 +47,9 @@ jobs:
         run: python3 scripts/static_architecture_audit.py
 
       - name: Verify formatting
-        run: dart format --output=none --set-exit-if-changed lib test
+        run: |
+          dart format lib test
+          git diff --exit-code
 
       - name: Analyze
         run: flutter analyze
