@@ -1,19 +1,30 @@
-# Aafiatak Design System — QA report v1.3
+# Aafiatak Design System — QA status
 
-## Review scope
+## Current status
 
-- foundations/tokens and canonical visual anchors;
-- explicit Material 3 theme mapping and semantic ThemeExtension;
+The `develop` baseline was previously validated on Flutter 3.47.4 / Dart 3.13.3 with the pre-migration v1.3 visual tokens.
+
+The active Design System migration branch changes the visual-token contract to **Burgundy Monochrome v2.1**. Therefore the old v1.3 static report must be treated as historical until the migration branch is validated again.
+
+Do **not** interpret the existing generated `STATIC_QA_REPORT.json` as proof that the new token migration has passed unless it was regenerated from the current branch.
+
+## Review scope for the migration
+
+- Burgundy/neutral foundations and explicit Material 3 ColorScheme mapping;
+- typography family key and approved type scale;
+- canonical spacing, radius, border, elevation and motion tokens;
 - Arabic/RTL/localization mechanics;
-- every domain-neutral component;
+- every domain-neutral component affected by theme propagation;
+- status communication without hue-only meaning;
+- input/hint contrast;
 - documentation-to-component coverage;
 - Design System dependency isolation;
-- authored widget/RTL/accessibility tests;
+- widget/RTL/accessibility tests;
 - public barrel/export coverage.
 
-Domain Patterns and production Patient screens are intentionally outside this foundation review.
+Domain Patterns and production Patient screens remain outside this foundation migration.
 
-## Static Design System QA
+## Required static Design System QA
 
 Run:
 
@@ -21,7 +32,17 @@ Run:
 python scripts/static_design_system_audit.py
 ```
 
-The report is written to `STATIC_QA_REPORT.json`. Final v1.3 source result: **35/35 PASS**. The v1.3 audit additionally checks localization setup, absence of visible Arabic literals from production Dart, OTP configuration markers, StatusBlock action/copy contract, `ListRow`, and `PrimaryActionBar`.
+The migration-aware audit checks, among other gates:
+
+- Burgundy Monochrome v2.1 canonical anchors;
+- absence of the old Mineral Bloom accent values from active Design System Dart;
+- canonical spacing/motion/touch-target contracts;
+- canonical contrast pairs;
+- localization setup;
+- OTP/StatusBlock/ListRow/PrimaryActionBar contracts;
+- RTL-safe core component layout;
+- no raw component-local hex colors;
+- public export coverage.
 
 ## Whole-project architecture QA
 
@@ -29,20 +50,40 @@ The report is written to `STATIC_QA_REPORT.json`. Final v1.3 source result: **35
 python scripts/static_architecture_audit.py
 ```
 
-Final v1.3 source result: **22/22 PASS**. It checks folder boundaries, `shared/` discipline, no wrong auth/template scaffolding, no Riverpod legacy/global navigation, dependency hygiene, localization resources and local Dart import integrity.
+The architecture audit continues to enforce the agreed folder boundaries, `shared/` discipline, auth/scaffold cleanup, dependency hygiene, localization resources and import integrity.
 
-## Tests authored
+Approved project font assets are now allowed under `assets/`; the audit specifically rejects the irrelevant social-login asset residue instead of banning the entire assets directory.
 
-- `test/design_system/aafiatak_theme_test.dart`
-- `test/design_system/aafiatak_components_test.dart`
-- `test/design_system/aafiatak_rtl_test.dart`
-- `test/design_system/aafiatak_accessibility_test.dart`
-- `test/app/app_routing_test.dart`
-- `test/shared/aafiatak_media_test.dart`
-- `test/widget_test.dart`
+## Flutter gates
 
-v1.3 component tests include configurable OTP cells/input, optional status action, generic ListRow tapping, and PrimaryActionBar composition.
+Run after localization generation and after approved font assets are registered:
 
-## Flutter CLI status
+```bash
+flutter pub get
+flutter gen-l10n
+dart format --set-exit-if-changed lib test
+flutter analyze
+flutter test
+```
 
-This delivery environment does not contain Flutter/Dart. Therefore this report does **not** claim `flutter gen-l10n`, formatting, `flutter analyze`, `flutter test`, or a device build passed here. Run `./scripts/verify_project.sh` with the approved Flutter baseline, then perform a real debug build before freezing the repository tag.
+## Runtime/visual smoke gate
+
+Test on a real/emulated phone before merge:
+
+- Arabic RTL and centered AppBar titles;
+- grey canvas with approved neutral surfaces;
+- Burgundy primary and selected states;
+- input/focus/error readability;
+- pill chips;
+- 28dp search and bottom-sheet geometry;
+- card shadow behavior;
+- all feedback tones with explicit icon/copy/state meaning;
+- OTP interaction;
+- text scaling;
+- reduced motion.
+
+## Merge criterion
+
+The Burgundy Monochrome v2.1 PR remains **not ready to merge** until the current branch produces passing static audits, zero analyzer issues, passing Flutter tests, and an approved phone visual smoke test.
+
+See `DESIGN_TOKEN_MIGRATION_v2.1.md` for the source decision and token mapping.
