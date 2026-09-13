@@ -4,6 +4,7 @@ abstract final class AafiatakRadii {
   const AafiatakRadii._();
 
   static const double xsValue = 4;
+  static const double controlValue = 6;
   static const double smValue = 8;
   static const double mdValue = 12;
   static const double lgValue = 16;
@@ -12,6 +13,7 @@ abstract final class AafiatakRadii {
   static const double fullValue = 999;
 
   static const xs = BorderRadius.all(Radius.circular(xsValue));
+  static const control = BorderRadius.all(Radius.circular(controlValue));
   static const sm = BorderRadius.all(Radius.circular(smValue));
   static const md = BorderRadius.all(Radius.circular(mdValue));
   static const lg = BorderRadius.all(Radius.circular(lgValue));
