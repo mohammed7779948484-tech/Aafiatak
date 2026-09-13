@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../foundations/foundations.dart';
 
-/// Explicit Material 3 mapping. We intentionally avoid ColorScheme.fromSeed
-/// so approved Aafiatak tokens remain the source of truth.
+/// Explicit Material 3 mapping for the approved Burgundy Monochrome v2.1
+/// visual system. No seed-generated accent colors are allowed to leak into the
+/// product theme.
 abstract final class AafiatakColorScheme {
   const AafiatakColorScheme._();
 
@@ -13,26 +14,26 @@ abstract final class AafiatakColorScheme {
     onPrimary: AafiatakColors.onPrimary,
     primaryContainer: AafiatakColors.primaryContainer,
     onPrimaryContainer: AafiatakColors.onPrimaryContainer,
-    primaryFixed: AafiatakPalette.damson200,
-    primaryFixedDim: AafiatakPalette.damson300,
-    onPrimaryFixed: AafiatakPalette.damson900,
-    onPrimaryFixedVariant: AafiatakPalette.damson700,
+    primaryFixed: AafiatakColors.primaryContainer,
+    primaryFixedDim: AafiatakColors.primaryContainer,
+    onPrimaryFixed: AafiatakColors.onPrimaryContainer,
+    onPrimaryFixedVariant: AafiatakColors.onPrimaryContainer,
     secondary: AafiatakColors.secondary,
     onSecondary: AafiatakColors.onSecondary,
     secondaryContainer: AafiatakColors.secondaryContainer,
     onSecondaryContainer: AafiatakColors.onSecondaryContainer,
-    secondaryFixed: AafiatakPalette.seaGlass200,
-    secondaryFixedDim: AafiatakPalette.seaGlass300,
-    onSecondaryFixed: AafiatakPalette.seaGlass950,
-    onSecondaryFixedVariant: AafiatakPalette.seaGlass800,
+    secondaryFixed: AafiatakColors.secondaryContainer,
+    secondaryFixedDim: AafiatakColors.secondaryContainer,
+    onSecondaryFixed: AafiatakColors.onSecondaryContainer,
+    onSecondaryFixedVariant: AafiatakColors.onSecondaryContainer,
     tertiary: AafiatakColors.tertiary,
     onTertiary: AafiatakColors.onTertiary,
     tertiaryContainer: AafiatakColors.tertiaryContainer,
     onTertiaryContainer: AafiatakColors.onTertiaryContainer,
-    tertiaryFixed: AafiatakPalette.copper200,
-    tertiaryFixedDim: AafiatakPalette.copper300,
-    onTertiaryFixed: AafiatakPalette.copper950,
-    onTertiaryFixedVariant: AafiatakPalette.copper900,
+    tertiaryFixed: AafiatakColors.tertiaryContainer,
+    tertiaryFixedDim: AafiatakColors.surfaceContainerHigh,
+    onTertiaryFixed: AafiatakColors.onTertiaryContainer,
+    onTertiaryFixedVariant: AafiatakColors.onTertiaryContainer,
     error: AafiatakColors.error,
     onError: AafiatakColors.onError,
     errorContainer: AafiatakColors.errorContainer,
@@ -53,7 +54,7 @@ abstract final class AafiatakColorScheme {
     scrim: AafiatakColors.scrim,
     inverseSurface: AafiatakColors.inverseSurface,
     onInverseSurface: AafiatakColors.onInverseSurface,
-    inversePrimary: AafiatakPalette.damson300,
+    inversePrimary: AafiatakColors.primaryContainer,
     surfaceTint: AafiatakColors.primary,
   );
 }
