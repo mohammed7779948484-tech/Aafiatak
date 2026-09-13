@@ -178,16 +178,16 @@ def main() -> int:
     add('design_system_directory_exists', DS.is_dir())
     add('legacy_core_directory_removed', not (ROOT / 'lib/src/core').exists())
     patterns = [
-        str(p.relative_to(ROOT))
-        for p in (ROOT / 'lib').rglob('patterns')
-        if p.is_dir()
+        str(path.relative_to(ROOT))
+        for path in (ROOT / 'lib').rglob('patterns')
+        if path.is_dir()
     ]
     add('no_domain_patterns_created', not patterns, patterns)
-    old = [str(p.relative_to(ROOT)) for p in LEGACY if p.exists()]
+    old = [str(path.relative_to(ROOT)) for path in LEGACY if path.exists()]
     add('legacy_visual_system_removed', not old, old)
 
     ds_text = '\n'.join(
-        p.read_text(encoding='utf-8') for p in DS.rglob('*.dart')
+        path.read_text(encoding='utf-8') for path in DS.rglob('*.dart')
     )
     classes = set(re.findall(r'\bclass\s+(Aafiatak\w+)', ds_text))
     missing = sorted(EXPECTED - classes)
@@ -195,12 +195,12 @@ def main() -> int:
 
     public_files = public_export_closure(DS / 'design_system.dart')
     leaf_modules = {
-        p.resolve()
-        for p in DS.rglob('aafiatak_*.dart')
-        if p.is_file()
+        path.resolve()
+        for path in DS.rglob('aafiatak_*.dart')
+        if path.is_file()
     }
     unexported = sorted(
-        str(p.relative_to(ROOT)) for p in leaf_modules - public_files
+        str(path.relative_to(ROOT)) for path in leaf_modules - public_files
     )
     add(
         'public_design_system_barrel_exports_all_leaf_modules',
@@ -209,8 +209,8 @@ def main() -> int:
     )
 
     component_text = '\n'.join(
-        p.read_text(encoding='utf-8')
-        for p in (DS / 'components').rglob('*.dart')
+        path.read_text(encoding='utf-8')
+        for path in (DS / 'components').rglob('*.dart')
     )
     raw_hex = re.findall(r'Color\(0x[0-9A-Fa-f]+\)', component_text)
     add('core_components_have_no_raw_hex_colors', not raw_hex, raw_hex)
@@ -221,12 +221,16 @@ def main() -> int:
     add('core_components_are_rtl_direction_safe', not physical, physical)
 
     outside_huge = []
-    for p in (ROOT / 'lib').rglob('*.dart'):
-        if DS in p.parents:
+    for path in (ROOT / 'lib').rglob('*.dart'):
+        if DS in path.parents:
             continue
-        text = p.read_text(encoding='utf-8')
-        if 'HugeIcon(' in text or 'HugeIcons.' in text or 'package:hugeicons' in text:
-            outside_huge.append(str(p.relative_to(ROOT)))
+        text = path.read_text(encoding='utf-8')
+        if (
+            'HugeIcon(' in text
+            or 'HugeIcons.' in text
+            or 'package:hugeicons' in text
+        ):
+            outside_huge.append(str(path.relative_to(ROOT)))
     add('hugeicons_encapsulated_by_design_system', not outside_huge, outside_huge)
 
     imports = local_import_errors()
@@ -248,7 +252,7 @@ def main() -> int:
         '0xFFD9D9D9',
         '0xFFF7F7F7',
     ]
-    missing_hex = [x for x in required_hex if x.upper() not in ds_text.upper()]
+    missing_hex = [value for value in required_hex if value.upper() not in ds_text.upper()]
     add('canonical_color_anchors_present', not missing_hex, missing_hex)
 
     legacy_hex = [
@@ -260,7 +264,9 @@ def main() -> int:
         '0xFFA94452',
         '0xFF496B98',
     ]
-    leaked_legacy = [x for x in legacy_hex if x.upper() in ds_text.upper()]
+    leaked_legacy = [
+        value for value in legacy_hex if value.upper() in ds_text.upper()
+    ]
     add('legacy_mineral_bloom_accents_removed', not leaked_legacy, leaked_legacy)
 
     add(
@@ -268,6 +274,13 @@ def main() -> int:
         'static const List<double> scale' in ds_text
         and 'micro = 2' in ds_text
         and 'x4l = 48' in ds_text,
+    )
+    add(
+        'canonical_geometry_tokens_present',
+        'controlValue = 6' in ds_text
+        and 'searchValue = 28' in ds_text
+        and 'buttonMinWidth = 88' in ds_text
+        and 'strong = 1.5' in ds_text,
     )
     add(
         'canonical_motion_scale_present',
@@ -286,7 +299,7 @@ def main() -> int:
     add(
         'approved_typography_contract_present',
         "arabicFamily = 'IBMPlexSansArabic'" in ds_text
-        and "latinFamily = 'IBMPlexSans'" in ds_text,
+        and 'static const String latinFamily' not in ds_text,
     )
 
     contrast_pairs = {
@@ -337,7 +350,8 @@ def main() -> int:
         'input_labels_and_messages_support_persistent_readability',
         'FloatingLabelBehavior.always' in theme_text
         and 'helperMaxLines: 3' in theme_text
-        and 'errorMaxLines: 3' in theme_text,
+        and 'errorMaxLines: 3' in theme_text
+        and 'fillColor: scheme.surfaceContainerLow' in theme_text,
     )
 
     button_text = (
@@ -408,7 +422,8 @@ def main() -> int:
     ).read_text(encoding='utf-8')
     add(
         'status_block_supports_optional_copy_and_next_action',
-        'final String? message;' in status_text and 'final Widget? action;' in status_text,
+        'final String? message;' in status_text
+        and 'final Widget? action;' in status_text,
     )
     add(
         'primary_action_bar_present',
@@ -432,14 +447,14 @@ def main() -> int:
     add(
         'design_system_tests_authored',
         len(tests) >= 4,
-        [str(p.relative_to(ROOT)) for p in tests],
+        [str(path.relative_to(ROOT)) for path in tests],
     )
 
     passed = all(bool(item['passed']) for item in checks)
     report = {
         'scope': 'Aafiatak Flutter Design System — Burgundy Monochrome v2.1 migration before Domain Patterns',
         'flutter_cli_executed': False,
-        'flutter_cli_reason': 'Run Flutter CLI gates on the developer machine/CI after token migration.',
+        'flutter_cli_reason': 'This report is produced by the static Python audit; Flutter CLI gates run separately in local/CI validation.',
         'static_result': 'passed' if passed else 'failed',
         'check_count': len(checks),
         'checks': checks,
