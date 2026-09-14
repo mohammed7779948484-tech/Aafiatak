@@ -28,14 +28,15 @@ enum PatientTab {
 /// زر الإشعارات [IconButton] أصلي، ويأتي تنسيقه من `IconButtonThemeData`.
 class AafiatakRootAppBar extends StatelessWidget
     implements PreferredSizeWidget {
-  const AafiatakRootAppBar({
-    super.key,
-    this.showBrand = true,
-    this.title,
-    this.onNotificationPressed,
-  }) : assert(showBrand || title != null, 'العنوان مطلوب عند إخفاء الشعار.');
+  const AafiatakRootAppBar.brand({super.key, this.onNotificationPressed})
+    : title = null;
 
-  final bool showBrand;
+  const AafiatakRootAppBar.titled({
+    super.key,
+    required this.title,
+    this.onNotificationPressed,
+  });
+
   final String? title;
   final VoidCallback? onNotificationPressed;
 
@@ -44,9 +45,11 @@ class AafiatakRootAppBar extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
+    final visibleTitle = title;
+
     return AppBar(
       toolbarHeight: 68,
-      title: showBrand
+      title: visibleTitle == null
           ? const Row(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
@@ -61,7 +64,7 @@ class AafiatakRootAppBar extends StatelessWidget
                 ),
               ],
             )
-          : Text(title!, maxLines: 1, overflow: TextOverflow.ellipsis),
+          : Text(visibleTitle, maxLines: 1, overflow: TextOverflow.ellipsis),
       actions: <Widget>[
         IconButton(
           onPressed: onNotificationPressed,
@@ -190,34 +193,46 @@ class AafiatakBottomAction extends StatelessWidget {
 /// الهيكل المشترك لشاشات المريض، وليس مكونًا بصريًا بدائيًا في Design System.
 ///
 /// استخدمه بدل تكرار [Scaffold] وشريط التطبيق والتنقل في كل شاشة. يدعم شريطًا
-/// جذريًا بالشعار أو بعنوان عبر [showBrand]، وشريط تفاصيل عند `root: false`.
+/// جذريًا بالشعار أو بعنوان، وشريط تفاصيل يفرض عنوانًا غير فارغ.
 /// يستخدم عرض الهاتف المتاح كاملًا، وتبقى قرارات التنقل وحالة الشاشة خارج هذا
 /// الملف لدى التطبيق أو الـ Feature.
 class PatientShell extends StatelessWidget {
-  const PatientShell({
+  const PatientShell.root({
     super.key,
     required this.body,
-    this.screenId,
-    this.title,
-    this.root = false,
-    this.showBrand = true,
+    this.title = '',
     this.activeTab,
     this.onTabSelected,
-    this.onBackPressed,
     this.onNotificationPressed,
-    this.trailing,
     this.bottomAction,
     this.scrollable = false,
-  }) : assert(
+  }) : root = true,
+       screenId = null,
+       onBackPressed = null,
+       trailing = null,
+       assert(
          (activeTab == null) == (onTabSelected == null),
          'يجب تمرير activeTab وonTabSelected معًا.',
        );
 
+  const PatientShell.detail({
+    super.key,
+    required this.body,
+    required this.title,
+    this.screenId,
+    this.onBackPressed,
+    this.trailing,
+    this.bottomAction,
+    this.scrollable = false,
+  }) : root = false,
+       activeTab = null,
+       onTabSelected = null,
+       onNotificationPressed = null;
+
   final Widget body;
   final String? screenId;
-  final String? title;
+  final String title;
   final bool root;
-  final bool showBrand;
   final PatientTab? activeTab;
   final ValueChanged<PatientTab>? onTabSelected;
   final VoidCallback? onBackPressed;
@@ -239,13 +254,16 @@ class PatientShell extends StatelessWidget {
 
     return Scaffold(
       appBar: root
-          ? AafiatakRootAppBar(
-              showBrand: showBrand,
-              title: title,
-              onNotificationPressed: onNotificationPressed,
-            )
+          ? title.isEmpty
+                ? AafiatakRootAppBar.brand(
+                    onNotificationPressed: onNotificationPressed,
+                  )
+                : AafiatakRootAppBar.titled(
+                    title: title,
+                    onNotificationPressed: onNotificationPressed,
+                  )
           : AafiatakDetailAppBar(
-              title: title ?? '',
+              title: title,
               screenId: screenId,
               onBackPressed: onBackPressed,
               trailing: trailing,

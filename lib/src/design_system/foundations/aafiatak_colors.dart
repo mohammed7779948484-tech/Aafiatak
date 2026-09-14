@@ -24,6 +24,8 @@ abstract final class AafiatakColors {
   // الحدود والفواصل.
   static const outline = Color(0xFFE5E5E5);
   static const outlineStrong = Color(0xFFB5B5B5);
+  // يحقق نسبة تباين 3.19:1 مقابل سطح الإدخال الأبيض (WCAG 1.4.11).
+  static const inputBoundary = Color(0xFF909090);
 
   // درجات شفافة مشتركة للحدود والأسطح والظل الخفيف.
   static const borderSubtle = Color(0x141A1A1A);

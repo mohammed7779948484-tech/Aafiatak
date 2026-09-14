@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../foundations/foundations.dart';
-
 /// حقل البحث المشترك لشاشات الاكتشاف والبحث في عافيتك.
 ///
 /// يعتمد مباشرة على [SearchBar]، لذلك تأتي هيئة السطح والارتفاع والحواف من
@@ -29,11 +27,7 @@ class AafiatakSearchField extends StatelessWidget {
       controller: controller,
       enabled: enabled,
       hintText: hintText,
-      leading: const Icon(
-        Icons.search_rounded,
-        size: 22,
-        color: AafiatakColors.primary,
-      ),
+      leading: const Icon(Icons.search_rounded, size: 22),
       onChanged: onChanged,
       onSubmitted: onSubmitted,
     );

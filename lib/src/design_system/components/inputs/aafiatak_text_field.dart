@@ -41,30 +41,38 @@ class AafiatakTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final visibleLabel = label;
+    final field = TextFormField(
+      controller: controller,
+      enabled: enabled,
+      keyboardType: keyboardType,
+      maxLines: maxLines,
+      onChanged: onChanged,
+      onFieldSubmitted: onFieldSubmitted,
+      textDirection: textDirection,
+      decoration: InputDecoration(
+        hintText: hintText,
+        helperText: helperText,
+        errorText: errorText,
+        prefixIcon: prefixIcon,
+        suffixIcon: suffixIcon,
+      ),
+    );
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        if (label != null) ...<Widget>[
-          Text(label!, style: AafiatakTypography.labelMedium),
+        if (visibleLabel != null) ...<Widget>[
+          ExcludeSemantics(
+            child: Text(visibleLabel, style: AafiatakTypography.labelMedium),
+          ),
           const SizedBox(height: AafiatakSpacing.space8),
         ],
-        TextFormField(
-          controller: controller,
-          enabled: enabled,
-          keyboardType: keyboardType,
-          maxLines: maxLines,
-          onChanged: onChanged,
-          onFieldSubmitted: onFieldSubmitted,
-          textDirection: textDirection,
-          decoration: InputDecoration(
-            hintText: hintText,
-            helperText: helperText,
-            errorText: errorText,
-            prefixIcon: prefixIcon,
-            suffixIcon: suffixIcon,
-          ),
-        ),
+        if (visibleLabel != null)
+          Semantics(label: visibleLabel, textField: true, child: field)
+        else
+          field,
       ],
     );
   }

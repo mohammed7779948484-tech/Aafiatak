@@ -41,11 +41,15 @@ class AafiatakBadge extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 6),
-          Text(
-            label,
-            style: AafiatakTypography.labelSmall.copyWith(
-              color: colors.foreground,
-              fontWeight: FontWeight.w600,
+          Flexible(
+            child: Text(
+              label,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: AafiatakTypography.labelSmall.copyWith(
+                color: colors.foreground,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
         ],

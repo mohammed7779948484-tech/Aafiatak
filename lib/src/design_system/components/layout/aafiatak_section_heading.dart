@@ -14,11 +14,14 @@ class AafiatakSectionHeading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final visibleMeta = meta;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        Expanded(
+        Flexible(
+          flex: 2,
           child: Text(
             label,
             style: AafiatakTypography.titleLarge.copyWith(
@@ -27,13 +30,19 @@ class AafiatakSectionHeading extends StatelessWidget {
             ),
           ),
         ),
-        if (meta != null && meta!.isNotEmpty)
-          Text(
-            meta!,
-            style: AafiatakTypography.labelSmall.copyWith(
-              color: AafiatakColors.textSecondary,
+        if (visibleMeta != null && visibleMeta.isNotEmpty) ...<Widget>[
+          const SizedBox(width: AafiatakSpacing.space8),
+          Flexible(
+            child: Text(
+              visibleMeta,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: AafiatakTypography.labelSmall.copyWith(
+                color: AafiatakColors.textSecondary,
+              ),
             ),
           ),
+        ],
       ],
     );
   }

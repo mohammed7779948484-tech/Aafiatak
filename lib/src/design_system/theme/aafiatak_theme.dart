@@ -139,11 +139,11 @@ abstract final class AafiatakTheme {
         ),
         border: const OutlineInputBorder(
           borderRadius: AafiatakRadii.medium,
-          borderSide: BorderSide(color: AafiatakColors.outline, width: 1),
+          borderSide: BorderSide(color: AafiatakColors.inputBoundary, width: 1),
         ),
         enabledBorder: const OutlineInputBorder(
           borderRadius: AafiatakRadii.medium,
-          borderSide: BorderSide(color: AafiatakColors.outline, width: 1),
+          borderSide: BorderSide(color: AafiatakColors.inputBoundary, width: 1),
         ),
         focusedBorder: const OutlineInputBorder(
           borderRadius: AafiatakRadii.medium,
@@ -199,10 +199,15 @@ abstract final class AafiatakTheme {
         disabledColor: AafiatakColors.surfaceContainer,
         secondarySelectedColor: AafiatakColors.primaryContainer,
         labelStyle: textTheme.labelMedium?.copyWith(
-          color: AafiatakColors.textPrimary,
+          color: WidgetStateColor.resolveWith((states) {
+            if (states.contains(WidgetState.selected)) {
+              return AafiatakColors.onPrimary;
+            }
+            return AafiatakColors.textPrimary;
+          }),
         ),
         secondaryLabelStyle: textTheme.labelMedium?.copyWith(
-          color: AafiatakColors.onPrimary,
+          color: AafiatakColors.onPrimaryContainer,
         ),
         side: const BorderSide(color: AafiatakColors.outline, width: 1),
         shape: const RoundedRectangleBorder(borderRadius: AafiatakRadii.full),

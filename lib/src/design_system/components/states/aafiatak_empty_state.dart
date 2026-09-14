@@ -6,21 +6,26 @@ import '../surfaces/aafiatak_card.dart';
 
 /// حالة فارغة موحّدة لغياب النتائج أو المواعيد أو البيانات.
 ///
-/// يمكن تغيير [icon] حسب سياق الشاشة، كما يمكن حذف الإجراء بالكامل. عند عرض
-/// إجراء يجب تمرير [actionLabel] و[onAction] معًا. هذا مكون عرض عام بلا منطق
-/// أعمال؛ أما الحالة الخاصة بميزة واحدة فمكانها داخل `feature/widgets`.
+/// يمكن تغيير [icon] حسب سياق الشاشة، كما يمكن حذف الإجراء بالكامل. استخدم
+/// [AafiatakEmptyState.withAction] عند الحاجة إلى إجراء. هذا مكون عرض عام بلا
+/// منطق أعمال؛ أما الحالة الخاصة بميزة واحدة فمكانها داخل `feature/widgets`.
 class AafiatakEmptyState extends StatelessWidget {
   const AafiatakEmptyState({
     super.key,
     required this.icon,
     required this.title,
     required this.message,
-    this.actionLabel,
-    this.onAction,
-  }) : assert(
-         (actionLabel == null) == (onAction == null),
-         'يجب تمرير actionLabel وonAction معًا.',
-       );
+  }) : actionLabel = null,
+       onAction = null;
+
+  const AafiatakEmptyState.withAction({
+    super.key,
+    required this.icon,
+    required this.title,
+    required this.message,
+    required this.actionLabel,
+    required this.onAction,
+  });
 
   final IconData icon;
   final String title;
@@ -30,6 +35,9 @@ class AafiatakEmptyState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final visibleActionLabel = actionLabel;
+    final actionCallback = onAction;
+
     return AafiatakCard(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: AafiatakSpacing.space16),
@@ -58,9 +66,13 @@ class AafiatakEmptyState extends StatelessWidget {
               textAlign: TextAlign.center,
               style: AafiatakTypography.bodySmall,
             ),
-            if (onAction != null) ...<Widget>[
+            if (visibleActionLabel != null &&
+                actionCallback != null) ...<Widget>[
               const SizedBox(height: AafiatakSpacing.space16),
-              AafiatakButton.tonal(label: actionLabel!, onPressed: onAction),
+              AafiatakButton.tonal(
+                label: visibleActionLabel,
+                onPressed: actionCallback,
+              ),
             ],
           ],
         ),

@@ -23,10 +23,12 @@ class _StarterScreenState extends State<StarterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return PatientShell(
-      root: true,
-      showBrand: _currentTab == PatientTab.home,
-      title: _currentTab == PatientTab.appointments ? 'مواعيدي' : 'حسابي',
+    return PatientShell.root(
+      title: switch (_currentTab) {
+        PatientTab.home => '',
+        PatientTab.appointments => 'مواعيدي',
+        PatientTab.profile => 'حسابي',
+      },
       onNotificationPressed: () {},
       activeTab: _currentTab,
       onTabSelected: (tab) => setState(() => _currentTab = tab),
@@ -122,7 +124,7 @@ class _StarterScreenState extends State<StarterScreen> {
               service: 'استشارة طب الأطفال',
               facility: 'مستشفى الأمل التخصصي',
               branch: 'فرع حدة الرئيسي',
-              date: 'الأربعاء، 18 سبتمبر 2026',
+              date: 'الجمعة، 18 سبتمبر 2026',
               arrivalWindow: '10:00 ص – 10:30 ص',
             ),
             const SizedBox(height: AafiatakSpacing.space12),
@@ -167,7 +169,7 @@ class _StarterScreenState extends State<StarterScreen> {
               ],
             ),
             const _SectionGap(),
-            AafiatakEmptyState(
+            AafiatakEmptyState.withAction(
               icon: Icons.calendar_month_outlined,
               title: 'لا توجد مواعيد سابقة',
               message: 'ستظهر المواعيد المكتملة في هذا السجل.',
