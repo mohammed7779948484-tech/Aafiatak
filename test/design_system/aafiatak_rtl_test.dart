@@ -1,3 +1,4 @@
+import 'package:aafiatak/src/app/patient_shell.dart';
 import 'package:aafiatak/src/design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -9,22 +10,28 @@ void main() {
     await tester.pumpWidget(
       buildDesignSystemTestApp(
         const Scaffold(
-          appBar: AafiatakAppBar(title: 'تفاصيل الموعد', showBackButton: true),
+          appBar: AafiatakDetailAppBar(
+            title: 'تفاصيل الموعد',
+            screenId: 'PAT-12',
+          ),
           body: Text('المحتوى'),
         ),
       ),
     );
     final titleContext = tester.element(find.text('تفاصيل الموعد'));
     expect(Directionality.of(titleContext), TextDirection.rtl);
-    expect(find.byType(BackButton), findsOneWidget);
+    expect(find.text('PAT-12'), findsOneWidget);
   });
 
-  testWidgets('phone input stays LTR inside RTL app', (tester) async {
+  testWidgets('LTR input / data row stays LTR inside RTL app', (tester) async {
     await tester.pumpWidget(
       buildDesignSystemTestApp(
         const Padding(
           padding: EdgeInsets.all(16),
-          child: AafiatakPhoneField(label: 'رقم الهاتف'),
+          child: AafiatakTextField(
+            label: 'رقم الهاتف',
+            textDirection: TextDirection.ltr,
+          ),
         ),
       ),
     );

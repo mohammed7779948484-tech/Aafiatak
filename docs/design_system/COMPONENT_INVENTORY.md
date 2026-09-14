@@ -1,72 +1,48 @@
-# Core component inventory — v1.3
+# Core Component Inventory — v2.1 (Burgundy Monochrome)
 
-## Buttons
+## Core Components (9 Primitives in `lib/src/design_system/components/`)
 
-- `AafiatakButton` — filled / tonal / outline / text / destructive, loading/disabled, leading/trailing, expanded width, semantics.
-- `AafiatakIconButton` — standard / filled / tonal / outlined icon action with required tooltip.
+### 1. Buttons (`components/buttons/`)
+- `AafiatakButton` — Clean button primitive supporting variants: `primary` (Burgundy `#800020`), `tonal` (`#F7E9EC`), `secondary` (`outline`), `destructive` (`#B91C1C`), and `text`. Sizing options: `block` (full width, 48dp) and `compact` (36dp). Handles optional leading/trailing icons, disabled states, and flexible text wrapping.
 
-## Inputs
+### 2. Inputs (`components/inputs/`)
+- `AafiatakTextField` — Modern input shell with persistent or floating label, hint text, optional leading/trailing icon, error message, helper text, and validation states.
 
-- `AafiatakTextField` — persistent label, helper/error, standard input geometry.
-- `AafiatakPhoneField` — phone-specialized LTR entry without inventing country/normalization policy.
-- `AafiatakOtpInput` — caller-configured length, one logical digits-only input, generated visual cells, paste/autofill, no component-owned verification submission.
-- `AafiatakSearchField` — Material 3 `SearchBar` wrapper with Aafiatak sizing/theme hooks.
+### 3. Surfaces (`components/surfaces/`)
+- `AafiatakCard` — Surface container with 12px or 16px radius, subtle border (`#E5E5E5`), optional tap handling, and configurable elevation/padding.
+- `AafiatakInfoRows` — Structured key-value display row list supporting RTL labels, optional LTR isolation for numbers/IDs/dates, and subtle dividers.
 
-## Selection
+### 4. Data Display (`components/data_display/`)
+- `AafiatakBadge` — Compact status pill badge featuring a 7px dot bullet indicator, configurable `AafiatakBadgeTone` / `AafiatakFeedbackTone`, and min 28dp height.
 
-- `AafiatakChip` — filter/select option with non-color selected indicator.
-- `AafiatakSegmentedControl<T>` — 2–4 peer options with selected icon enabled by default.
+### 5. Feedback (`components/feedback/`)
+- `AafiatakNotice` — Contextual alert banner across feedback tones (`neutral`, `success`, `warning`, `error`, `info`, `hold`) for highlighting important messages.
+- `AafiatakStatusBlock` — High-emphasis status presentation card featuring a 48x48 icon chip, category tag, title heading, descriptive body text, and optional action.
 
-## Surfaces / layout
+### 6. Layout (`components/layout/`)
+- `AafiatakSectionHeading` — Standard section header displaying title text with optional trailing action button or badge.
 
-- `AafiatakCard` — standard card surface + optional interaction.
-- `AafiatakDivider` — low-emphasis separator.
-- `AafiatakInfoRow` — domain-neutral label/value summary row.
-- `AafiatakListRow` — generic RTL-safe repeated/menu list row; domain-specific rows remain Patterns/features.
-- `AafiatakPrimaryActionBar` — stable SafeArea-aware bottom action region for transactional/form screens; owns layout only.
+### 7. States (`components/states/`)
+- `AafiatakEmptyState` — Full-surface empty state placeholder with 48x48 icon container, title, supporting copy, and action button.
 
-## Navigation
+---
 
-- `AafiatakAppBar` — platform/RTL-correct Material AppBar/back behavior.
-- `AafiatakNavigationBar` — Material 3 top-level phone navigation.
+## Domain Patterns (7 Visual Compositions in `lib/src/design_system/patterns/`)
 
-## Feedback
+### 1. Doctor Pattern (`patterns/doctor/`)
+- `DoctorCard` — Doctor presentation card with photo placeholder, name, specialty, rating badge, consultation fee, next available slot, and booking action button.
 
-- `AafiatakStatusBlock` — icon + state title + optional supporting copy + optional next action/trailing content.
-- `AafiatakBanner` — persistent page feedback with optional action/dismiss.
-- `AafiatakSnackbar` — centralized transient feedback.
-- `AafiatakFeedbackTone` — neutral/success/warning/error/info/hold semantic mapping.
+### 2. Service Pattern (`patterns/service/`)
+- `ServiceCard` — Medical service card displaying service title, duration, price, description, and selection button.
 
-## Overlays
+### 3. Facility Pattern (`patterns/facility/`)
+- `FacilitySummary` — Healthcare facility / hospital summary card with clinic name, address, working hours, rating, and distance.
 
-- `AafiatakDialog` / `showAafiatakDialog`
-- `AafiatakBottomSheetBody` / `showAafiatakBottomSheet`
+### 4. Appointment Pattern (`patterns/appointment/`)
+- `AppointmentSummary` — Appointment overview card with doctor, clinic/branch, date, time slot, appointment type, and status badge.
 
-## States
+### 5. Booking Patterns (`patterns/booking/`)
+- `ReservationHoldBanner` — Temporary hold countdown banner highlighting hold duration and expiration timer with clock icon.
+- `ArrivalWindowCard` — Recommended arrival guidance block displaying arrival window time, room number, and gate instructions.
+- `PolicyCard` — Clinic policy disclosure card displaying cancellation rules and clinic instructions with bullet points.
 
-- `AafiatakLoading`
-- `AafiatakSkeleton`
-- `AafiatakProgress`
-- `AafiatakEmptyState`
-- `AafiatakErrorState`
-
-These are primitives, not a one-size-fits-all `AsyncStateView`; feature state may preserve stale/offline content according to the approved state matrix.
-
-## Data display
-
-- `AafiatakBadge`
-- `AafiatakIcon`
-
-## Material controls themed without wrapper
-
-Checkbox, Radio, Switch and related standard controls are governed through the application Material theme. A wrapper is not created unless a stable product-specific API becomes necessary.
-
-## Deliberately absent: Domain Patterns
-
-Examples intentionally left for team ownership include:
-
-`DoctorCard`, `ServiceCard`, `FacilitySummaryCard`, `AppointmentCard`,
-`AvailabilityDayItem`, `ArrivalWindowCard`, `ReservationHoldBanner`,
-`AppointmentStatusBlock`, `PaymentStatusBlock`, `VisitStatusBlock`,
-`QueueStatusBlock`, `NotificationItem`, `BookingSummary`,
-`PolicyDisclosureSection`, and `QRVerificationPanel`.

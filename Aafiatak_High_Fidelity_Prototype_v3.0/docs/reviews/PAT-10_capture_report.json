@@ -1,0 +1,16 @@
+[
+  {
+    "state": "confirmed-paid",
+    "file": "PAT-10-confirmed-paid-phone.png",
+    "h": 1155,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "confirmed-pay-at-facility",
+    "file": "PAT-10-confirmed-pay-at-facility-phone.png",
+    "h": 1178,
+    "overflow": false,
+    "errors": []
+  }
+]

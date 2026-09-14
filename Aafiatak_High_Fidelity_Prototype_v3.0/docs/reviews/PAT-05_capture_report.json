@@ -1,0 +1,30 @@
+[
+  {
+    "state": "loaded",
+    "file": "PAT-05-loaded-phone.png",
+    "h": 1481,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "location-unavailable",
+    "file": "PAT-05-location-unavailable-phone.png",
+    "h": 1513,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "loading",
+    "file": "PAT-05-loading-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "error",
+    "file": "PAT-05-error-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  }
+]

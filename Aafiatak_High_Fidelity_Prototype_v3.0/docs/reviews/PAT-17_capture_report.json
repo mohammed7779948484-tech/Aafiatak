@@ -1,0 +1,51 @@
+[
+  {
+    "state": "pristine",
+    "file": "PAT-17-pristine-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "editing",
+    "file": "PAT-17-editing-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "validation-error",
+    "file": "PAT-17-validation-error-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "saving",
+    "file": "PAT-17-saving-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "saved",
+    "file": "PAT-17-saved-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "save-failed",
+    "file": "PAT-17-save-failed-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "offline",
+    "file": "PAT-17-offline-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  }
+]

@@ -1,112 +1,156 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import '../../foundations/foundations.dart';
 
-/// Standard labeled form field. Helper/error text remains adjacent to input.
+/// Simplified form text input matching the High-Fidelity design system.
+///
+/// Follows the High-Fidelity .input-group pattern:
+/// - Distinct top label
+/// - 56px minimum height white surface shell
+/// - High-Fidelity typography and monochrome borders
+/// - Clean helper/error text below the shell
 class AafiatakTextField extends StatelessWidget {
   const AafiatakTextField({
     super.key,
-    required this.label,
-    this.hint,
+    this.label,
+    String? hint,
+    String? hintText,
     this.helperText,
     this.errorText,
     this.controller,
     this.initialValue,
-    this.validator,
-    this.onChanged,
-    this.onFieldSubmitted,
-    this.focusNode,
     this.keyboardType,
-    this.textInputAction,
-    this.inputFormatters,
-    this.autofillHints,
+    this.onChanged,
+    this.onSubmitted,
     this.obscureText = false,
-    this.readOnly = false,
     this.enabled = true,
-    this.autofocus = false,
     this.maxLines = 1,
-    this.minLines,
     this.prefixIcon,
     this.suffixIcon,
     this.textDirection,
-    this.textAlign = TextAlign.start,
-    this.textStyle,
-    this.onTap,
-  });
+    this.autofocus = false,
+  }) : hint = hintText ?? hint;
 
-  final String label;
+  final String? label;
   final String? hint;
   final String? helperText;
   final String? errorText;
   final TextEditingController? controller;
   final String? initialValue;
-  final FormFieldValidator<String>? validator;
-  final ValueChanged<String>? onChanged;
-  final ValueChanged<String>? onFieldSubmitted;
-  final FocusNode? focusNode;
   final TextInputType? keyboardType;
-  final TextInputAction? textInputAction;
-  final List<TextInputFormatter>? inputFormatters;
-  final Iterable<String>? autofillHints;
+  final ValueChanged<String>? onChanged;
+  final ValueChanged<String>? onSubmitted;
   final bool obscureText;
-  final bool readOnly;
   final bool enabled;
-  final bool autofocus;
   final int? maxLines;
-  final int? minLines;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final TextDirection? textDirection;
-  final TextAlign textAlign;
-  final TextStyle? textStyle;
-  final VoidCallback? onTap;
+  final bool autofocus;
 
   @override
   Widget build(BuildContext context) {
-    assert(
-      controller == null || initialValue == null,
-      'controller and initialValue cannot both be provided.',
-    );
+    final hasError = errorText != null && errorText!.isNotEmpty;
 
-    final field = TextFormField(
-      controller: controller,
-      initialValue: initialValue,
-      validator: validator,
-      onChanged: onChanged,
-      onFieldSubmitted: onFieldSubmitted,
-      focusNode: focusNode,
-      keyboardType: keyboardType,
-      textInputAction: textInputAction,
-      inputFormatters: inputFormatters,
-      autofillHints: autofillHints,
-      obscureText: obscureText,
-      readOnly: readOnly,
-      enabled: enabled,
-      autofocus: autofocus,
-      maxLines: obscureText ? 1 : maxLines,
-      minLines: minLines,
-      textDirection: textDirection,
-      textAlign: textAlign,
-      style: textStyle ?? Theme.of(context).textTheme.bodyMedium,
-      cursorColor: Theme.of(context).colorScheme.primary,
-      onTap: onTap,
-      decoration: InputDecoration(
-        labelText: label,
-        hintText: hint,
-        helperText: helperText,
-        errorText: errorText,
-        prefixIcon: prefixIcon,
-        suffixIcon: suffixIcon,
-      ),
-    );
-
-    if ((maxLines ?? 1) != 1 || minLines != null) return field;
-    return ConstrainedBox(
-      constraints: const BoxConstraints(
-        minHeight: AafiatakSizes.inputMinHeight,
-      ),
-      child: field,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        if (label != null) ...<Widget>[
+          Text(
+            label!,
+            style: AafiatakTypography.label.copyWith(
+              color: AafiatakColors.textPrimary,
+            ),
+          ),
+          const SizedBox(height: AafiatakSpacing.xs),
+        ],
+        Container(
+          constraints: const BoxConstraints(minHeight: 56),
+          decoration: BoxDecoration(
+            color: enabled
+                ? AafiatakColors.surface
+                : AafiatakColors.surfaceContainer,
+            borderRadius: AafiatakRadii.md,
+            border: Border.all(
+              color: hasError ? AafiatakColors.error : AafiatakColors.outline,
+              width: hasError ? 1.5 : 1,
+            ),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: AafiatakSpacing.md),
+          alignment: Alignment.center,
+          child: Row(
+            children: <Widget>[
+              if (prefixIcon != null) ...<Widget>[
+                IconTheme(
+                  data: const IconThemeData(
+                    size: 22,
+                    color: AafiatakColors.primary,
+                  ),
+                  child: prefixIcon!,
+                ),
+                const SizedBox(width: AafiatakSpacing.sm),
+              ],
+              Expanded(
+                child: TextField(
+                  controller: controller,
+                  decoration: InputDecoration(
+                    hintText: hint,
+                    hintStyle: AafiatakTypography.body.copyWith(
+                      color: AafiatakColors.textSecondary,
+                    ),
+                    border: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    errorBorder: InputBorder.none,
+                    focusedErrorBorder: InputBorder.none,
+                    contentPadding: EdgeInsets.zero,
+                    isDense: true,
+                    fillColor: Colors.transparent,
+                    filled: false,
+                  ),
+                  style: AafiatakTypography.body.copyWith(
+                    color: enabled
+                        ? AafiatakColors.textPrimary
+                        : AafiatakColors.textSecondary,
+                  ),
+                  keyboardType: keyboardType,
+                  onChanged: onChanged,
+                  onSubmitted: onSubmitted,
+                  obscureText: obscureText,
+                  enabled: enabled,
+                  maxLines: obscureText ? 1 : maxLines,
+                  textDirection: textDirection,
+                  autofocus: autofocus,
+                  cursorColor: AafiatakColors.primary,
+                ),
+              ),
+              if (suffixIcon != null) ...<Widget>[
+                const SizedBox(width: AafiatakSpacing.sm),
+                IconTheme(
+                  data: const IconThemeData(
+                    size: 22,
+                    color: AafiatakColors.textSecondary,
+                  ),
+                  child: suffixIcon!,
+                ),
+              ],
+            ],
+          ),
+        ),
+        if (hasError ||
+            (helperText != null && helperText!.isNotEmpty)) ...<Widget>[
+          const SizedBox(height: AafiatakSpacing.xxs),
+          Text(
+            hasError ? errorText! : helperText!,
+            style: AafiatakTypography.bodySmall.copyWith(
+              color: hasError
+                  ? AafiatakColors.error
+                  : AafiatakColors.textSecondary,
+            ),
+          ),
+        ],
+      ],
     );
   }
 }

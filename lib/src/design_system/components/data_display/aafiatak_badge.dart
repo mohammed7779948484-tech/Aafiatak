@@ -3,58 +3,67 @@ import 'package:flutter/material.dart';
 import '../../foundations/foundations.dart';
 import '../feedback/aafiatak_feedback_tone.dart';
 
+typedef AafiatakBadgeTone = AafiatakFeedbackTone;
+
+/// Pill badge widget matching the High-Fidelity .badge pattern.
+///
+/// Has a 28px min-height, full radius, 7px dot bullet, and monochrome tone styling.
 class AafiatakBadge extends StatelessWidget {
   const AafiatakBadge({
     super.key,
     required this.label,
     this.tone = AafiatakFeedbackTone.neutral,
-    this.icon,
   });
 
   final String label;
   final AafiatakFeedbackTone tone;
-  final Widget? icon;
 
   @override
   Widget build(BuildContext context) {
-    final colors = tone.colors(context);
-    final textStyle = Theme.of(context).textTheme.labelSmall
-        ?.copyWith(color: colors.foreground);
+    Color bg;
+    Color fg;
 
-    return Semantics(
-      label: label,
-      excludeSemantics: true,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: colors.background,
-          borderRadius: AafiatakRadii.full,
-          border: Border.all(
-            color: colors.border,
-            width: AafiatakBorders.subtle,
+    switch (tone) {
+      case AafiatakFeedbackTone.primary:
+      case AafiatakFeedbackTone.success:
+      case AafiatakFeedbackTone.hold:
+        bg = AafiatakColors.primaryContainer;
+        fg = AafiatakColors.onPrimaryContainer;
+      case AafiatakFeedbackTone.secondary:
+      case AafiatakFeedbackTone.info:
+      case AafiatakFeedbackTone.warning:
+        bg = AafiatakColors.surfaceContainer;
+        fg = AafiatakColors.textPrimary;
+      case AafiatakFeedbackTone.error:
+        bg = AafiatakColors.error;
+        fg = AafiatakColors.onError;
+      case AafiatakFeedbackTone.neutral:
+        bg = AafiatakColors.surfaceContainer;
+        fg = AafiatakColors.textSecondary;
+    }
+
+    return Container(
+      constraints: const BoxConstraints(minHeight: 28),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+      decoration: BoxDecoration(color: bg, borderRadius: AafiatakRadii.full),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            width: 7,
+            height: 7,
+            decoration: BoxDecoration(color: fg, shape: BoxShape.circle),
           ),
-        ),
-        child: Padding(
-          padding: const EdgeInsetsDirectional.symmetric(
-            horizontal: AafiatakSpacing.sm,
-            vertical: AafiatakSpacing.xxs,
+          const SizedBox(width: 6),
+          Text(
+            label,
+            style: AafiatakTypography.caption.copyWith(
+              color: fg,
+              fontWeight: FontWeight.w600,
+            ),
           ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              if (icon != null) ...<Widget>[
-                IconTheme(
-                  data: IconThemeData(
-                    color: colors.foreground,
-                    size: AafiatakSizes.iconInline,
-                  ),
-                  child: icon!,
-                ),
-                const SizedBox(width: AafiatakSpacing.xxs),
-              ],
-              Text(label, style: textStyle),
-            ],
-          ),
-        ),
+        ],
       ),
     );
   }

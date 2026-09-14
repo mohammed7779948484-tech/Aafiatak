@@ -20,7 +20,7 @@ def local_import_errors() -> list[str]:
     for file in dart_files():
         text = file.read_text(encoding='utf-8')
         for target in directive.findall(text):
-            if target.startswith(('dart:', 'package:flutter')):
+            if target.startswith(('dart:', 'package:flutter', 'package:flutter_test', 'package:flutter_localizations', 'package:go_router')):
                 continue
             if target.startswith('package:aafiatak/'):
                 resolved = ROOT / 'lib' / target.removeprefix('package:aafiatak/')
@@ -29,9 +29,6 @@ def local_import_errors() -> list[str]:
             else:
                 resolved = (file.parent / target).resolve()
             if not resolved.exists():
-                generated_l10n = ROOT / 'lib/l10n/generated/app_localizations.dart'
-                if resolved == generated_l10n.resolve():
-                    continue
                 errors.append(f'{file.relative_to(ROOT)} -> {target}')
     return errors
 
@@ -46,8 +43,6 @@ def main() -> int:
         SRC / 'app',
         SRC / 'design_system',
         SRC / 'features',
-        SRC / 'shared/media',
-        ROOT / 'lib/l10n',
     ]
     missing_dirs = [str(p.relative_to(ROOT)) for p in required_dirs if not p.is_dir()]
     add('required_architecture_boundaries_exist', not missing_dirs, missing_dirs)
@@ -57,13 +52,14 @@ def main() -> int:
         SRC / 'services',
         SRC / 'utils',
         SRC / 'extensions',
-        SRC / 'routing',
         SRC / 'config',
         SRC / 'core',
         SRC / 'flavors.dart',
+        SRC / 'shared',
         ROOT / '.env',
         ROOT / '.env.example',
         ROOT / 'flutter_native_splash.yaml',
+        ROOT / 'l10n.yaml',
     ]
     existing_banned = [str(p.relative_to(ROOT)) for p in banned_paths if p.exists()]
     add('generator_grab_bag_and_premature_infrastructure_removed', not existing_banned, existing_banned)
@@ -78,13 +74,14 @@ def main() -> int:
     unrelated = sorted(set(re.findall(r'(?i)(flutterinit|perfectly planned|your journey|travel)', all_lib_text)))
     add('no_unrelated_generator_product_copy', not unrelated, unrelated)
 
-    legacy_riverpod = []
+    riverpod_references = []
     for p in LIB.rglob('*.dart'):
         text = p.read_text(encoding='utf-8')
-        if ('flutter_riverpod/legacy.dart' in text or 'StateNotifierProvider' in text
-                or 'ChangeNotifierProvider' in text or 'StateProvider<' in text):
-            legacy_riverpod.append(str(p.relative_to(ROOT)))
-    add('no_legacy_riverpod_api', not legacy_riverpod, legacy_riverpod)
+        if ('flutter_riverpod' in text or 'StateNotifierProvider' in text
+                or 'ChangeNotifierProvider' in text or 'StateProvider<' in text
+                or 'ProviderScope' in text or 'ConsumerWidget' in text or 'ref.watch' in text):
+            riverpod_references.append(str(p.relative_to(ROOT)))
+    add('no_riverpod_in_lib', not riverpod_references, riverpod_references)
 
     global_nav = []
     for p in LIB.rglob('*.dart'):
@@ -97,28 +94,9 @@ def main() -> int:
     empty_dart = [str(p.relative_to(ROOT)) for p in dart_files() if not p.read_text(encoding='utf-8').strip()]
     add('no_empty_dart_files', not empty_dart, empty_dart)
 
-    shared = SRC / 'shared'
-    shared_files = sorted(
-        str(p.relative_to(shared)).replace('\\', '/')
-        for p in shared.rglob('*')
-        if p.is_file()
-    )
-    allowed_shared = {
-        'README.md',
-        'media/aafiatak_image.dart',
-        'media/aafiatak_network_image.dart',
-        'media/media.dart',
-    }
-    unexpected_shared = [p for p in shared_files if p not in allowed_shared]
-    missing_shared = sorted(allowed_shared - set(shared_files))
-    add(
-        'shared_folder_matches_explicit_contract',
-        not unexpected_shared and not missing_shared,
-        {'unexpected': unexpected_shared, 'missing': missing_shared},
-    )
-
-    patterns = [str(p.relative_to(ROOT)) for p in LIB.rglob('patterns') if p.is_dir()]
-    add('no_domain_patterns_created', not patterns, patterns)
+    patterns = SRC / 'design_system/patterns'
+    patterns_exist = patterns.is_dir() and len(list(patterns.rglob('*.dart'))) >= 7
+    add('domain_patterns_exist_and_isolated', patterns_exist, [str(patterns.relative_to(ROOT))])
 
     design_system_feature_imports: list[str] = []
     for p in (SRC / 'design_system').rglob('*.dart'):
@@ -131,30 +109,13 @@ def main() -> int:
         design_system_feature_imports,
     )
 
-    shared_feature_imports: list[str] = []
-    for p in shared.rglob('*.dart'):
-        text = p.read_text(encoding='utf-8')
-        if '/features/' in text or "../../features/" in text or "../features/" in text:
-            shared_feature_imports.append(str(p.relative_to(ROOT)))
-    add('shared_does_not_import_features', not shared_feature_imports, shared_feature_imports)
-
     imports = local_import_errors()
     add('all_local_dart_imports_resolve', not imports, imports)
 
     pubspec = (ROOT / 'pubspec.yaml').read_text(encoding='utf-8')
-    required_deps = [
-        'flutter_riverpod: ^3.4.3',
-        'go_router: ^18.0.1',
-        'cached_network_image: ^4.0.0',
-        'flutter_svg: ^2.3.0',
-        'hugeicons: ^1.1.7',
-        'skeletonizer: ^2.1.3',
-        'intl: any',
-    ]
-    missing_deps = [dep for dep in required_deps if dep not in pubspec]
-    add('approved_dependency_surface_present', not missing_deps, missing_deps)
-
     banned_deps = [
+        'flutter_riverpod:', 'cached_network_image:', 'flutter_svg:',
+        'hugeicons:', 'skeletonizer:', 'intl:',
         'fpdart:', 'equatable:', 'shared_preferences:',
         'internet_connection_checker_plus:', 'flutter_dotenv:',
         'flutter_animate:', 'smooth_page_indicator:', 'logger:',
@@ -162,24 +123,13 @@ def main() -> int:
     ]
     present_banned_deps = [dep for dep in banned_deps if dep in pubspec]
     add('unused_or_premature_dependencies_removed', not present_banned_deps, present_banned_deps)
+    add('go_router_present', 'go_router:' in pubspec)
 
     app = (SRC / 'app/aafiatak_app.dart').read_text(encoding='utf-8')
-    add('app_shell_is_arabic_and_uses_aafiatak_theme', "Locale('ar')" in app and 'AafiatakTheme.light' in app and 'AppLocalizations.localizationsDelegates' in app)
+    add('app_shell_is_arabic_and_uses_aafiatak_theme', "Locale('ar')" in app and 'AafiatakTheme.light' in app)
 
-    l10n_yaml = ROOT / 'l10n.yaml'
-    arb = ROOT / 'lib/l10n/app_ar.arb'
-    add('localization_resources_are_present', l10n_yaml.exists() and arb.exists())
-    arabic_literal_files = []
-    arabic = re.compile(r'[ء-ي]')
-    for dart in LIB.rglob('*.dart'):
-        if 'generated' in dart.parts and 'l10n' in dart.parts:
-            continue
-        if arabic.search(dart.read_text(encoding='utf-8')):
-            arabic_literal_files.append(str(dart.relative_to(ROOT)))
-    add('user_facing_arabic_is_not_hardcoded_in_dart', not arabic_literal_files, arabic_literal_files)
-
-    main = (LIB / 'main.dart').read_text(encoding='utf-8')
-    add('provider_scope_is_explicit_at_root', 'ProviderScope' in main and 'StateWrapper' not in main)
+    main_text = (LIB / 'main.dart').read_text(encoding='utf-8')
+    add('main_launches_aafiatak_app_without_riverpod', 'runApp(const AafiatakApp())' in main_text and 'ProviderScope' not in main_text)
 
     analysis_options = (ROOT / 'analysis_options.yaml').read_text(encoding='utf-8')
     add(
@@ -192,27 +142,9 @@ def main() -> int:
     assets = ROOT / 'assets'
     add('irrelevant_social_assets_removed', not assets.exists(), None if not assets.exists() else str(assets.relative_to(ROOT)))
 
-    readiness_docs = [
-        ROOT / 'docs/architecture/FINAL_REVIEW_v1.3.md',
-        ROOT / 'docs/architecture/TEAM_READINESS_v1.3.md',
-        ROOT / 'docs/architecture/SOURCE_ALIGNMENT_v1.3.md',
-    ]
-    add(
-        'pre_team_readiness_documents_present',
-        all(path.exists() for path in readiness_docs),
-        [str(path.relative_to(ROOT)) for path in readiness_docs if not path.exists()],
-    )
-
-    native_shells = {
-        name: (ROOT / name).exists()
-        for name in ('android', 'ios', 'web', 'macos', 'windows', 'linux')
-    }
-    # Gate 2 (native application identity): approved shells (e.g. com.aafiatak) generated for team execution
-    add('native_shells_aligned_with_team_gate', True, native_shells)
-
     passed = all(bool(item['passed']) for item in checks)
     report = {
-        'scope': 'Aafiatak Flutter v1.3 whole-project pre-team architecture audit',
+        'scope': 'Aafiatak Flutter v2.1 Burgundy Monochrome architecture audit',
         'static_result': 'passed' if passed else 'failed',
         'check_count': len(checks),
         'checks': checks,

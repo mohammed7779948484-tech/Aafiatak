@@ -1,57 +1,55 @@
-# Aafiatak Flutter Design System — Foundation v1.3
+# Aafiatak Flutter Design System — Foundation v2.1 (Burgundy Monochrome)
 
 ## Scope
 
-This module implements the approved visual foundations, Material 3 theme, and domain-neutral primitives required before the team builds Domain Patterns and Patient screens.
+This module implements the approved visual foundations, Material 3 theme, 9 domain-neutral primitives, and 7 domain patterns derived directly from the High-Fidelity Prototype (`Aafiatak_High_Fidelity_Prototype_v3.0`).
 
 ```text
 Flutter / Material 3
         ↓
-foundations/
+foundations/         # Colors, Spacing, Radii, Typography
         ↓
-theme/
+theme/               # Material 3 Theme mapping
         ↓
-components/
+components/          # 9 Core primitives
         ↓
-Domain Patterns   # next team-owned layer
+patterns/            # 7 Domain patterns
         ↓
-feature screens
+features / shell     # Patient shell & feature screens
 ```
 
-## Public import
+## Public Import
 
 ```dart
 import 'package:aafiatak/src/design_system/design_system.dart';
 ```
 
-## Foundation groups
+## Foundation Groups
 
-- `AafiatakPalette`
-- `AafiatakColors`
-- `AafiatakTypography`
-- `AafiatakSpacing`
-- `AafiatakRadii`
-- `AafiatakBorders`
-- `AafiatakElevation`
-- `AafiatakMotion`
-- `AafiatakSizes`
-- `AafiatakIcons`
+- `AafiatakColors` — Burgundy monochrome tokens (`#800020`, `#FFFFFF`, `#E5E5E5`, `#EFEFEF`, `#F7E9EC`, `#1A1A1A`, `#6E6E6E`) and feedback tones (`success`, `warning`, `error`, `info`, `neutral`, `hold`).
+- `AafiatakTypography` — Arabic scale (Display, H1, H2, H3, Body, BodySmall, Caption, Button) with system font fallbacks.
+- `AafiatakSpacing` — Spacing scale (`0, 4, 8, 12, 16, 20, 24, 32, 40, 48, 64`) with t-shirt and numeric aliases.
+- `AafiatakRadii` — Corner radii (`8, 12, 16, 24, 999`) with t-shirt and numeric aliases.
 
-## Theme
+## 9 Core Primitives
 
-- explicit Material 3 `ColorScheme`;
-- `AafiatakSemanticColors` ThemeExtension;
-- `AafiatakTheme.light` and component themes;
-- no dark theme in the current approved scope.
+- `AafiatakButton`
+- `AafiatakTextField`
+- `AafiatakCard`
+- `AafiatakInfoRows`
+- `AafiatakBadge`
+- `AafiatakNotice`
+- `AafiatakStatusBlock`
+- `AafiatakSectionHeading`
+- `AafiatakEmptyState`
 
-## Component boundary
+## 7 Domain Patterns
 
-Primitives are domain-neutral and may be used by features or Domain Patterns. Product-specific compositions (Doctor, Appointment, Payment, ReservationHold, Visit/Queue, etc.) are not primitives and are intentionally deferred to team-owned Patterns.
+- `DoctorCard`
+- `ServiceCard`
+- `FacilitySummary`
+- `AppointmentSummary`
+- `ReservationHoldBanner`
+- `ArrivalWindowCard`
+- `PolicyCard`
 
-Visible strings are localization inputs/ARB resources rather than hard-coded reusable Arabic copy.
-
-Cross-feature non-visual infrastructure is documented separately in `docs/architecture/SHARED_GUIDE.md`.
-
-## Team usage contract
-
-See `COMPONENT_USAGE_CONTRACTS_v1.3.md` for per-component purpose, variants, states, token/RTL/text-scaling/accessibility rules, demo states and do/don’t guidance.

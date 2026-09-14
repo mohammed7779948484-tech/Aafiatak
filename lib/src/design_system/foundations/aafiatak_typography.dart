@@ -96,6 +96,11 @@ abstract final class AafiatakTypography {
     color: AafiatakColors.textSecondary,
   );
 
+  // Role aliases
+  static const TextStyle bodyMedium = body;
+  static const TextStyle titleMedium = labelLarge;
+  static const TextStyle titleSmall = label;
+
   static const TextTheme textTheme = TextTheme(
     displayLarge: display,
     displayMedium: h1,

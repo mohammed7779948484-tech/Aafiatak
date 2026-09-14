@@ -9,6 +9,13 @@ abstract final class AafiatakRadii {
   static const double xlValue = 24;
   static const double fullValue = 999;
 
+  // Numeric aliases
+  static const double radius8 = smValue;
+  static const double radius12 = mdValue;
+  static const double radius16 = lgValue;
+  static const double radius24 = xlValue;
+  static const double radiusFull = fullValue;
+
   static const sm = BorderRadius.all(Radius.circular(smValue));
   static const md = BorderRadius.all(Radius.circular(mdValue));
   static const lg = BorderRadius.all(Radius.circular(lgValue));

@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    "target": "ES2019",
+    "module": "none",
+    "outFile": "dist/app.js",
+    "strict": false,
+    "skipLibCheck": true,
+    "lib": [
+      "DOM",
+      "ES2019"
+    ]
+  },
+  "files": [
+    "src/ts/core/types.ts",
+    "src/ts/core/icons.ts",
+    "src/ts/data/fixtures.ts",
+    "src/ts/components/primitives.ts",
+    "src/ts/components/domain.ts",
+    "src\\ts\\screens\\PAT01.ts",
+    "src\\ts\\screens\\PAT02.ts",
+    "src\\ts\\screens\\PAT03.ts",
+    "src\\ts\\screens\\PAT04.ts",
+    "src\\ts\\screens\\PAT05.ts",
+    "src\\ts\\screens\\PAT06.ts",
+    "src\\ts\\screens\\PAT07.ts",
+    "src\\ts\\screens\\PAT08.ts",
+    "src\\ts\\screens\\PAT09.ts",
+    "src\\ts\\screens\\PAT10.ts",
+    "src\\ts\\screens\\PAT11.ts",
+    "src\\ts\\screens\\PAT12.ts",
+    "src\\ts\\screens\\PAT13.ts",
+    "src\\ts\\screens\\PAT14.ts",
+    "src\\ts\\screens\\PAT15.ts",
+    "src\\ts\\screens\\PAT16.ts",
+    "src\\ts\\screens\\PAT17.ts",
+    "src\\ts\\screens\\PAT18.ts",
+    "src\\ts\\screens\\PAT19.ts",
+    "src\\ts\\screens\\PAT20.ts",
+    "src\\ts\\screens\\PAT21.ts",
+    "src/ts/main.ts"
+  ]
+}

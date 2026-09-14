@@ -1,5 +1,5 @@
 name: aafiatak
-description: Aafiatak patient Flutter starter with an audited Material 3 design-system foundation.
+description: Aafiatak patient Flutter application with a lightweight Material 3 design system.
 publish_to: 'none'
 version: 1.3.0+4
 
@@ -12,19 +12,9 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  intl: any
 
-  # Application shell
-  flutter_riverpod: ^3.4.3
+  # Routing
   go_router: ^18.0.1
-
-  # Shared media infrastructure
-  cached_network_image: ^4.0.0
-  flutter_svg: ^2.3.0
-
-  # Design System
-  hugeicons: ^1.1.7
-  skeletonizer: ^2.1.3
 
 dev_dependencies:
   flutter_test:
@@ -32,5 +22,5 @@ dev_dependencies:
   flutter_lints: ^6.0.0
 
 flutter:
-  generate: true
   uses-material-design: true
+

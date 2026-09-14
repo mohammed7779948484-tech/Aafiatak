@@ -1,75 +1,70 @@
-# Aafiatak Flutter architecture v1.3
+# Aafiatak Flutter Architecture v2.1 (Burgundy Monochrome)
 
-## Current goal
+## Current Goal
 
-Provide a stable, team-splittable frontend baseline for the Patient MVP without
-inventing backend architecture or unresolved product decisions.
+Provide a clean, focused, team-splittable frontend baseline for the 3-student university team, strictly aligned with the High-Fidelity Prototype (`Aafiatak_High_Fidelity_Prototype_v3.0`).
 
 ```text
-lib/src/
-├── app/                         # composition, routing
-├── design_system/               # visual source of truth
-├── features/                    # patient feature ownership
-└── shared/
-    └── media/                    # cross-feature technical infrastructure
+lib/
+├── main.dart
+└── src/
+    ├── app/                         # composition, routing, patient shell
+    │   ├── patient_shell.dart       # PatientShell, AppBars, BottomNav, BottomAction
+    │   └── routing/                 # GoRouter configuration
+    ├── design_system/               # visual source of truth
+    │   ├── foundations/             # colors, typography, spacing, radii
+    │   ├── theme/                   # Material 3 light theme mapping
+    │   ├── components/              # 9 core primitives
+    │   └── patterns/                # 7 domain patterns
+    └── features/                    # patient feature ownership
+        └── starter/                 # QA showcase gallery
 ```
 
-Localization resources live under `lib/l10n/` and are generated through Flutter
-`gen-l10n`.
-
-## UI/mock feature shape
+## UI/Mock Feature Shape
 
 ```text
 features/<feature>/
 ├── presentation/
 │   ├── screens/
-│   ├── widgets/
-│   └── view_models/             # Riverpod Notifier/AsyncNotifier when needed
+│   └── widgets/
 └── data/
     └── mock/                    # feature-local deterministic fixtures
 ```
 
-Do not create empty layers merely for architectural symmetry.
+Pure Flutter `StatefulWidget` / `ValueNotifier` is used where state is needed. Heavy state management abstractions (like Riverpod 3) and codegen have been removed.
 
-## Dependency direction
+## Dependency Direction
 
 ```text
-app ───────────→ features + design_system + shared + generated localizations
-features ──────→ design_system + shared + generated localizations
-shared ────────→ design_system + generated localizations where needed
-design_system ─→ Flutter/Material + generated localizations + approved DS packages
+app ───────────→ features + design_system
+features ──────→ design_system
+design_system ─→ Flutter / Material 3
 ```
 
 Forbidden:
 - `design_system` importing a feature;
-- `shared` importing a feature;
 - one feature importing another feature's private implementation;
 - repositories/services using `BuildContext` or visual feedback APIs;
 - global navigator/root `BuildContext` singletons.
 
-## Domain Patterns
+## Design System & Domain Patterns
 
-The team will add a layer such as:
+The Design System is organized into:
+1. **Foundations**: Tokens for colors, radii, spacing, and typography.
+2. **Theme**: Material 3 theme mapping with `CardThemeData`, `OutlineInputBorder`, component themes.
+3. **Components (9)**: Domain-neutral primitives (`AafiatakButton`, `AafiatakTextField`, `AafiatakCard`, `AafiatakInfoRows`, `AafiatakBadge`, `AafiatakNotice`, `AafiatakStatusBlock`, `AafiatakSectionHeading`, `AafiatakEmptyState`).
+4. **Patterns (7)**: Reusable domain compositions (`DoctorCard`, `ServiceCard`, `FacilitySummary`, `AppointmentSummary`, `ReservationHoldBanner`, `ArrivalWindowCard`, `PolicyCard`).
 
-```text
-design_system/
-└── patterns/
-    ├── doctor/
-    ├── booking/
-    ├── appointment/
-    ├── payment/
-    └── visit_queue/
+## Verification Gate
+
+Before any branch or PR is merged:
+
+```bash
+flutter pub get
+python scripts/static_design_system_audit.py
+python scripts/static_architecture_audit.py
+dart format --set-exit-if-changed lib test
+flutter analyze
+flutter test
 ```
 
-A Domain Pattern is a reusable visual composition with domain meaning. It may
-compose Design System primitives, but it must not own backend truth or perform
-API calls. Feature/ViewModel logic decides what state/actions are allowed.
-
-Every shared Pattern gets exactly one implementation owner to prevent duplicate
-`DoctorCard`/`PaymentStatusCard` variants across branches.
-
-## Backend evolution
-
-When real integration starts, introduce repositories/services around approved
-real data sources. App-wide sources of truth may then justify explicit `data/`
-and, only where useful, `domain/` layers. Do not place them in `shared/`.

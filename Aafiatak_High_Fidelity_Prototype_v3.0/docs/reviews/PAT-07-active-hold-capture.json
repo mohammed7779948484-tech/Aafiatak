@@ -1,0 +1,13 @@
+{
+  "screen": "PAT-07",
+  "state": "active-hold",
+  "width": 390,
+  "height": 844,
+  "metrics": {
+    "scrollWidth": 390,
+    "scrollHeight": 937,
+    "clientWidth": 390
+  },
+  "errors": [],
+  "overflow": false
+}

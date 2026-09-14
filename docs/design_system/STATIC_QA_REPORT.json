@@ -1,9 +1,7 @@
 {
-  "scope": "Aafiatak Flutter v1.3 — documentation-aligned design system foundation before Domain Patterns",
-  "flutter_cli_executed": false,
-  "flutter_cli_reason": "Flutter/Dart SDK is not installed in this execution environment.",
+  "scope": "Aafiatak Flutter v2.1 Burgundy Monochrome Design System audit",
   "static_result": "passed",
-  "check_count": 35,
+  "check_count": 22,
   "checks": [
     {
       "name": "design_system_directory_exists",
@@ -16,11 +14,6 @@
       "details": null
     },
     {
-      "name": "no_domain_patterns_created",
-      "passed": true,
-      "details": []
-    },
-    {
       "name": "legacy_visual_system_removed",
       "passed": true,
       "details": []
@@ -31,24 +24,59 @@
       "details": []
     },
     {
-      "name": "public_design_system_barrel_exports_all_leaf_modules",
+      "name": "expected_domain_patterns_present",
       "passed": true,
       "details": []
     },
     {
-      "name": "core_components_have_no_raw_hex_colors",
+      "name": "public_design_system_barrel_exports_foundations",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "public_design_system_barrel_exports_components",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "public_design_system_barrel_exports_patterns",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "public_design_system_barrel_exports_theme",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "no_banned_packages_in_design_system",
       "passed": true,
       "details": []
     },
     {
-      "name": "core_components_are_rtl_direction_safe",
+      "name": "canonical_burgundy_monochrome_color_anchors_present",
       "passed": true,
       "details": []
     },
     {
-      "name": "hugeicons_encapsulated_by_design_system",
+      "name": "legacy_mineral_bloom_palette_removed",
       "passed": true,
       "details": []
+    },
+    {
+      "name": "canonical_spacing_scale_present",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "canonical_radii_scale_present",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "approved_typography_contract_present",
+      "passed": true,
+      "details": null
     },
     {
       "name": "local_imports_resolve",
@@ -59,51 +87,6 @@
       "name": "dart_delimiters_balanced",
       "passed": true,
       "details": []
-    },
-    {
-      "name": "canonical_color_anchors_present",
-      "passed": true,
-      "details": []
-    },
-    {
-      "name": "canonical_spacing_scale_present",
-      "passed": true,
-      "details": null
-    },
-    {
-      "name": "canonical_motion_scale_present",
-      "passed": true,
-      "details": null
-    },
-    {
-      "name": "minimum_touch_target_is_48",
-      "passed": true,
-      "details": null
-    },
-    {
-      "name": "approved_typography_contract_present",
-      "passed": true,
-      "details": null
-    },
-    {
-      "name": "canonical_text_contrast_pairs_meet_4_5_to_1",
-      "passed": true,
-      "details": {}
-    },
-    {
-      "name": "selection_controls_have_non_color_selected_indicators",
-      "passed": true,
-      "details": null
-    },
-    {
-      "name": "input_labels_and_messages_support_persistent_readability",
-      "passed": true,
-      "details": null
-    },
-    {
-      "name": "custom_button_semantics_preserve_accessible_tap_action",
-      "passed": true,
-      "details": null
     },
     {
       "name": "arabic_locale_configured",
@@ -119,56 +102,6 @@
       "name": "no_dark_theme_added",
       "passed": true,
       "details": null
-    },
-    {
-      "name": "targets_flutter_3_47_and_dart_3_13",
-      "passed": true,
-      "details": null
-    },
-    {
-      "name": "no_dependency_override",
-      "passed": true,
-      "details": null
-    },
-    {
-      "name": "flutter_localizations_dependency_present",
-      "passed": true,
-      "details": null
-    },
-    {
-      "name": "flutter_gen_l10n_is_configured",
-      "passed": true,
-      "details": null
-    },
-    {
-      "name": "visible_arabic_copy_externalized_from_dart",
-      "passed": true,
-      "details": []
-    },
-    {
-      "name": "otp_input_is_configuration_driven_and_single_logical_field",
-      "passed": true,
-      "details": null
-    },
-    {
-      "name": "status_block_supports_optional_copy_and_next_action",
-      "passed": true,
-      "details": null
-    },
-    {
-      "name": "primary_action_bar_present",
-      "passed": true,
-      "details": null
-    },
-    {
-      "name": "list_row_present",
-      "passed": true,
-      "details": null
-    },
-    {
-      "name": "component_coverage_and_usage_contracts_documented",
-      "passed": true,
-      "details": []
     },
     {
       "name": "design_system_tests_authored",

@@ -1,0 +1,44 @@
+[
+  {
+    "state": "initial",
+    "file": "PAT-02-initial-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "searching",
+    "file": "PAT-02-searching-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "results",
+    "file": "PAT-02-results-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "no-results",
+    "file": "PAT-02-no-results-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "offline",
+    "file": "PAT-02-offline-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "error",
+    "file": "PAT-02-error-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "state": "loading",
+    "file": "PAT-11-loading-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "upcoming-populated",
+    "file": "PAT-11-upcoming-populated-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "upcoming-empty",
+    "file": "PAT-11-upcoming-empty-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "past-populated",
+    "file": "PAT-11-past-populated-phone.png",
+    "h": 965,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "past-empty",
+    "file": "PAT-11-past-empty-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "refreshing",
+    "file": "PAT-11-refreshing-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "offline",
+    "file": "PAT-11-offline-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "error",
+    "file": "PAT-11-error-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  }
+]

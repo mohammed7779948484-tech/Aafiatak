@@ -1,0 +1,65 @@
+[
+  {
+    "state": "idle",
+    "file": "PAT-19-idle-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "editing",
+    "file": "PAT-19-editing-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "invalid",
+    "file": "PAT-19-invalid-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "requesting-otp",
+    "file": "PAT-19-requesting-otp-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "existing-identity",
+    "file": "PAT-19-existing-identity-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "unknown-identity",
+    "file": "PAT-19-unknown-identity-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "provider-unavailable",
+    "file": "PAT-19-provider-unavailable-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "rate-limited",
+    "file": "PAT-19-rate-limited-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "accepted",
+    "file": "PAT-19-accepted-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  }
+]

@@ -1,86 +1,80 @@
-# Aafiatak Flutter Starter — Team Baseline Candidate v1.3
+# Aafiatak Flutter Starter — Design System v2.1 (Burgundy Monochrome)
 
-This package is the audited Flutter starting point for the **Aafiatak Patient MVP**.
-It aligns the application shell and domain-neutral Design System with the approved
-21-screen / 142-state High-Fidelity documentation before the team starts building
-feature screens and Domain Patterns.
+This repository provides the refactored, production-quality Flutter Design System for the **Aafiatak Patient Mobile App**, perfectly aligned with the Burgundy Monochrome High-Fidelity Prototype (`Aafiatak_High_Fidelity_Prototype_v3.0`).
 
 ## Baseline
 
-- Flutter `>=3.47.0`
-- Dart `>=3.13.0 <4.0.0`
-- Material 3
-- Riverpod 3 (`flutter_riverpod ^3.4.3`)
-- `go_router ^18.0.1`
-- Arabic-first, RTL
-- Flutter `gen-l10n` localization resources
-- feature-first UI/mock-data phase
-- phone-only current product target
+- Flutter `>=3.24.0`
+- Dart `>=3.0.0 <4.0.0`
+- Material 3 (Burgundy Monochrome light theme)
+- `go_router` routing
+- Arabic-only (`ar`), RTL-first
+- Pure Flutter state (`StatefulWidget`, `ValueNotifier`)
+- Centered 430px max-width patient phone container
+- 9 Core Primitives & 7 Domain Patterns
 
-## Source structure
+## Source Structure
 
 ```text
 lib/
 ├── main.dart
-├── l10n/
-│   └── app_ar.arb             # generated Dart goes to l10n/generated/
 └── src/
-    ├── app/                   # app composition + routing
-    ├── design_system/         # foundations + theme + domain-neutral components
-    ├── features/              # team-owned patient features
-    └── shared/
-        └── media/             # approved cross-feature media infrastructure
+    ├── app/                         # App shell, root routing, patient phone container
+    │   ├── aafiatak_app.dart        # MaterialApp entry point
+    │   ├── patient_shell.dart       # Centered phone canvas, app bars, bottom nav
+    │   └── routing/                 # GoRouter configuration
+    ├── design_system/               # Visual source of truth
+    │   ├── foundations/             # Colors, spacing, radii, typography
+    │   ├── theme/                   # Material 3 theme mapping
+    │   ├── components/              # 9 core primitives
+    │   └── patterns/                # 7 domain patterns
+    └── features/
+        └── starter/                 # Interactive QA gallery showcase
 ```
 
-`core/` is intentionally absent. `design_system/` is a first-class subsystem.
+## What Was Refactored from v1.3
 
-## What changed from v1.2
+1. **Eliminated Over-Engineering**:
+   - Removed unused/heavy dependencies: `flutter_riverpod`, `hugeicons`, `cached_network_image`, `flutter_svg`, `skeletonizer`, `intl`.
+   - Removed `shared/media/` and legacy Mineral Bloom palette (`#4A315D`, `#3F786E`, `#A85A41`).
+   - Removed complex `gen-l10n` build codegen overhead in favor of direct, clean Arabic typography and strings.
 
-The full patient design-document chain was re-read against the Flutter starter.
-The following gaps were closed before team handoff:
+2. **Adopted Burgundy Monochrome Palette**:
+   - Brand: Burgundy `#800020`
+   - Primary Container: Light Burgundy `#F7E9EC`
+   - Canvas / Background: Cool Grey `#E5E5E5`
+   - Surface: Clean White `#FFFFFF`
+   - Surface Container: Soft Off-White `#EFEFEF`
+   - Text Primary: `#1A1A1A`, Text Secondary: `#6E6E6E`
+   - Outline / Border: `#E5E5E5`
 
-- added `AafiatakPrimaryActionBar`, required by transactional/form layouts;
-- added `AafiatakListRow`, completing the documented Tier-A primitive set;
-- rebuilt `AafiatakOtpInput` as a configuration-driven multi-cell presentation
-  over one logical input, with paste/autofill and no hard-coded OTP length;
-- expanded `AafiatakStatusBlock` to support optional supporting copy and next action;
-- expanded `AafiatakPhoneField` without inventing country/normalization rules;
-- externalized visible Arabic copy to Flutter localization resources;
-- added explicit pre-team component-coverage and readiness audits.
+3. **Implemented 9 Core Components & 7 Domain Patterns**:
+   - 9 Primitives: `AafiatakButton`, `AafiatakTextField`, `AafiatakCard`, `AafiatakInfoRows`, `AafiatakBadge`, `AafiatakNotice`, `AafiatakStatusBlock`, `AafiatakSectionHeading`, `AafiatakEmptyState`.
+   - 7 Domain Patterns: `DoctorCard`, `ServiceCard`, `FacilitySummary`, `AppointmentSummary`, `ReservationHoldBanner`, `ArrivalWindowCard`, `PolicyCard`.
 
-## Design System import
+4. **Added Patient Shell**:
+   - Centered 430px max-width viewport with `PatientShell`.
+   - `AafiatakRootAppBar` with brand mark and notification bell.
+   - `AafiatakDetailAppBar` with screen ID kicker and RTL back navigation.
+   - `AafiatakBottomNav` with active Burgundy pill containers.
+   - `AafiatakBottomAction` for sticky actions.
+
+## Design System Import
 
 ```dart
 import 'package:aafiatak/src/design_system/design_system.dart';
 ```
 
-Do not recreate a primitive inside a feature if the Design System already owns it.
+## Verification Gate
 
-## Domain Patterns
-
-Domain Patterns are **intentionally not implemented in this baseline**. They are
-the next team-owned layer and should be created from the approved High-Fidelity
-screens using the existing components.
-
-Examples to be assigned to one owner each include `DoctorCard`, `ServiceCard`,
-`AppointmentCard`, `ArrivalWindowCard`, `ReservationHoldBanner`,
-`PaymentStatusBlock`, `VisitStatusBlock`, `QueueStatusBlock`, and
-`BookingSummary`.
-
-## Required developer-machine gate
+Run the complete verification suite before merging:
 
 ```bash
-./scripts/verify_project.sh
+flutter pub get
+python scripts/static_design_system_audit.py
+python scripts/static_architecture_audit.py
+dart format --set-exit-if-changed lib test
+flutter analyze
+flutter test
 ```
 
-This runs localization generation, static audits, formatting, `flutter analyze`,
-and `flutter test`.
-
-The delivery environment does not contain Flutter, so this archive deliberately
-does **not** claim that those Flutter CLI gates passed here.
-
-See:
-- `docs/architecture/FINAL_REVIEW_v1.3.md`
-- `docs/architecture/TEAM_READINESS_v1.3.md`
-- `docs/design_system/COMPONENT_COVERAGE_AUDIT_v1.3.md`
-- `docs/design_system/QA_REPORT.md`

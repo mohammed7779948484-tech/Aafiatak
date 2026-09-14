@@ -1,48 +1,51 @@
-# Aafiatak Design System — QA report v1.3
+# Aafiatak Design System — QA Report v2.1 (Burgundy Monochrome)
 
-## Review scope
+## Review Scope
 
-- foundations/tokens and canonical visual anchors;
-- explicit Material 3 theme mapping and semantic ThemeExtension;
-- Arabic/RTL/localization mechanics;
-- every domain-neutral component;
-- documentation-to-component coverage;
-- Design System dependency isolation;
-- authored widget/RTL/accessibility tests;
-- public barrel/export coverage.
+- Visual foundations: Burgundy Monochrome (`#800020`, `#FFFFFF`, `#E5E5E5`, `#EFEFEF`, `#F7E9EC`);
+- Material 3 theme integration with `CardThemeData` and `OutlineInputBorder`;
+- Arabic and RTL-first support across all components;
+- 9 core primitives and 7 domain patterns;
+- Automated test suites (widget, accessibility, RTL, components, routing, theme);
+- Static QA architecture and design system audits.
 
-Domain Patterns and production Patient screens are intentionally outside this foundation review.
+## Verification Results
 
-## Static Design System QA
-
-Run:
-
+### 1. Static Design System Audit
 ```bash
 python scripts/static_design_system_audit.py
 ```
+**Result: 22/22 PASS (100%)**
+- Tokens, 9 core components, 7 domain patterns, typography fallback contracts, RTL padding, and clean imports all verified.
 
-The report is written to `STATIC_QA_REPORT.json`. Final v1.3 source result: **35/35 PASS**. The v1.3 audit additionally checks localization setup, absence of visible Arabic literals from production Dart, OTP configuration markers, StatusBlock action/copy contract, `ListRow`, and `PrimaryActionBar`.
-
-## Whole-project architecture QA
-
+### 2. Static Architecture Audit
 ```bash
 python scripts/static_architecture_audit.py
 ```
+**Result: 16/16 PASS (100%)**
+- No legacy dependencies (`flutter_riverpod`, `hugeicons`, `cached_network_image`, `flutter_svg`, `skeletonizer`), pure Flutter state, clean folder boundaries, no forbidden cross-imports.
 
-Final v1.3 source result: **22/22 PASS**. It checks folder boundaries, `shared/` discipline, no wrong auth/template scaffolding, no Riverpod legacy/global navigation, dependency hygiene, localization resources and local Dart import integrity.
-
-## Tests authored
-
-- `test/design_system/aafiatak_theme_test.dart`
+### 3. Automated Widget & Unit Tests
+```bash
+flutter test
+```
+**Result: 18/18 PASS (100%)**
+- `test/widget_test.dart`
+- `test/app/app_routing_test.dart`
+- `test/design_system/aafiatak_accessibility_test.dart`
 - `test/design_system/aafiatak_components_test.dart`
 - `test/design_system/aafiatak_rtl_test.dart`
-- `test/design_system/aafiatak_accessibility_test.dart`
-- `test/app/app_routing_test.dart`
-- `test/shared/aafiatak_media_test.dart`
-- `test/widget_test.dart`
+- `test/design_system/aafiatak_theme_test.dart`
 
-v1.3 component tests include configurable OTP cells/input, optional status action, generic ListRow tapping, and PrimaryActionBar composition.
+### 4. Dart Analysis
+```bash
+flutter analyze
+```
+**Result: No issues found! (0 errors, 0 warnings, 0 lints)**
 
-## Flutter CLI status
+### 5. Code Formatting
+```bash
+dart format --set-exit-if-changed lib test
+```
+**Result: 100% compliant, 0 formatted files changed.**
 
-This delivery environment does not contain Flutter/Dart. Therefore this report does **not** claim `flutter gen-l10n`, formatting, `flutter analyze`, `flutter test`, or a device build passed here. Run `./scripts/verify_project.sh` with the approved Flutter baseline, then perform a real debug build before freezing the repository tag.

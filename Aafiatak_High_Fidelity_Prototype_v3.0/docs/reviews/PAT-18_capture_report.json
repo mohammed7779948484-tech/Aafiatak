@@ -1,0 +1,23 @@
+[
+  {
+    "state": "default",
+    "file": "PAT-18-default-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "return-intent",
+    "file": "PAT-18-return-intent-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "session-expired-context",
+    "file": "PAT-18-session-expired-context-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  }
+]

@@ -1,0 +1,170 @@
+[
+  {
+    "screen": "PAT-01",
+    "state": "patient",
+    "file": "PAT-01-patient-phone.png",
+    "height": 2027,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-02",
+    "state": "results",
+    "file": "PAT-02-results-phone.png",
+    "height": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-03",
+    "state": "active",
+    "file": "PAT-03-active-phone.png",
+    "height": 1307,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-04",
+    "state": "active",
+    "file": "PAT-04-active-phone.png",
+    "height": 1325,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-05",
+    "state": "loaded",
+    "file": "PAT-05-loaded-phone.png",
+    "height": 1481,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-06",
+    "state": "bookable",
+    "file": "PAT-06-bookable-phone.png",
+    "height": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-07",
+    "state": "pre-hold-review",
+    "file": "PAT-07-pre-hold-review-phone.png",
+    "height": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-08",
+    "state": "ready",
+    "file": "PAT-08-ready-phone.png",
+    "height": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-09",
+    "state": "success-confirmed",
+    "file": "PAT-09-success-confirmed-phone.png",
+    "height": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-10",
+    "state": "confirmed-paid",
+    "file": "PAT-10-confirmed-paid-phone.png",
+    "height": 1155,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-11",
+    "state": "upcoming-populated",
+    "file": "PAT-11-upcoming-populated-phone.png",
+    "height": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-12",
+    "state": "confirmed",
+    "file": "PAT-12-confirmed-phone.png",
+    "height": 1077,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-13",
+    "state": "succeeded",
+    "file": "PAT-13-succeeded-phone.png",
+    "height": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-14",
+    "state": "checked-in-waiting",
+    "file": "PAT-14-checked-in-waiting-phone.png",
+    "height": 885,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-15",
+    "state": "populated-unread",
+    "file": "PAT-15-populated-unread-phone.png",
+    "height": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-16",
+    "state": "loaded",
+    "file": "PAT-16-loaded-phone.png",
+    "height": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-17",
+    "state": "editing",
+    "file": "PAT-17-editing-phone.png",
+    "height": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-18",
+    "state": "default",
+    "file": "PAT-18-default-phone.png",
+    "height": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-19",
+    "state": "idle",
+    "file": "PAT-19-idle-phone.png",
+    "height": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-20",
+    "state": "waiting",
+    "file": "PAT-20-waiting-phone.png",
+    "height": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-21",
+    "state": "editing",
+    "file": "PAT-21-editing-phone.png",
+    "height": 844,
+    "overflow": false,
+    "errors": []
+  }
+]

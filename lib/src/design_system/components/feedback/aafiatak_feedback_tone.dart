@@ -1,74 +1,62 @@
 import 'package:flutter/material.dart';
 
-import '../../theme/theme.dart';
+import '../../foundations/foundations.dart';
 
-enum AafiatakFeedbackTone { neutral, success, warning, error, info, hold }
+enum AafiatakFeedbackTone {
+  primary,
+  secondary,
+  success,
+  warning,
+  error,
+  info,
+  hold,
+  neutral,
+}
 
 @immutable
-class AafiatakFeedbackColors {
-  const AafiatakFeedbackColors({
+class AafiatakToneColors {
+  const AafiatakToneColors({
     required this.foreground,
     required this.background,
     required this.border,
-    required this.solid,
-    required this.onSolid,
   });
 
   final Color foreground;
   final Color background;
   final Color border;
-  final Color solid;
-  final Color onSolid;
 }
 
 extension AafiatakFeedbackToneX on AafiatakFeedbackTone {
-  AafiatakFeedbackColors colors(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
-    final semantic = context.semanticColors;
-
-    return switch (this) {
-      AafiatakFeedbackTone.neutral => AafiatakFeedbackColors(
-        foreground: scheme.onSurface,
-        background: scheme.surfaceContainerLow,
-        border: scheme.outlineVariant,
-        solid: scheme.onSurface,
-        onSolid: scheme.surface,
-      ),
-      AafiatakFeedbackTone.success => AafiatakFeedbackColors(
-        foreground: semantic.onSuccessContainer,
-        background: semantic.successContainer,
-        border: semantic.success,
-        solid: semantic.success,
-        onSolid: semantic.onSuccess,
-      ),
-      AafiatakFeedbackTone.warning => AafiatakFeedbackColors(
-        foreground: semantic.onWarningContainer,
-        background: semantic.warningContainer,
-        border: semantic.warning,
-        solid: semantic.warning,
-        onSolid: semantic.onWarning,
-      ),
-      AafiatakFeedbackTone.error => AafiatakFeedbackColors(
-        foreground: scheme.onErrorContainer,
-        background: scheme.errorContainer,
-        border: scheme.error,
-        solid: scheme.error,
-        onSolid: scheme.onError,
-      ),
-      AafiatakFeedbackTone.info => AafiatakFeedbackColors(
-        foreground: semantic.onInfoContainer,
-        background: semantic.infoContainer,
-        border: semantic.info,
-        solid: semantic.info,
-        onSolid: semantic.onInfo,
-      ),
-      AafiatakFeedbackTone.hold => AafiatakFeedbackColors(
-        foreground: semantic.onHoldAttentionContainer,
-        background: semantic.holdAttentionContainer,
-        border: semantic.holdAttention,
-        solid: semantic.holdAttention,
-        onSolid: semantic.onHoldAttention,
-      ),
-    };
+  AafiatakToneColors get colors {
+    switch (this) {
+      case AafiatakFeedbackTone.primary:
+      case AafiatakFeedbackTone.success:
+      case AafiatakFeedbackTone.hold:
+        return const AafiatakToneColors(
+          foreground: AafiatakColors.onPrimaryContainer,
+          background: AafiatakColors.primaryContainer,
+          border: Color(0x1F800020),
+        );
+      case AafiatakFeedbackTone.secondary:
+      case AafiatakFeedbackTone.info:
+      case AafiatakFeedbackTone.warning:
+        return const AafiatakToneColors(
+          foreground: AafiatakColors.textPrimary,
+          background: AafiatakColors.surfaceContainer,
+          border: AafiatakColors.outline,
+        );
+      case AafiatakFeedbackTone.error:
+        return const AafiatakToneColors(
+          foreground: AafiatakColors.onError,
+          background: AafiatakColors.error,
+          border: AafiatakColors.error,
+        );
+      case AafiatakFeedbackTone.neutral:
+        return const AafiatakToneColors(
+          foreground: AafiatakColors.textSecondary,
+          background: AafiatakColors.surfaceContainer,
+          border: AafiatakColors.outline,
+        );
+    }
   }
 }

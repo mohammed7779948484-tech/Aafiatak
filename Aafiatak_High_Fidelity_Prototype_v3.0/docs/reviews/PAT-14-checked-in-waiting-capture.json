@@ -1,0 +1,13 @@
+{
+  "screen": "PAT-14",
+  "state": "checked-in-waiting",
+  "width": 390,
+  "height": 844,
+  "metrics": {
+    "scrollWidth": 390,
+    "scrollHeight": 885,
+    "clientWidth": 390
+  },
+  "errors": [],
+  "overflow": false
+}

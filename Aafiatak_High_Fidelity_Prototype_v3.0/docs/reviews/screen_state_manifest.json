@@ -1,0 +1,290 @@
+[
+  {
+    "id": "PAT-01",
+    "title": "الرئيسية / اكتشف",
+    "default": "patient",
+    "states": [
+      "guest",
+      "patient",
+      "loading",
+      "empty-discovery",
+      "offline"
+    ]
+  },
+  {
+    "id": "PAT-02",
+    "title": "البحث والنتائج",
+    "default": "results",
+    "states": [
+      "initial",
+      "searching",
+      "results",
+      "no-results",
+      "offline",
+      "error"
+    ]
+  },
+  {
+    "id": "PAT-03",
+    "title": "تفاصيل الطبيب",
+    "default": "active",
+    "states": [
+      "active",
+      "no-bookable",
+      "inactive",
+      "loading",
+      "error"
+    ]
+  },
+  {
+    "id": "PAT-04",
+    "title": "تفاصيل الخدمة",
+    "default": "active",
+    "states": [
+      "active",
+      "no-capacity",
+      "inactive",
+      "loading",
+      "error"
+    ]
+  },
+  {
+    "id": "PAT-05",
+    "title": "تفاصيل المنشأة والفرع",
+    "default": "loaded",
+    "states": [
+      "loaded",
+      "location-unavailable",
+      "loading",
+      "error"
+    ]
+  },
+  {
+    "id": "PAT-06",
+    "title": "التوفر / اختيار اليوم",
+    "default": "bookable",
+    "states": [
+      "loading",
+      "bookable",
+      "no-capacity",
+      "last-seat-held",
+      "time-cutoff",
+      "stale",
+      "offline",
+      "error"
+    ]
+  },
+  {
+    "id": "PAT-07",
+    "title": "مراجعة الحجز والحجز المؤقت",
+    "default": "pre-hold-review",
+    "states": [
+      "pre-hold-review",
+      "acquiring-hold",
+      "active-hold",
+      "capacity-loss",
+      "hold-expired",
+      "target-invalid",
+      "offline-unknown"
+    ]
+  },
+  {
+    "id": "PAT-08",
+    "title": "الدفع الكامل",
+    "default": "ready",
+    "states": [
+      "ready",
+      "handoff",
+      "returned-unverified",
+      "connectivity-interrupted",
+      "hold-near-expiry",
+      "hold-expired"
+    ]
+  },
+  {
+    "id": "PAT-09",
+    "title": "نتيجة الدفع والمعالجة",
+    "default": "success-confirmed",
+    "states": [
+      "processing",
+      "success-confirmed",
+      "failed",
+      "expired",
+      "under-review",
+      "payment-succeeded-booking-unresolved",
+      "refund-pending",
+      "refunded",
+      "offline"
+    ]
+  },
+  {
+    "id": "PAT-10",
+    "title": "تأكيد الحجز",
+    "default": "confirmed-paid",
+    "states": [
+      "confirmed-paid",
+      "confirmed-pay-at-facility"
+    ]
+  },
+  {
+    "id": "PAT-11",
+    "title": "مواعيدي",
+    "default": "upcoming-populated",
+    "states": [
+      "loading",
+      "upcoming-populated",
+      "upcoming-empty",
+      "past-populated",
+      "past-empty",
+      "refreshing",
+      "offline",
+      "error"
+    ]
+  },
+  {
+    "id": "PAT-12",
+    "title": "تفاصيل الموعد",
+    "default": "confirmed",
+    "states": [
+      "confirmed",
+      "cancelled-patient",
+      "cancelled-facility",
+      "payment-variant",
+      "visit-queue-variant",
+      "manual-late",
+      "loading",
+      "offline"
+    ]
+  },
+  {
+    "id": "PAT-13",
+    "title": "الدفع قيد المعالجة",
+    "default": "succeeded",
+    "states": [
+      "due-at-facility",
+      "processing",
+      "succeeded",
+      "failed",
+      "expired",
+      "under-review",
+      "refund-pending",
+      "refunded",
+      "loading",
+      "error"
+    ]
+  },
+  {
+    "id": "PAT-14",
+    "title": "حالة الزيارة والطابور",
+    "default": "checked-in-waiting",
+    "states": [
+      "not-checked-in",
+      "checked-in-waiting",
+      "called",
+      "in-service",
+      "completed",
+      "not-completed",
+      "no-show",
+      "manual-late",
+      "offline",
+      "stale"
+    ]
+  },
+  {
+    "id": "PAT-15",
+    "title": "مركز الإشعارات",
+    "default": "populated-unread",
+    "states": [
+      "loading",
+      "empty",
+      "populated-unread",
+      "populated-read",
+      "deep-link-stale",
+      "offline",
+      "error"
+    ]
+  },
+  {
+    "id": "PAT-16",
+    "title": "حسابي",
+    "default": "loaded",
+    "states": [
+      "loaded",
+      "loading",
+      "error",
+      "session-expired",
+      "logging-out",
+      "logged-out"
+    ]
+  },
+  {
+    "id": "PAT-17",
+    "title": "تعديل الملف الشخصي",
+    "default": "editing",
+    "states": [
+      "pristine",
+      "editing",
+      "validation-error",
+      "saving",
+      "saved",
+      "save-failed",
+      "offline"
+    ]
+  },
+  {
+    "id": "PAT-18",
+    "title": "الدخول إلى الحساب",
+    "default": "default",
+    "states": [
+      "default",
+      "return-intent",
+      "session-expired-context"
+    ]
+  },
+  {
+    "id": "PAT-19",
+    "title": "رقم الهاتف",
+    "default": "idle",
+    "states": [
+      "idle",
+      "editing",
+      "invalid",
+      "requesting-otp",
+      "existing-identity",
+      "unknown-identity",
+      "provider-unavailable",
+      "rate-limited",
+      "accepted"
+    ]
+  },
+  {
+    "id": "PAT-20",
+    "title": "التحقق برمز واتساب",
+    "default": "waiting",
+    "states": [
+      "waiting",
+      "verifying",
+      "invalid",
+      "expired",
+      "already-used",
+      "rate-limited",
+      "provider-unavailable",
+      "verified-existing",
+      "verified-new"
+    ]
+  },
+  {
+    "id": "PAT-21",
+    "title": "استكمال بيانات المريض",
+    "default": "editing",
+    "states": [
+      "pristine",
+      "editing",
+      "validation-error",
+      "creating",
+      "success",
+      "failure-recoverable",
+      "duplicate-identity-conflict"
+    ]
+  }
+]

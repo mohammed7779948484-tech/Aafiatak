@@ -5,9 +5,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'test_app.dart';
 
 void main() {
-  testWidgets(
-    'AafiatakButton uses Material behavior and blocks taps while loading',
-    (tester) async {
+  group('Aafiatak Core Components', () {
+    testWidgets('AafiatakButton responds to taps and disables correctly', (
+      tester,
+    ) async {
       var taps = 0;
 
       await tester.pumpWidget(
@@ -18,177 +19,224 @@ void main() {
         ),
       );
 
-      expect(find.byType(FilledButton), findsOneWidget);
+      expect(find.text('متابعة'), findsOneWidget);
       await tester.tap(find.text('متابعة'));
       await tester.pump();
       expect(taps, 1);
 
+      // Disabled button
       await tester.pumpWidget(
         buildDesignSystemTestApp(
-          Center(
-            child: AafiatakButton(
-              label: 'متابعة',
-              isLoading: true,
-              onPressed: () => taps += 1,
+          const Center(child: AafiatakButton(label: 'معطل', onPressed: null)),
+        ),
+      );
+
+      await tester.tap(find.text('معطل'));
+      await tester.pump();
+      expect(taps, 1); // Tap should not increase
+    });
+
+    testWidgets('AafiatakTextField renders label, hint, and errorText', (
+      tester,
+    ) async {
+      String entered = '';
+
+      await tester.pumpWidget(
+        buildDesignSystemTestApp(
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: AafiatakTextField(
+              label: 'رقم الهاتف',
+              hintText: '777 000 000',
+              errorText: 'الرقم غير صحيح',
+              onChanged: (v) => entered = v,
             ),
           ),
         ),
       );
 
-      expect(find.byType(CircularProgressIndicator), findsOneWidget);
-      await tester.tap(find.byType(FilledButton));
+      expect(find.text('رقم الهاتف'), findsOneWidget);
+      expect(find.text('777 000 000'), findsOneWidget);
+      expect(find.text('الرقم غير صحيح'), findsOneWidget);
+
+      await tester.enterText(find.byType(TextField), '771234567');
       await tester.pump();
-      expect(taps, 1);
-    },
-  );
+      expect(entered, '771234567');
+    });
 
-  testWidgets('OTP input obeys caller-supplied length', (tester) async {
-    String? completed;
-
-    await tester.pumpWidget(
-      buildDesignSystemTestApp(
-        Padding(
-          padding: const EdgeInsets.all(16),
-          child: AafiatakOtpInput(
-            label: 'رمز التحقق',
-            length: 5,
-            onCompleted: (value) => completed = value,
-          ),
-        ),
-      ),
-    );
-
-    final cells = find.descendant(
-      of: find.byType(AafiatakOtpInput),
-      matching: find.byType(AnimatedContainer),
-    );
-    expect(cells, findsNWidgets(5));
-
-    await tester.enterText(find.byType(TextField), '12345');
-    await tester.pump();
-    expect(completed, '12345');
-    expect(find.text('1'), findsOneWidget);
-    expect(find.text('5'), findsOneWidget);
-  });
-
-  testWidgets('status block supports optional supporting copy and action', (
-    tester,
-  ) async {
-    await tester.pumpWidget(
-      buildDesignSystemTestApp(
-        Padding(
-          padding: const EdgeInsets.all(16),
-          child: AafiatakStatusBlock(
-            title: 'قيد المعالجة',
-            tone: AafiatakFeedbackTone.info,
-            action: TextButton(
-              onPressed: () {},
-              child: const Text('عرض التفاصيل'),
+    testWidgets('AafiatakBadge renders label and bullet point', (tester) async {
+      await tester.pumpWidget(
+        buildDesignSystemTestApp(
+          const Center(
+            child: AafiatakBadge(
+              label: 'مؤكد',
+              tone: AafiatakFeedbackTone.success,
             ),
           ),
         ),
-      ),
-    );
+      );
 
-    expect(find.text('قيد المعالجة'), findsOneWidget);
-    expect(find.text('عرض التفاصيل'), findsOneWidget);
-  });
+      expect(find.text('مؤكد'), findsOneWidget);
+      expect(find.byType(AafiatakBadge), findsOneWidget);
+    });
 
-  testWidgets('list row exposes a reusable tappable row', (tester) async {
-    var taps = 0;
-
-    await tester.pumpWidget(
-      buildDesignSystemTestApp(
-        AafiatakListRow(
-          title: const Text('عنصر'),
-          trailing: const Icon(Icons.chevron_left_rounded),
-          onTap: () => taps += 1,
-        ),
-      ),
-    );
-
-    await tester.tap(find.text('عنصر'));
-    expect(taps, 1);
-  });
-
-  testWidgets('primary action bar owns only reusable action layout', (
-    tester,
-  ) async {
-    await tester.pumpWidget(
-      buildDesignSystemTestApp(
-        AafiatakPrimaryActionBar(
-          secondaryAction: AafiatakButton(
-            label: 'رجوع',
-            variant: AafiatakButtonVariant.text,
-            onPressed: () {},
-          ),
-          primaryAction: AafiatakButton(
-            label: 'متابعة',
-            isExpanded: true,
-            onPressed: () {},
-          ),
-        ),
-      ),
-    );
-
-    expect(find.text('رجوع'), findsOneWidget);
-    expect(find.text('متابعة'), findsOneWidget);
-  });
-
-  testWidgets('feedback surfaces include text, not color alone', (
-    tester,
-  ) async {
-    await tester.pumpWidget(
-      buildDesignSystemTestApp(
-        const Padding(
-          padding: EdgeInsets.all(16),
-          child: AafiatakStatusBlock(
-            title: 'قيد المعالجة',
-            message: 'سنحدّث الحالة عند وصول النتيجة الموثوقة.',
-            tone: AafiatakFeedbackTone.info,
-          ),
-        ),
-      ),
-    );
-
-    expect(find.text('قيد المعالجة'), findsOneWidget);
-    expect(
-      find.text('سنحدّث الحالة عند وصول النتيجة الموثوقة.'),
-      findsOneWidget,
-    );
-  });
-
-  testWidgets('selection controls expose a non-color selected indicator', (
-    tester,
-  ) async {
-    await tester.pumpWidget(
-      buildDesignSystemTestApp(
-        Column(
-          children: <Widget>[
-            AafiatakChip(
-              label: 'متاح اليوم',
-              selected: true,
-              onSelected: (_) {},
+    testWidgets('AafiatakNotice renders contextual notice text', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        buildDesignSystemTestApp(
+          const Padding(
+            padding: EdgeInsets.all(16),
+            child: AafiatakNotice(
+              message: 'تم حجز السعة المؤقتة بنجاح',
+              tone: AafiatakFeedbackTone.hold,
             ),
-            AafiatakSegmentedControl<String>(
-              segments: const <AafiatakSegment<String>>[
-                AafiatakSegment(value: 'a', label: 'الأول'),
-                AafiatakSegment(value: 'b', label: 'الثاني'),
+          ),
+        ),
+      );
+
+      expect(find.text('تم حجز السعة المؤقتة بنجاح'), findsOneWidget);
+    });
+
+    testWidgets('AafiatakStatusBlock renders tag, title, and copy', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        buildDesignSystemTestApp(
+          const Padding(
+            padding: EdgeInsets.all(16),
+            child: AafiatakStatusBlock(
+              title: 'تم تأكيد الموعد',
+              copy: 'تم إرسال رسالة التأكيد عبر واتساب.',
+              tag: 'مكتمل',
+              tone: AafiatakFeedbackTone.success,
+            ),
+          ),
+        ),
+      );
+
+      expect(find.text('تم تأكيد الموعد'), findsOneWidget);
+      expect(find.text('تم إرسال رسالة التأكيد عبر واتساب.'), findsOneWidget);
+      expect(find.text('مكتمل'), findsOneWidget);
+    });
+
+    testWidgets('AafiatakInfoRows renders rows with proper LTR isolation', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        buildDesignSystemTestApp(
+          const Padding(
+            padding: EdgeInsets.all(16),
+            child: AafiatakInfoRows(
+              rows: <InfoRowItem>[
+                InfoRowItem(label: 'اليوم', value: 'الأربعاء'),
+                InfoRowItem(
+                  label: 'النافذة',
+                  value: '10:00 ص – 10:30 ص',
+                  isLtr: true,
+                ),
               ],
-              selected: 'a',
-              onChanged: (_) {},
             ),
-          ],
+          ),
         ),
-      ),
-    );
+      );
 
-    final chip = tester.widget<FilterChip>(find.byType(FilterChip));
-    expect(chip.showCheckmark, isTrue);
+      expect(find.text('اليوم'), findsOneWidget);
+      expect(find.text('الأربعاء'), findsOneWidget);
+      expect(find.text('النافذة'), findsOneWidget);
+      expect(find.text('10:00 ص – 10:30 ص'), findsOneWidget);
+    });
 
-    final segmented = tester.widget<SegmentedButton<String>>(
-      find.byType(SegmentedButton<String>),
+    testWidgets('AafiatakSectionHeading renders label and meta action', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        buildDesignSystemTestApp(
+          const Padding(
+            padding: EdgeInsets.all(16),
+            child: AafiatakSectionHeading(
+              label: 'الأطباء المتاحون',
+              meta: 'عرض الكل',
+            ),
+          ),
+        ),
+      );
+
+      expect(find.text('الأطباء المتاحون'), findsOneWidget);
+      expect(find.text('عرض الكل'), findsOneWidget);
+    });
+
+    testWidgets(
+      'AafiatakEmptyState renders icon, title, copy, and action button',
+      (tester) async {
+        var actionTapped = false;
+
+        await tester.pumpWidget(
+          buildDesignSystemTestApp(
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: AafiatakEmptyState(
+                title: 'لا توجد نتائج',
+                copy: 'جرب البحث بكلمات أخرى.',
+                actionLabel: 'إعادة المحاولة',
+                onAction: () => actionTapped = true,
+              ),
+            ),
+          ),
+        );
+
+        expect(find.text('لا توجد نتائج'), findsOneWidget);
+        expect(find.text('جرب البحث بكلمات أخرى.'), findsOneWidget);
+        expect(find.text('إعادة المحاولة'), findsOneWidget);
+
+        await tester.tap(find.text('إعادة المحاولة'));
+        await tester.pump();
+        expect(actionTapped, isTrue);
+      },
     );
-    expect(segmented.showSelectedIcon, isTrue);
+  });
+
+  group('Aafiatak Domain Patterns', () {
+    testWidgets('DoctorCard renders doctor name, specialty, and price', (
+      tester,
+    ) async {
+      var doctorTapped = false;
+
+      await tester.pumpWidget(
+        buildDesignSystemTestApp(
+          DoctorCard(
+            name: 'د. سارة المنصوري',
+            specialty: 'استشارية الأطفال',
+            price: '15,000 ر.ي',
+            onTap: () => doctorTapped = true,
+          ),
+        ),
+      );
+
+      expect(find.text('د. سارة المنصوري'), findsOneWidget);
+      expect(find.text('استشارية الأطفال'), findsOneWidget);
+      expect(find.text('15,000 ر.ي'), findsOneWidget);
+      expect(find.text('سعر الخدمة'), findsOneWidget);
+
+      await tester.tap(find.text('د. سارة المنصوري'));
+      await tester.pump();
+      expect(doctorTapped, isTrue);
+    });
+
+    testWidgets('ReservationHoldBanner renders title and countdown', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        buildDesignSystemTestApp(
+          const ReservationHoldBanner(
+            title: 'تم حجز السعة مؤقتًا',
+            countdown: '09:59',
+          ),
+        ),
+      );
+
+      expect(find.text('تم حجز السعة مؤقتًا'), findsOneWidget);
+      expect(find.text('09:59'), findsOneWidget);
+    });
   });
 }

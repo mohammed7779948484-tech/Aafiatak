@@ -14,6 +14,19 @@ abstract final class AafiatakSpacing {
   static const double x4l = 48;
   static const double x5l = 64;
 
+  // Numeric token aliases
+  static const double space0 = none;
+  static const double space4 = xxs;
+  static const double space8 = xs;
+  static const double space12 = sm;
+  static const double space16 = md;
+  static const double space20 = lg;
+  static const double space24 = xl;
+  static const double space32 = x2l;
+  static const double space40 = x3l;
+  static const double space48 = x4l;
+  static const double space64 = x5l;
+
   static const List<double> scale = <double>[
     none,
     xxs,

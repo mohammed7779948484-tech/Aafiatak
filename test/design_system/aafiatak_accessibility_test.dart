@@ -15,19 +15,7 @@ void main() {
             ListView(
               padding: const EdgeInsets.all(16),
               children: <Widget>[
-                AafiatakButton(
-                  label: 'متابعة',
-                  isExpanded: true,
-                  onPressed: () {},
-                ),
-                const SizedBox(height: 16),
-                Center(
-                  child: AafiatakIconButton(
-                    icon: const Icon(Icons.notifications_none_rounded),
-                    tooltip: 'الإشعارات',
-                    onPressed: () {},
-                  ),
-                ),
+                AafiatakButton(label: 'متابعة', block: true, onPressed: () {}),
                 const SizedBox(height: 16),
                 const AafiatakTextField(
                   label: 'الاسم الكامل',

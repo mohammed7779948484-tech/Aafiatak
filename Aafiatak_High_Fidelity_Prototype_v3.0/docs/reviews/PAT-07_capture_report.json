@@ -1,0 +1,51 @@
+[
+  {
+    "state": "pre-hold-review",
+    "file": "PAT-07-pre-hold-review-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "acquiring-hold",
+    "file": "PAT-07-acquiring-hold-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "active-hold",
+    "file": "PAT-07-active-hold-phone.png",
+    "h": 937,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "capacity-loss",
+    "file": "PAT-07-capacity-loss-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "hold-expired",
+    "file": "PAT-07-hold-expired-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "target-invalid",
+    "file": "PAT-07-target-invalid-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "offline-unknown",
+    "file": "PAT-07-offline-unknown-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  }
+]

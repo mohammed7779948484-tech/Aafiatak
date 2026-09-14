@@ -1,0 +1,65 @@
+[
+  {
+    "state": "waiting",
+    "file": "PAT-20-waiting-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "verifying",
+    "file": "PAT-20-verifying-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "invalid",
+    "file": "PAT-20-invalid-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "expired",
+    "file": "PAT-20-expired-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "already-used",
+    "file": "PAT-20-already-used-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "rate-limited",
+    "file": "PAT-20-rate-limited-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "provider-unavailable",
+    "file": "PAT-20-provider-unavailable-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "verified-existing",
+    "file": "PAT-20-verified-existing-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "verified-new",
+    "file": "PAT-20-verified-new-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  }
+]
