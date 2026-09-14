@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 
 import '../../foundations/foundations.dart';
 import '../data_display/aafiatak_badge.dart';
+import '../surfaces/aafiatak_card.dart';
 import 'aafiatak_feedback_tone.dart';
 
-/// Status block widget matching the High-Fidelity `.status-block` pattern.
+/// كتلة حالة بارزة لنتائج مثل نجاح الحجز أو تعذر الإجراء.
 ///
-/// Features a white surface card, a 48x48 rounded icon chip styled by tone,
-/// a tag badge, a bold title, and secondary supporting copy.
+/// تجمع بطاقة Material وشارة وأيقونة فقط، ويحدد [tone] التنسيق المرئي. لا
+/// تحتوي منطق أعمال أو تنقلًا؛ الشاشة تمرر الحالة والنص الناتجين من بياناتها.
 class AafiatakStatusBlock extends StatelessWidget {
   const AafiatakStatusBlock({
     super.key,
@@ -28,13 +29,7 @@ class AafiatakStatusBlock extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = tone.colors;
 
-    return Container(
-      padding: const EdgeInsets.all(AafiatakSpacing.space16),
-      decoration: BoxDecoration(
-        color: AafiatakColors.surface,
-        borderRadius: AafiatakRadii.large,
-        border: Border.all(color: AafiatakColors.outline, width: 1),
-      ),
+    return AafiatakCard(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[

@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import '../../components/components.dart';
 import '../../foundations/foundations.dart';
 
+/// ملخص بصري لموعد يعرض الخدمة والطبيب والمنشأة ونافذة الوصول.
+///
+/// هذا Pattern خاص بعافيتك ويستقبل قيمًا جاهزة للعرض فقط. لا يحسب حالة الموعد
+/// ولا يجلب بيانات ولا يغير المسار؛ الشاشة مسؤولة عن منطقها وأحداثها.
 class AppointmentSummary extends StatelessWidget {
   const AppointmentSummary({
     super.key,

@@ -29,5 +29,12 @@ Shared visual controls belong in `design_system/components/`. Reusable patient
 compositions belong in `design_system/patterns/`. Feature-specific widgets stay
 with their feature.
 
+The starter follows the same structure at `features/starter/screens/`; it does
+not add a `presentation/` layer.
+
+Patient screens compose their `Scaffold`, app bar, and bottom navigation through
+`PatientShell`. Root screens can display either the Aafiatak brand or a section
+title, while route changes remain outside the shell.
+
 Routing is defined under `lib/src/app/routing/` with `go_router`. Widgets and
 domain patterns do not own navigation or data access.

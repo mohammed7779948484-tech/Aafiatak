@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 import '../../components/components.dart';
 import '../../foundations/foundations.dart';
 
+/// بطاقة طبيب مشتركة تعرض الاسم والتخصص والصورة المختصرة وسعر الخدمة.
+///
+/// هذا Pattern خاص بعافيتك لأنه يجمع عدة مكونات وفق تصميم متكرر في شاشات
+/// الاكتشاف. يستقبل البيانات وحدث [onTap] من الشاشة، ولا يجلب بيانات ولا ينفذ
+/// تنقلًا بنفسه. أي شكل خاص بميزة واحدة يوضع داخل `feature/widgets`.
 class DoctorCard extends StatelessWidget {
   const DoctorCard({
     super.key,

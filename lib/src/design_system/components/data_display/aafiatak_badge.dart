@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import '../feedback/aafiatak_feedback_tone.dart';
 import '../../foundations/foundations.dart';
 
-/// Pill badge widget matching the High-Fidelity .badge pattern.
+/// شارة صغيرة لعرض حالة أو تصنيف بجوار المحتوى.
 ///
-/// Has a 28px min-height, full radius, 7px dot bullet, and monochrome tone styling.
+/// اختر [tone] بحسب المعنى ولا تحدد ألوانًا محلية في الشاشة. هذه الشارة مكون
+/// عرض عام بلا تفاعل أو منطق أعمال، وليست بديلًا عن زر أو FilterChip.
 class AafiatakBadge extends StatelessWidget {
   const AafiatakBadge({
     super.key,

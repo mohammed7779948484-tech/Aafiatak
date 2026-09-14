@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../design_system/design_system.dart';
 
+/// التبويبات الرئيسية الثابتة في تجربة المريض.
+///
+/// يحتفظ كل تبويب باسمه وأيقونتيه فقط؛ أما تغيير المسار أو الشاشة فيبقى
+/// مسؤولية طبقة التطبيق أو الـ Feature من خلال callback.
 enum PatientTab {
   home('الرئيسية', Icons.home_outlined, Icons.home_rounded),
   appointments(
@@ -18,10 +22,21 @@ enum PatientTab {
   final IconData selectedIcon;
 }
 
+/// شريط Material للشاشات الجذرية، ويدعم شعار عافيتك أو عنوان القسم.
+///
+/// استخدم وضع الشعار للرئيسية، ووضع العنوان لشاشات مثل «مواعيدي» و«حسابي».
+/// زر الإشعارات [IconButton] أصلي، ويأتي تنسيقه من `IconButtonThemeData`.
 class AafiatakRootAppBar extends StatelessWidget
     implements PreferredSizeWidget {
-  const AafiatakRootAppBar({super.key, this.onNotificationPressed});
+  const AafiatakRootAppBar({
+    super.key,
+    this.showBrand = true,
+    this.title,
+    this.onNotificationPressed,
+  }) : assert(showBrand || title != null, 'العنوان مطلوب عند إخفاء الشعار.');
 
+  final bool showBrand;
+  final String? title;
   final VoidCallback? onNotificationPressed;
 
   @override
@@ -31,20 +46,22 @@ class AafiatakRootAppBar extends StatelessWidget
   Widget build(BuildContext context) {
     return AppBar(
       toolbarHeight: 68,
-      title: const Row(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          _BrandMark(),
-          SizedBox(width: AafiatakSpacing.space12),
-          Text(
-            'عافيتك',
-            style: TextStyle(
-              color: AafiatakColors.primary,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-        ],
-      ),
+      title: showBrand
+          ? const Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                _BrandMark(),
+                SizedBox(width: AafiatakSpacing.space12),
+                Text(
+                  'عافيتك',
+                  style: TextStyle(
+                    color: AafiatakColors.primary,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ],
+            )
+          : Text(title!, maxLines: 1, overflow: TextOverflow.ellipsis),
       actions: <Widget>[
         IconButton(
           onPressed: onNotificationPressed,
@@ -61,6 +78,10 @@ class AafiatakRootAppBar extends StatelessWidget
   }
 }
 
+/// شريط Material للشاشات الداخلية مع رجوع وعنوان ومعرّف شاشة اختياري.
+///
+/// لا ينفذ التنقل بنفسه عند تمرير [onBackPressed]؛ الشاشة أو الموجّه يحددان
+/// السلوك. يعزل [screenId] باتجاه LTR لأنه معرّف تقني وليس نصًا عربيًا.
 class AafiatakDetailAppBar extends StatelessWidget
     implements PreferredSizeWidget {
   const AafiatakDetailAppBar({
@@ -89,11 +110,14 @@ class AafiatakDetailAppBar extends StatelessWidget
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           if (screenId != null)
-            Text(
-              screenId!,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: AafiatakTypography.labelSmall,
+            Directionality(
+              textDirection: TextDirection.ltr,
+              child: Text(
+                screenId!,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: AafiatakTypography.labelSmall,
+              ),
             ),
           Text(title, maxLines: 1, overflow: TextOverflow.ellipsis),
         ],
@@ -107,6 +131,10 @@ class AafiatakDetailAppBar extends StatelessWidget
   }
 }
 
+/// تنقل المريض السفلي المبني مباشرة على [NavigationBar].
+///
+/// يعرض الحالة الحالية ويرسل اختيار المستخدم فقط؛ تحويل الاختيار إلى مسار
+/// يبقى في التطبيق أو الشاشة ولا يوضع داخل هذا التركيب المشترك.
 class AafiatakBottomNav extends StatelessWidget {
   const AafiatakBottomNav({
     super.key,
@@ -134,6 +162,10 @@ class AafiatakBottomNav extends StatelessWidget {
   }
 }
 
+/// مساحة سفلية ثابتة لإجراء رئيسي مثل تأكيد الحجز.
+///
+/// تعتمد على [BottomAppBar] وتستقبل المحتوى فقط، لذلك لا تفرض منطقًا أو زرًا
+/// بعينه على الشاشة.
 class AafiatakBottomAction extends StatelessWidget {
   const AafiatakBottomAction({super.key, required this.child});
 
@@ -155,7 +187,12 @@ class AafiatakBottomAction extends StatelessWidget {
   }
 }
 
-/// Shared phone shell. It uses the available device width without a web-preview cap.
+/// الهيكل المشترك لشاشات المريض، وليس مكونًا بصريًا بدائيًا في Design System.
+///
+/// استخدمه بدل تكرار [Scaffold] وشريط التطبيق والتنقل في كل شاشة. يدعم شريطًا
+/// جذريًا بالشعار أو بعنوان عبر [showBrand]، وشريط تفاصيل عند `root: false`.
+/// يستخدم عرض الهاتف المتاح كاملًا، وتبقى قرارات التنقل وحالة الشاشة خارج هذا
+/// الملف لدى التطبيق أو الـ Feature.
 class PatientShell extends StatelessWidget {
   const PatientShell({
     super.key,
@@ -163,6 +200,7 @@ class PatientShell extends StatelessWidget {
     this.screenId,
     this.title,
     this.root = false,
+    this.showBrand = true,
     this.activeTab,
     this.onTabSelected,
     this.onBackPressed,
@@ -172,13 +210,14 @@ class PatientShell extends StatelessWidget {
     this.scrollable = false,
   }) : assert(
          (activeTab == null) == (onTabSelected == null),
-         'activeTab and onTabSelected must be provided together.',
+         'يجب تمرير activeTab وonTabSelected معًا.',
        );
 
   final Widget body;
   final String? screenId;
   final String? title;
   final bool root;
+  final bool showBrand;
   final PatientTab? activeTab;
   final ValueChanged<PatientTab>? onTabSelected;
   final VoidCallback? onBackPressed;
@@ -200,7 +239,11 @@ class PatientShell extends StatelessWidget {
 
     return Scaffold(
       appBar: root
-          ? AafiatakRootAppBar(onNotificationPressed: onNotificationPressed)
+          ? AafiatakRootAppBar(
+              showBrand: showBrand,
+              title: title,
+              onNotificationPressed: onNotificationPressed,
+            )
           : AafiatakDetailAppBar(
               title: title ?? '',
               screenId: screenId,
@@ -226,7 +269,17 @@ class _BrandMark extends StatelessWidget {
       height: 38,
       decoration: const BoxDecoration(
         color: AafiatakColors.primary,
-        borderRadius: AafiatakRadii.large,
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(14),
+          bottom: Radius.circular(18),
+        ),
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: AafiatakColors.shadowSubtle,
+            blurRadius: 10,
+            offset: Offset(0, 2),
+          ),
+        ],
       ),
       child: const Icon(
         Icons.health_and_safety_outlined,

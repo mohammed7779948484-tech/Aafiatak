@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../../foundations/foundations.dart';
 
-/// Section header matching the High-Fidelity `.section-heading` pattern.
+/// عنوان موحّد لبداية قسم من محتوى الشاشة.
 ///
-/// Features an H3 label on the start side and an optional meta subtitle or action on the end side.
+/// يعرض [label] مع وصف مختصر اختياري في [meta]. استخدم أزرار Material مباشرة
+/// إذا احتاج القسم إلى إجراء، ولا توسع هذا المكون ليحمل منطق الـ Feature.
 class AafiatakSectionHeading extends StatelessWidget {
   const AafiatakSectionHeading({super.key, required this.label, this.meta});
 

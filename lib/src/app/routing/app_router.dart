@@ -1,6 +1,6 @@
 import 'package:go_router/go_router.dart';
 
-import '../../features/starter/presentation/screens/starter_screen.dart';
+import '../../features/starter/screens/starter_screen.dart';
 import 'app_routes.dart';
 
 final GoRouter appRouter = GoRouter(

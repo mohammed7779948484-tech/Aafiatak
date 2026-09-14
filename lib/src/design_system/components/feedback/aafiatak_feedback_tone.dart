@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../../foundations/foundations.dart';
 
+/// المعاني الدلالية المشتركة بين مكونات التغذية الراجعة.
+///
+/// لا يعني اشتراك المكونات في هذا النوع أنها تعرض اللون بالطريقة نفسها؛
+/// يمكن للملاحظة مثلًا استخدام حاوية أخف من أيقونة الحالة الحرجة.
 enum AafiatakFeedbackTone {
   primary,
   secondary,
@@ -13,6 +17,7 @@ enum AafiatakFeedbackTone {
   neutral,
 }
 
+/// مجموعة ألوان بسيطة تستخدمها مكونات الحالة المشتركة.
 @immutable
 class AafiatakToneColors {
   const AafiatakToneColors({
@@ -26,6 +31,7 @@ class AafiatakToneColors {
   final Color border;
 }
 
+/// يوفر التنسيق الافتراضي للشارات وأيقونات الحالة دون تكرار Switch بينها.
 extension AafiatakFeedbackToneX on AafiatakFeedbackTone {
   AafiatakToneColors get colors {
     switch (this) {

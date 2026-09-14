@@ -2,33 +2,68 @@ import 'package:flutter/material.dart';
 
 import '../../foundations/foundations.dart';
 
-enum AafiatakButtonVariant { primary, tonal, secondary, destructive, text }
+enum _ButtonType { primary, tonal, secondary, destructive, text }
 
-/// Thin brand wrapper over Material 3 buttons.
+/// زر موحّد لتطبيق عافيتك يعتمد على أزرار Material 3 الأصلية.
+///
+/// استخدم أحد المنشئات المسماة مثل [AafiatakButton.primary] داخل الشاشات،
+/// حتى تبقى الأنواع واضحة ومتسقة بين أعضاء الفريق. الشكل العام يأتي من
+/// `ThemeData`، وحالة التعطيل لا تحتاج خاصية إضافية؛ مرر `onPressed: null`.
 class AafiatakButton extends StatelessWidget {
-  const AafiatakButton({
+  const AafiatakButton.primary({
     super.key,
     required this.label,
     required this.onPressed,
-    this.variant = AafiatakButtonVariant.primary,
     this.icon,
     this.fullWidth = false,
-  });
+  }) : _type = _ButtonType.primary;
+
+  const AafiatakButton.tonal({
+    super.key,
+    required this.label,
+    required this.onPressed,
+    this.icon,
+    this.fullWidth = false,
+  }) : _type = _ButtonType.tonal;
+
+  const AafiatakButton.secondary({
+    super.key,
+    required this.label,
+    required this.onPressed,
+    this.icon,
+    this.fullWidth = false,
+  }) : _type = _ButtonType.secondary;
+
+  const AafiatakButton.destructive({
+    super.key,
+    required this.label,
+    required this.onPressed,
+    this.icon,
+    this.fullWidth = false,
+  }) : _type = _ButtonType.destructive;
+
+  const AafiatakButton.text({
+    super.key,
+    required this.label,
+    required this.onPressed,
+    this.icon,
+    this.fullWidth = false,
+  }) : _type = _ButtonType.text;
 
   final String label;
   final VoidCallback? onPressed;
-  final AafiatakButtonVariant variant;
   final IconData? icon;
   final bool fullWidth;
+  final _ButtonType _type;
 
   @override
   Widget build(BuildContext context) {
-    final child = switch (variant) {
-      AafiatakButtonVariant.primary => _filled(),
-      AafiatakButtonVariant.tonal => _tonal(),
-      AafiatakButtonVariant.secondary => _outlined(),
-      AafiatakButtonVariant.destructive => _destructive(),
-      AafiatakButtonVariant.text => _text(),
+    final child = switch (_type) {
+      _ButtonType.primary => _filled(),
+      _ButtonType.tonal => _tonal(),
+      _ButtonType.secondary => _outlined(),
+      _ButtonType.destructive => _destructive(),
+      _ButtonType.text => _text(),
     };
 
     return fullWidth ? SizedBox(width: double.infinity, child: child) : child;
@@ -42,13 +77,24 @@ class AafiatakButton extends StatelessWidget {
           label: Text(label),
         );
 
-  Widget _tonal() => icon == null
-      ? FilledButton.tonal(onPressed: onPressed, child: Text(label))
-      : FilledButton.tonalIcon(
-          onPressed: onPressed,
-          icon: Icon(icon),
-          label: Text(label),
-        );
+  Widget _tonal() {
+    final style = FilledButton.styleFrom(
+      backgroundColor: AafiatakColors.primaryContainer,
+      foregroundColor: AafiatakColors.onPrimaryContainer,
+    );
+    return icon == null
+        ? FilledButton.tonal(
+            style: style,
+            onPressed: onPressed,
+            child: Text(label),
+          )
+        : FilledButton.tonalIcon(
+            style: style,
+            onPressed: onPressed,
+            icon: Icon(icon),
+            label: Text(label),
+          );
+  }
 
   Widget _outlined() => icon == null
       ? OutlinedButton(onPressed: onPressed, child: Text(label))

@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import '../../components/components.dart';
 import '../../foundations/foundations.dart';
 
+/// بطاقة عرض لسياسات الحضور أو الإلغاء على هيئة نقاط واضحة.
+///
+/// تستقبل [title] و[items] فقط ولا تفسر السياسات أو تطبق قواعد أعمال. توجد في
+/// Patterns لأنها صيغة متكررة في تدفقات عافيتك، لا لأنها مكون Material عام.
 class PolicyCard extends StatelessWidget {
   const PolicyCard({super.key, required this.title, required this.items});
 

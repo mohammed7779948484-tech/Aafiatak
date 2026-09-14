@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:aafiatak/src/app/patient_shell.dart';
 import 'package:aafiatak/src/design_system/design_system.dart';
 
-/// Small development showcase for the shared theme and UI building blocks.
+/// شاشة تطوير صغيرة لمراجعة الواجهات المشتركة قبل بناء شاشات المنتج.
 class StarterScreen extends StatefulWidget {
   const StarterScreen({super.key});
 
@@ -25,6 +25,8 @@ class _StarterScreenState extends State<StarterScreen> {
   Widget build(BuildContext context) {
     return PatientShell(
       root: true,
+      showBrand: _currentTab == PatientTab.home,
+      title: _currentTab == PatientTab.appointments ? 'مواعيدي' : 'حسابي',
       onNotificationPressed: () {},
       activeTab: _currentTab,
       onTabSelected: (tab) => setState(() => _currentTab = tab),
@@ -57,13 +59,18 @@ class _StarterScreenState extends State<StarterScreen> {
               style: AafiatakTypography.bodyMedium,
             ),
             const SizedBox(height: AafiatakSpacing.space24),
-            AafiatakTextField(
+            AafiatakSearchField(
               controller: _searchController,
               hintText: 'ابحث عن طبيب أو تخصص أو خدمة',
-              prefixIcon: const Icon(Icons.search),
+            ),
+            const SizedBox(height: AafiatakSpacing.space12),
+            const AafiatakTextField(
+              label: 'اسم المريض',
+              hintText: 'اكتب الاسم الكامل',
+              helperText: 'مثال على حقل نموذج عام',
             ),
             const SizedBox(height: AafiatakSpacing.space16),
-            AafiatakButton(
+            AafiatakButton.primary(
               label: 'احجز موعدًا الآن',
               icon: Icons.calendar_month_rounded,
               fullWidth: true,
@@ -148,32 +155,20 @@ class _StarterScreenState extends State<StarterScreen> {
               spacing: AafiatakSpacing.space8,
               runSpacing: AafiatakSpacing.space8,
               children: <Widget>[
-                AafiatakButton(label: 'أساسي', onPressed: () {}),
-                AafiatakButton(
-                  label: 'لوني',
-                  variant: AafiatakButtonVariant.tonal,
-                  onPressed: () {},
+                AafiatakButton.primary(label: 'أساسي', onPressed: () {}),
+                AafiatakButton.tonal(label: 'لوني', onPressed: () {}),
+                AafiatakButton.secondary(label: 'ثانوي', onPressed: () {}),
+                AafiatakButton.destructive(label: 'حذف', onPressed: () {}),
+                AafiatakButton.text(label: 'نصي', onPressed: () {}),
+                const AafiatakButton.primary(
+                  label: 'غير مفعّل',
+                  onPressed: null,
                 ),
-                AafiatakButton(
-                  label: 'ثانوي',
-                  variant: AafiatakButtonVariant.secondary,
-                  onPressed: () {},
-                ),
-                AafiatakButton(
-                  label: 'حذف',
-                  variant: AafiatakButtonVariant.destructive,
-                  onPressed: () {},
-                ),
-                AafiatakButton(
-                  label: 'نصي',
-                  variant: AafiatakButtonVariant.text,
-                  onPressed: () {},
-                ),
-                const AafiatakButton(label: 'غير مفعّل', onPressed: null),
               ],
             ),
             const _SectionGap(),
             AafiatakEmptyState(
+              icon: Icons.calendar_month_outlined,
               title: 'لا توجد مواعيد سابقة',
               message: 'ستظهر المواعيد المكتملة في هذا السجل.',
               actionLabel: 'استكشف الخدمات',

@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import '../../components/components.dart';
 import '../../foundations/foundations.dart';
 
+/// بطاقة توضح نافذة الوصول والتنبيه بأنها ليست موعد دخول مضمونًا للطبيب.
+///
+/// تستقبل العنوان والوقت والملاحظة كنصوص جاهزة، وتعزل [arrivalWindow] باتجاه
+/// LTR. لا تحسب المواعيد ولا تتصل بمصدر بيانات؛ هذا من مسؤولية الـ Feature.
 class ArrivalWindowCard extends StatelessWidget {
   const ArrivalWindowCard({
     super.key,

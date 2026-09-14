@@ -24,6 +24,7 @@ width are not application constraints.
 | Surface | `#FFFFFF` |
 | Surface container | `#EFEFEF` |
 | Primary container | `#F7E9EC` |
+| Secondary container | `#EFEFEF` |
 | Primary text | `#1A1A1A` |
 | Secondary text | `#6E6E6E` |
 | Outline | `#E5E5E5` |
@@ -41,7 +42,9 @@ bundled, so Flutter uses the platform's Arabic-capable system font.
 ## Material First
 
 - Buttons use `FilledButton`, `OutlinedButton`, and `TextButton`.
+- `AafiatakButton` exposes named constructors for consistent team usage.
 - Inputs use `TextFormField` and `InputDecorationTheme`.
+- Search uses `SearchBar` and `SearchBarThemeData`.
 - Cards use `Card` and add `InkWell` only when tappable.
 - App bars use `AppBar` and `IconButton`.
 - Bottom navigation uses `NavigationBar` and `NavigationDestination`.

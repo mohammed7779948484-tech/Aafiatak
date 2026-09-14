@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'aafiatak_colors.dart';
 
-/// Aafiatak type scale using the platform's Arabic-capable system font.
+/// أدوار النصوص المشتركة وفق التسلسل الطباعي في المرجع البصري.
+///
+/// استخدم `Theme.of(context).textTheme` أو هذه الأدوار بدل تعريف حجم ووزن في
+/// كل شاشة. لا يحتوي المشروع على خط مضمّن، لذا يستخدم Flutter خط النظام الداعم
+/// للعربية.
 abstract final class AafiatakTypography {
   const AafiatakTypography._();
 

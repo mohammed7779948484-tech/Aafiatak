@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../foundations/foundations.dart';
 
-/// Simplified Material 3 theme matching the High-Fidelity Burgundy Monochrome design.
+/// المصدر المركزي لتنسيق عناصر Material 3 في تطبيق عافيتك.
+///
+/// تعتمد الشاشات على [light] بدل تكرار الألوان والحواف محليًا. يربط
+/// [colorScheme] أدوار Material بالقيم المرجعية دون تغيير معنى أي Token.
 abstract final class AafiatakTheme {
   const AafiatakTheme._();
 
@@ -59,6 +62,7 @@ abstract final class AafiatakTheme {
         thickness: 1,
         space: 1,
       ),
+      // يضبط شريط التطبيق مرة واحدة لجميع الشاشات الجذرية والتفصيلية.
       appBarTheme: AppBarTheme(
         backgroundColor: AafiatakColors.canvas,
         foregroundColor: AafiatakColors.textPrimary,
@@ -69,6 +73,7 @@ abstract final class AafiatakTheme {
           fontWeight: FontWeight.w700,
         ),
       ),
+      // تعتمد AafiatakCard والبطاقات المباشرة على هذا السطح والشكل.
       cardTheme: const CardThemeData(
         color: AafiatakColors.surface,
         elevation: 0,
@@ -78,6 +83,7 @@ abstract final class AafiatakTheme {
           side: BorderSide(color: AafiatakColors.outline, width: 1),
         ),
       ),
+      // الأحجام والحواف مشتركة، بينما يحدد نوع الزر ألوانه الدلالية.
       filledButtonTheme: FilledButtonThemeData(
         style: ButtonStyle(
           minimumSize: const WidgetStatePropertyAll(Size(0, 48)),
@@ -123,6 +129,7 @@ abstract final class AafiatakTheme {
           textStyle: textTheme.labelLarge,
         ),
       ),
+      // الحدود وحالات التركيز والخطأ لكل TextFormField تأتي من هنا.
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: AafiatakColors.surface,
@@ -165,6 +172,27 @@ abstract final class AafiatakTheme {
         prefixIconColor: AafiatakColors.primary,
         suffixIconColor: AafiatakColors.textSecondary,
       ),
+      // يحاكي SearchBar حقل البحث المرتفع قليلًا في المرجع البصري.
+      searchBarTheme: SearchBarThemeData(
+        backgroundColor: const WidgetStatePropertyAll(AafiatakColors.surface),
+        elevation: const WidgetStatePropertyAll(1),
+        shadowColor: const WidgetStatePropertyAll(AafiatakColors.shadowSubtle),
+        surfaceTintColor: const WidgetStatePropertyAll(Colors.transparent),
+        side: const WidgetStatePropertyAll(
+          BorderSide(color: AafiatakColors.borderSubtle),
+        ),
+        shape: const WidgetStatePropertyAll(
+          RoundedRectangleBorder(borderRadius: AafiatakRadii.large),
+        ),
+        padding: const WidgetStatePropertyAll(
+          EdgeInsetsDirectional.symmetric(horizontal: AafiatakSpacing.space16),
+        ),
+        textStyle: WidgetStatePropertyAll(textTheme.bodyMedium),
+        hintStyle: WidgetStatePropertyAll(
+          textTheme.bodyMedium?.copyWith(color: AafiatakColors.textSecondary),
+        ),
+        constraints: const BoxConstraints(minHeight: 58),
+      ),
       chipTheme: ChipThemeData(
         backgroundColor: AafiatakColors.surface,
         selectedColor: AafiatakColors.primary,
@@ -180,6 +208,7 @@ abstract final class AafiatakTheme {
         shape: const RoundedRectangleBorder(borderRadius: AafiatakRadii.full),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       ),
+      // يترك NavigationBar مسؤولًا عن التفاعل مع تطبيق هوية عافيتك فقط.
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: AafiatakColors.surface,
         surfaceTintColor: Colors.transparent,
@@ -202,10 +231,13 @@ abstract final class AafiatakTheme {
           return const IconThemeData(color: AafiatakColors.textSecondary);
         }),
       ),
+      // يحافظ IconButton على هدف لمس 48dp وسطح قريب من النموذج المرجعي.
       iconButtonTheme: IconButtonThemeData(
         style: IconButton.styleFrom(
           foregroundColor: AafiatakColors.primary,
+          backgroundColor: AafiatakColors.surfaceTranslucent,
           minimumSize: const Size.square(48),
+          side: const BorderSide(color: AafiatakColors.borderSubtle),
           shape: const RoundedRectangleBorder(
             borderRadius: AafiatakRadii.large,
           ),

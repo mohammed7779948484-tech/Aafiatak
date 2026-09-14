@@ -1,4 +1,4 @@
-/// Public entry point for Aafiatak's design system foundations, components, and domain patterns.
+/// نقطة الاستيراد العامة للأسس والمكونات والـ Patterns المشتركة في عافيتك.
 library;
 
 export 'components/components.dart';

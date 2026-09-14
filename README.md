@@ -10,7 +10,8 @@ phone interfaces. It has no backend or production infrastructure.
 - Arabic locale and RTL-first layouts
 - Burgundy Monochrome palette
 - Native Material controls styled through `ThemeData`
-- Nine shared UI components and seven patient-domain patterns
+- Ten shared UI components and seven patient-domain patterns
+- Arabic strings written directly in Dart; no app gen-l10n or ARB layer
 - `go_router` for navigation
 - `StatefulWidget`, `setState`, or `ValueNotifier` for local demo state
 

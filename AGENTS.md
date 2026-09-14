@@ -14,6 +14,7 @@ explain, and maintain.
 - `go_router` for routing
 - `StatefulWidget`, `setState`, and occasional `ValueNotifier` for UI state
 - Burgundy Monochrome colors from `lib/src/design_system/`
+- 10 shared components and 7 shared domain patterns
 - High-Fidelity reference: `Aafiatak_High_Fidelity_Prototype_v3.0/`
 
 Treat the High-Fidelity package as read-only. Translate its visual design into
@@ -25,6 +26,9 @@ simulation constraint.
 Use Flutter Material controls and style them through `ThemeData`. Keep Aafiatak
 wrappers thin. Do not rebuild buttons, text fields, cards, app bars, icon
 buttons, or navigation bars from `Container`, `Material`, and `InkWell`.
+
+Use the named `AafiatakButton` constructors for shared button consistency and
+`AafiatakSearchField` for repeated discovery/search inputs.
 
 Normal layout widgets such as `Row`, `Column`, `Padding`, `Expanded`, `Wrap`,
 and `Stack` are appropriate for compositions.
@@ -47,6 +51,10 @@ and `Stack` are appropriate for compositions.
 
 Features may contain `screens/`, `widgets/`, and `mock_data.dart`. Add only what
 the feature needs. Do not create empty domain/data/repository/service layers.
+
+Write application strings directly in Arabic Dart code. Keep
+`flutter_localizations` for framework RTL behavior, but do not add app gen-l10n,
+ARB files, or an `l10n/` directory.
 
 Import the shared design system with:
 

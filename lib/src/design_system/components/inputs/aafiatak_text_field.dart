@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 
-/// Thin wrapper over [TextFormField] for common Aafiatak form inputs.
+import '../../foundations/foundations.dart';
+
+/// حقل إدخال موحّد للنماذج العامة في تطبيق عافيتك.
+///
+/// يظهر [label] فوق الحقل كما في التصميم المرجعي، بينما تأتي الحدود والألوان
+/// وحالات التركيز والخطأ من `InputDecorationTheme`. لا تضف حدودًا محلية داخل
+/// الـ Feature؛ وإذا كان الحقل خاصًا بميزة واحدة فضع تركيبه في `feature/widgets`.
 class AafiatakTextField extends StatelessWidget {
   const AafiatakTextField({
     super.key,
-    required this.hintText,
     this.controller,
-    this.labelText,
+    this.label,
+    this.hintText,
     this.helperText,
     this.errorText,
     this.keyboardType,
@@ -19,9 +25,9 @@ class AafiatakTextField extends StatelessWidget {
     this.textDirection,
   });
 
-  final String hintText;
   final TextEditingController? controller;
-  final String? labelText;
+  final String? label;
+  final String? hintText;
   final String? helperText;
   final String? errorText;
   final TextInputType? keyboardType;
@@ -35,22 +41,31 @@ class AafiatakTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      enabled: enabled,
-      keyboardType: keyboardType,
-      maxLines: maxLines,
-      onChanged: onChanged,
-      onFieldSubmitted: onFieldSubmitted,
-      textDirection: textDirection,
-      decoration: InputDecoration(
-        hintText: hintText,
-        labelText: labelText,
-        helperText: helperText,
-        errorText: errorText,
-        prefixIcon: prefixIcon,
-        suffixIcon: suffixIcon,
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        if (label != null) ...<Widget>[
+          Text(label!, style: AafiatakTypography.labelMedium),
+          const SizedBox(height: AafiatakSpacing.space8),
+        ],
+        TextFormField(
+          controller: controller,
+          enabled: enabled,
+          keyboardType: keyboardType,
+          maxLines: maxLines,
+          onChanged: onChanged,
+          onFieldSubmitted: onFieldSubmitted,
+          textDirection: textDirection,
+          decoration: InputDecoration(
+            hintText: hintText,
+            helperText: helperText,
+            errorText: errorText,
+            prefixIcon: prefixIcon,
+            suffixIcon: suffixIcon,
+          ),
+        ),
+      ],
     );
   }
 }

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../../foundations/foundations.dart';
 
-/// Single item descriptor for [AafiatakInfoRows].
+/// بيانات صف واحد داخل [AafiatakInfoRows].
+///
+/// فعّل [isLtr] للقيم التقنية فقط مثل الوقت أو الرقم المرجعي.
 class InfoRowItem {
   const InfoRowItem({
     required this.label,
@@ -15,7 +17,10 @@ class InfoRowItem {
   final bool isLtr;
 }
 
-/// Key-value information list matching the High-Fidelity `.info-list` / `.info-row` pattern.
+/// قائمة عرض مختصرة لأزواج العنوان والقيمة.
+///
+/// تستخدم في الملخصات المتكررة، وتتعامل مع عزل قيم LTR دون أن تضيف منطق أعمال.
+/// إذا كان شكل الصف خاصًا بميزة واحدة فضعه داخل `feature/widgets`.
 class AafiatakInfoRows extends StatelessWidget {
   const AafiatakInfoRows({super.key, required this.rows});
 

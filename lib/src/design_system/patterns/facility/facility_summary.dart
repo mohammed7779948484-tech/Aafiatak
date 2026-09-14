@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 import '../../components/components.dart';
 import '../../foundations/foundations.dart';
 
+/// ملخص منشأة صحية يعرض الفرع والاسم والموقع ورابط التفاصيل.
+///
+/// يجمع مكونات Material وعافيتك في Pattern متكرر، ويستقبل [onTap] من الشاشة
+/// دون الوصول إلى API أو Repository أو تنفيذ تنقل داخلي. التركيبات الخاصة
+/// بميزة واحدة مكانها `feature/widgets`.
 class FacilitySummary extends StatelessWidget {
   const FacilitySummary({
     super.key,

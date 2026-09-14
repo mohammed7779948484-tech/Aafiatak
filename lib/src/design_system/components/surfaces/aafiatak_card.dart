@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../../foundations/foundations.dart';
 
-/// A consistently padded Material card.
+/// بطاقة موحّدة تعتمد مباشرة على [Card] من Material.
+///
+/// استخدمها للأسطح المتكررة بدل `Container` بحدود محلية. يأتي اللون والشكل
+/// من `CardThemeData`، ويضاف [InkWell] فقط عند تمرير [onTap]. البطاقة لا تجلب
+/// بيانات ولا تنفذ تنقلًا؛ الشاشة تمرر المحتوى والحدث.
 class AafiatakCard extends StatelessWidget {
   const AafiatakCard({
     super.key,

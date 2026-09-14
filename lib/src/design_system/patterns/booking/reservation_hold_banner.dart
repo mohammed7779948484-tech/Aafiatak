@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../../foundations/foundations.dart';
 
+/// تنبيه بصري بأن السعة محجوزة مؤقتًا مع عرض العد التنازلي.
+///
+/// يستقبل [countdown] جاهزًا ولا يشغّل مؤقتًا أو ينشئ حجزًا؛ منطق مدة الحجز
+/// يبقى في الشاشة وإعداداتها. يوجد في Patterns لأنه تركيب خاص بتدفق عافيتك.
 class ReservationHoldBanner extends StatelessWidget {
   const ReservationHoldBanner({super.key, required this.countdown});
 

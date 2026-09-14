@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 import '../../components/components.dart';
 import '../../foundations/foundations.dart';
 
+/// بطاقة خدمة طبية تعرض التصنيف والعنوان والسعر وسياسة الدفع.
+///
+/// هي Pattern عرض خاص بعافيتك وليست طبقة بيانات. تمرر الشاشة النصوص و[onTap]،
+/// وتبقى مسؤولية التحميل والتنقل داخل الـ Feature. استخدم Widget محليًا إذا لم
+/// يتكرر هذا التركيب بين أكثر من شاشة.
 class ServiceCard extends StatelessWidget {
   const ServiceCard({
     super.key,

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
-/// Border radii used by the High-Fidelity interface.
+/// الحواف الدائرية المشتركة للأسطح وعناصر التحكم.
+///
+/// تختار المكونات الحجم المناسب، لذلك لا تحتاج الشاشة غالبًا إلى تحديد
+/// `BorderRadius` محليًا أو إنشاء شكل مختلف لكل Feature.
 abstract final class AafiatakRadii {
   const AafiatakRadii._();
 
