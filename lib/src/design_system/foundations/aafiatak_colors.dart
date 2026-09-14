@@ -1,72 +1,68 @@
 import 'package:flutter/material.dart';
 
-import 'aafiatak_palette.dart';
-
-/// Semantic aliases used to construct the Aafiatak Material theme.
+/// ألوان عافيتك الأساسية المبنية على اتجاه Burgundy Monochrome.
+///
+/// استخدم هذه الأدوار أو `ColorScheme` بدل كتابة ألوان عشوائية داخل الشاشات.
+/// تحافظ الأدوار الدلالية على اتساق الواجهة، ولا تضيف ألوان حالة خضراء أو
+/// برتقالية أو زرقاء خارج المرجع البصري.
 abstract final class AafiatakColors {
   const AafiatakColors._();
 
-  static const canvas = AafiatakPalette.neutral100;
-  static const surface = AafiatakPalette.neutral50;
-  static const surfaceMuted = Color(0xFFF1ECE6);
-  static const surfaceDim = Color(0xFFE6DED5);
-  static const surfaceBright = surface;
-  static const surfaceContainerLowest = Colors.white;
-  static const surfaceContainerLow = Color(0xFFFBF8F4);
-  static const surfaceContainer = Color(0xFFF5F0EA);
-  static const surfaceContainerHigh = AafiatakPalette.neutral200;
-  static const surfaceContainerHighest = Color(0xFFE7E0D8);
+  // أسطح الواجهة المحايدة مشتقة من الأبيض والرمادي المرجعيين.
+  static const canvas = Color(0xFFE5E5E5);
+  static const surface = Color(0xFFFFFFFF);
 
-  static const textPrimary = AafiatakPalette.neutral900;
-  static const textSecondary = Color(0xFF6B666E);
-  static const outline = Color(0xFFD8D0C8);
-  static const outlineStrong = AafiatakPalette.neutral500;
+  static const surfaceLow = Color(0xFFF7F7F7);
+  static const surfaceContainer = Color(0xFFEFEFEF);
+  static const surfaceHigh = Color(0xFFEDEDED);
+  static const surfaceHighest = Color(0xFFD9D9D9);
 
-  static const primary = AafiatakPalette.damson700;
-  static const onPrimary = Colors.white;
-  static const primaryContainer = AafiatakPalette.damson100;
-  static const onPrimaryContainer = AafiatakPalette.damson900;
+  // ألوان النصوص والمحتوى.
+  static const textPrimary = Color(0xFF1A1A1A);
+  static const textSecondary = Color(0xFF6E6E6E);
 
-  /// Higher-contrast interactive Sea Glass semantic role.
-  static const secondary = Color(0xFF3F786E);
-  static const onSecondary = Colors.white;
-  static const secondaryContainer = AafiatakPalette.seaGlass100;
-  static const onSecondaryContainer = AafiatakPalette.seaGlass900;
+  // الحدود والفواصل.
+  static const outline = Color(0xFFE5E5E5);
+  static const outlineStrong = Color(0xFFB5B5B5);
+  // يحقق نسبة تباين 3.19:1 مقابل سطح الإدخال الأبيض (WCAG 1.4.11).
+  static const inputBoundary = Color(0xFF909090);
 
-  static const tertiary = AafiatakPalette.copper600;
-  static const onTertiary = Colors.white;
-  static const tertiaryContainer = AafiatakPalette.copper100;
-  static const onTertiaryContainer = AafiatakPalette.copper900;
+  // درجات شفافة مشتركة للحدود والأسطح والظل الخفيف.
+  static const borderSubtle = Color(0x141A1A1A);
+  static const borderEmphasis = Color(0x291A1A1A);
+  static const primaryBorderSubtle = Color(0x1F800020);
+  static const surfaceTranslucent = Color(0xEBFFFFFF);
+  static const shadowSubtle = Color(0x0E1A1A1A);
 
-  static const success = Color(0xFF2F725F);
-  static const onSuccess = Colors.white;
-  static const successContainer = Color(0xFFE7F4EF);
-  static const onSuccessContainer = Color(0xFF1F5647);
+  // اللون الأساسي البرغندي وحاويته الفاتحة.
+  static const primary = Color(0xFF800020);
+  static const onPrimary = Color(0xFFFFFFFF);
+  static const primaryContainer = Color(0xFFF7E9EC);
+  static const onPrimaryContainer = Color(0xFF5C0016);
 
-  static const warning = Color(0xFF9B651F);
-  static const onWarning = Colors.white;
-  static const warningContainer = Color(0xFFFAEEDB);
-  static const onWarningContainer = Color(0xFF6D4518);
+  // الأدوار الثانوية تحافظ على القيم الأصلية في ملف tokens.css.
+  static const secondary = Color(0xFF800020);
+  static const onSecondary = Color(0xFFFFFFFF);
+  static const secondaryContainer = Color(0xFFEFEFEF);
+  static const onSecondaryContainer = Color(0xFF1A1A1A);
 
-  static const error = Color(0xFFA94452);
-  static const onError = Colors.white;
-  static const errorContainer = Color(0xFFF9E9EC);
-  static const onErrorContainer = Color(0xFF7A2936);
+  // الدور الثالث يستخدم درجة برغندية أعمق عند الحاجة.
+  static const tertiary = Color(0xFF5C0016);
+  static const onTertiary = Color(0xFFFFFFFF);
+  static const tertiaryContainer = Color(0xFFF7E9EC);
+  static const onTertiaryContainer = Color(0xFF5C0016);
 
-  static const info = Color(0xFF496B98);
-  static const onInfo = Colors.white;
-  static const infoContainer = Color(0xFFEAF0F8);
-  static const onInfoContainer = Color(0xFF2F527B);
+  // الحالات الحرجة أحادية اللون: فحمي قوي أو حاوية رمادية فاتحة.
+  static const error = Color(0xFF1F1F1F);
+  static const onError = Color(0xFFFFFFFF);
+  static const errorContainer = Color(0xFFEFEFEF);
+  static const onErrorContainer = Color(0xFF1A1A1A);
 
-  /// ReservationHold attention is deliberately not warning/error.
-  static const holdAttention = AafiatakPalette.copper600;
-  static const onHoldAttention = Colors.white;
-  static const holdAttentionContainer = AafiatakPalette.copper100;
-  static const onHoldAttentionContainer = AafiatakPalette.copper900;
-
-  static const focus = AafiatakPalette.damson500;
-  static const shadow = AafiatakPalette.neutral950;
-  static const scrim = Color(0xB3171519);
-  static const inverseSurface = AafiatakPalette.neutral900;
-  static const onInverseSurface = AafiatakPalette.neutral100;
+  // أدوار Material الثابتة والتركيز والطبقة المعتمة.
+  static const primaryFixed = Color(0xFFF7E9EC);
+  static const primaryFixedDim = Color(0xFFEBD0D6);
+  static const secondaryFixed = Color(0xFFEFEFEF);
+  static const secondaryFixedDim = Color(0xFFD9D9D9);
+  static const focus = Color(0xFF800020);
+  static const scrim = Color(0x9E141213);
 }

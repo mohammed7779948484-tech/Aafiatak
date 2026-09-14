@@ -1,101 +1,73 @@
 import 'package:flutter/material.dart';
 
 import '../../foundations/foundations.dart';
+import '../data_display/aafiatak_badge.dart';
+import '../surfaces/aafiatak_card.dart';
 import 'aafiatak_feedback_tone.dart';
 
-/// Domain-neutral persistent status panel.
+/// كتلة حالة بارزة لنتائج مثل نجاح الحجز أو تعذر الإجراء.
 ///
-/// Domain-specific appointment/payment/visit/queue status blocks should be
-/// built later from this primitive rather than embedding business-state logic
-/// here.
+/// تجمع بطاقة Material وشارة وأيقونة فقط، ويحدد [tone] التنسيق المرئي. لا
+/// تحتوي منطق أعمال أو تنقلًا؛ الشاشة تمرر الحالة والنص الناتجين من بياناتها.
 class AafiatakStatusBlock extends StatelessWidget {
   const AafiatakStatusBlock({
     super.key,
     required this.title,
-    this.message,
-    this.tone = AafiatakFeedbackTone.neutral,
-    this.icon,
-    this.action,
-    this.trailing,
-    this.semanticLabel,
+    required this.message,
+    required this.tone,
+    required this.icon,
+    required this.tag,
   });
 
   final String title;
-  final String? message;
+  final String message;
   final AafiatakFeedbackTone tone;
-  final Widget? icon;
-  final Widget? action;
-  final Widget? trailing;
-  final String? semanticLabel;
+  final IconData icon;
+  final String tag;
 
   @override
   Widget build(BuildContext context) {
-    final colors = tone.colors(context);
-    final textTheme = Theme.of(context).textTheme;
+    final colors = tone.colors;
 
-    return Semantics(
-      container: true,
-      label: semanticLabel,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: colors.background,
-          borderRadius: AafiatakRadii.card,
-          border: Border.all(
-            color: colors.border,
-            width: AafiatakBorders.subtle,
+    return AafiatakCard(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            width: 48,
+            height: 48,
+            decoration: BoxDecoration(
+              color: colors.background,
+              borderRadius: AafiatakRadii.large,
+            ),
+            alignment: Alignment.center,
+            child: Icon(icon, size: 24, color: colors.foreground),
           ),
-        ),
-        child: Padding(
-          padding: const EdgeInsetsDirectional.all(AafiatakSpacing.md),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              if (icon != null) ...<Widget>[
-                IconTheme(
-                  data: IconThemeData(
-                    color: colors.foreground,
-                    size: AafiatakSizes.iconDefault,
+          const SizedBox(width: AafiatakSpacing.space12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                AafiatakBadge(label: tag, tone: tone),
+                const SizedBox(height: AafiatakSpacing.space8),
+                Text(
+                  title,
+                  style: AafiatakTypography.labelLarge.copyWith(
+                    color: AafiatakColors.textPrimary,
+                    fontWeight: FontWeight.w700,
                   ),
-                  child: icon!,
                 ),
-                const SizedBox(width: AafiatakSpacing.sm),
-              ],
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      title,
-                      style: textTheme.labelLarge?.copyWith(
-                        color: colors.foreground,
-                      ),
-                    ),
-                    if (message != null) ...<Widget>[
-                      const SizedBox(height: AafiatakSpacing.xxs),
-                      Text(
-                        message!,
-                        style: textTheme.bodySmall?.copyWith(
-                          color: colors.foreground,
-                        ),
-                      ),
-                    ],
-                    if (action != null) ...<Widget>[
-                      const SizedBox(height: AafiatakSpacing.xs),
-                      Align(
-                        alignment: AlignmentDirectional.centerStart,
-                        child: action!,
-                      ),
-                    ],
-                  ],
+                const SizedBox(height: 2),
+                Text(
+                  message,
+                  style: AafiatakTypography.bodySmall.copyWith(
+                    color: AafiatakColors.textSecondary,
+                  ),
                 ),
-              ),
-              if (trailing != null) ...<Widget>[
-                const SizedBox(width: AafiatakSpacing.sm),
-                trailing!,
               ],
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

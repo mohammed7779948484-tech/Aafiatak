@@ -1,0 +1,58 @@
+[
+  {
+    "state": "loading",
+    "file": "PAT-06-loading-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "bookable",
+    "file": "PAT-06-bookable-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "no-capacity",
+    "file": "PAT-06-no-capacity-phone.png",
+    "h": 988,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "last-seat-held",
+    "file": "PAT-06-last-seat-held-phone.png",
+    "h": 988,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "time-cutoff",
+    "file": "PAT-06-time-cutoff-phone.png",
+    "h": 988,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "stale",
+    "file": "PAT-06-stale-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "offline",
+    "file": "PAT-06-offline-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "error",
+    "file": "PAT-06-error-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  }
+]

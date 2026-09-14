@@ -1,0 +1,37 @@
+[
+  {
+    "state": "active",
+    "file": "PAT-03-active-phone.png",
+    "h": 1307,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "no-bookable-availability",
+    "file": "PAT-03-no-bookable-availability-phone.png",
+    "h": 1395,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "inactive",
+    "file": "PAT-03-inactive-phone.png",
+    "h": 1395,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "loading",
+    "file": "PAT-03-loading-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "error",
+    "file": "PAT-03-error-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  }
+]

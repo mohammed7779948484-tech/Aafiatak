@@ -1,0 +1,154 @@
+{
+  "pairs_checked": 21,
+  "passed": 21,
+  "failed": 0,
+  "pairs": [
+    {
+      "foreground": "color-text-primary",
+      "background": "color-canvas",
+      "ratio": 14.04,
+      "minimum": 4.5,
+      "pass": true
+    },
+    {
+      "foreground": "color-text-primary",
+      "background": "color-surface",
+      "ratio": 15.27,
+      "minimum": 4.5,
+      "pass": true
+    },
+    {
+      "foreground": "color-text-secondary",
+      "background": "color-canvas",
+      "ratio": 5.07,
+      "minimum": 4.5,
+      "pass": true
+    },
+    {
+      "foreground": "color-text-secondary",
+      "background": "color-surface",
+      "ratio": 5.51,
+      "minimum": 4.5,
+      "pass": true
+    },
+    {
+      "foreground": "color-on-primary",
+      "background": "color-primary",
+      "ratio": 11.12,
+      "minimum": 4.5,
+      "pass": true
+    },
+    {
+      "foreground": "color-on-primary-container",
+      "background": "color-primary-container",
+      "ratio": 12.22,
+      "minimum": 4.5,
+      "pass": true
+    },
+    {
+      "foreground": "color-on-secondary",
+      "background": "color-secondary",
+      "ratio": 5.09,
+      "minimum": 4.5,
+      "pass": true
+    },
+    {
+      "foreground": "color-on-secondary-container",
+      "background": "color-secondary-container",
+      "ratio": 8.49,
+      "minimum": 4.5,
+      "pass": true
+    },
+    {
+      "foreground": "color-on-tertiary",
+      "background": "color-tertiary",
+      "ratio": 5.0,
+      "minimum": 4.5,
+      "pass": true
+    },
+    {
+      "foreground": "color-on-tertiary-container",
+      "background": "color-tertiary-container",
+      "ratio": 8.75,
+      "minimum": 4.5,
+      "pass": true
+    },
+    {
+      "foreground": "color-on-success",
+      "background": "color-success",
+      "ratio": 5.69,
+      "minimum": 4.5,
+      "pass": true
+    },
+    {
+      "foreground": "color-on-success-container",
+      "background": "color-success-container",
+      "ratio": 7.49,
+      "minimum": 4.5,
+      "pass": true
+    },
+    {
+      "foreground": "color-on-warning",
+      "background": "color-warning",
+      "ratio": 4.91,
+      "minimum": 4.5,
+      "pass": true
+    },
+    {
+      "foreground": "color-on-warning-container",
+      "background": "color-warning-container",
+      "ratio": 7.28,
+      "minimum": 4.5,
+      "pass": true
+    },
+    {
+      "foreground": "color-on-error",
+      "background": "color-error",
+      "ratio": 5.78,
+      "minimum": 4.5,
+      "pass": true
+    },
+    {
+      "foreground": "color-on-error-container",
+      "background": "color-error-container",
+      "ratio": 8.14,
+      "minimum": 4.5,
+      "pass": true
+    },
+    {
+      "foreground": "color-on-info",
+      "background": "color-info",
+      "ratio": 5.47,
+      "minimum": 4.5,
+      "pass": true
+    },
+    {
+      "foreground": "color-on-info-container",
+      "background": "color-info-container",
+      "ratio": 7.01,
+      "minimum": 4.5,
+      "pass": true
+    },
+    {
+      "foreground": "color-on-hold",
+      "background": "color-hold",
+      "ratio": 5.0,
+      "minimum": 4.5,
+      "pass": true
+    },
+    {
+      "foreground": "color-on-hold-container",
+      "background": "color-hold-container",
+      "ratio": 8.75,
+      "minimum": 4.5,
+      "pass": true
+    },
+    {
+      "foreground": "color-focus",
+      "background": "color-canvas",
+      "ratio": 5.78,
+      "minimum": 3.0,
+      "pass": true
+    }
+  ]
+}

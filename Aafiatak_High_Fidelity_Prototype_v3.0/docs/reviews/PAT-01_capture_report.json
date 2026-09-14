@@ -1,0 +1,44 @@
+[
+  {
+    "state": "guest-populated",
+    "file": "PAT-01-guest-populated-phone.png",
+    "h": 1707,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "patient-populated",
+    "file": "PAT-01-patient-populated-phone.png",
+    "h": 2027,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "loading",
+    "file": "PAT-01-loading-phone.png",
+    "h": 900,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "empty-discovery",
+    "file": "PAT-01-empty-discovery-phone.png",
+    "h": 866,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "offline",
+    "file": "PAT-01-offline-phone.png",
+    "h": 2123,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "error",
+    "file": "PAT-01-error-phone.png",
+    "h": 2123,
+    "overflow": false,
+    "errors": []
+  }
+]

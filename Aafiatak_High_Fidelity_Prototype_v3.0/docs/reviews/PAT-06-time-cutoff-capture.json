@@ -1,0 +1,13 @@
+{
+  "screen": "PAT-06",
+  "state": "time-cutoff",
+  "width": 390,
+  "height": 844,
+  "metrics": {
+    "scrollWidth": 390,
+    "scrollHeight": 1012,
+    "clientWidth": 390
+  },
+  "errors": [],
+  "overflow": false
+}

@@ -1,120 +1,129 @@
-import 'package:aafiatak/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
-import '../../foundations/foundations.dart';
+enum _ButtonType { primary, tonal, secondary, destructive, text }
 
-enum AafiatakButtonVariant { filled, tonal, outline, text, destructive }
-
-/// Standard Aafiatak text action built on Material 3 button primitives.
+/// زر موحّد لتطبيق عافيتك يعتمد على أزرار Material 3 الأصلية.
+///
+/// استخدم أحد المنشئات المسماة مثل [AafiatakButton.primary] داخل الشاشات،
+/// حتى تبقى الأنواع واضحة ومتسقة بين أعضاء الفريق. الشكل العام يأتي من
+/// `ThemeData`، وحالة التعطيل لا تحتاج خاصية إضافية؛ مرر `onPressed: null`.
 class AafiatakButton extends StatelessWidget {
-  const AafiatakButton({
+  const AafiatakButton.primary({
     super.key,
     required this.label,
     required this.onPressed,
-    this.variant = AafiatakButtonVariant.filled,
-    this.leading,
-    this.trailing,
-    this.isLoading = false,
-    this.isExpanded = false,
-    this.semanticLabel,
-    this.loadingSemanticLabel,
-  });
+    this.icon,
+    this.fullWidth = false,
+  }) : _type = _ButtonType.primary;
+
+  const AafiatakButton.tonal({
+    super.key,
+    required this.label,
+    required this.onPressed,
+    this.icon,
+    this.fullWidth = false,
+  }) : _type = _ButtonType.tonal;
+
+  const AafiatakButton.secondary({
+    super.key,
+    required this.label,
+    required this.onPressed,
+    this.icon,
+    this.fullWidth = false,
+  }) : _type = _ButtonType.secondary;
+
+  const AafiatakButton.destructive({
+    super.key,
+    required this.label,
+    required this.onPressed,
+    this.icon,
+    this.fullWidth = false,
+  }) : _type = _ButtonType.destructive;
+
+  const AafiatakButton.text({
+    super.key,
+    required this.label,
+    required this.onPressed,
+    this.icon,
+    this.fullWidth = false,
+  }) : _type = _ButtonType.text;
 
   final String label;
   final VoidCallback? onPressed;
-  final AafiatakButtonVariant variant;
-  final Widget? leading;
-  final Widget? trailing;
-  final bool isLoading;
-  final bool isExpanded;
-  final String? semanticLabel;
-  final String? loadingSemanticLabel;
+  final IconData? icon;
+  final bool fullWidth;
+  final _ButtonType _type;
 
   @override
   Widget build(BuildContext context) {
-    final reduceMotion = MediaQuery.disableAnimationsOf(context);
-    final child = AnimatedSwitcher(
-      duration: reduceMotion ? Duration.zero : AafiatakMotion.fast,
-      child: isLoading
-          ? SizedBox.square(
-              key: const ValueKey<String>('loading'),
-              dimension: AafiatakSizes.iconInline,
-              child: CircularProgressIndicator(
-                strokeWidth: AafiatakSizes.progressStrokeCompact,
-                color: _foregroundColor(context),
-              ),
-            )
-          : Row(
-              key: const ValueKey<String>('content'),
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                if (leading != null) ...<Widget>[
-                  leading!,
-                  const SizedBox(width: AafiatakSpacing.xs),
-                ],
-                Flexible(child: Text(label, textAlign: TextAlign.center)),
-                if (trailing != null) ...<Widget>[
-                  const SizedBox(width: AafiatakSpacing.xs),
-                  trailing!,
-                ],
-              ],
-            ),
-    );
-
-    final button = switch (variant) {
-      AafiatakButtonVariant.filled => FilledButton(
-        onPressed: isLoading ? null : onPressed,
-        child: child,
-      ),
-      AafiatakButtonVariant.tonal => FilledButton.tonal(
-        onPressed: isLoading ? null : onPressed,
-        child: child,
-      ),
-      AafiatakButtonVariant.outline => OutlinedButton(
-        onPressed: isLoading ? null : onPressed,
-        child: child,
-      ),
-      AafiatakButtonVariant.text => TextButton(
-        onPressed: isLoading ? null : onPressed,
-        child: child,
-      ),
-      AafiatakButtonVariant.destructive => FilledButton(
-        onPressed: isLoading ? null : onPressed,
-        style: FilledButton.styleFrom(
-          backgroundColor: Theme.of(context).colorScheme.error,
-          foregroundColor: Theme.of(context).colorScheme.onError,
-        ),
-        child: child,
-      ),
+    final child = switch (_type) {
+      _ButtonType.primary => _filled(),
+      _ButtonType.tonal => _tonal(context),
+      _ButtonType.secondary => _outlined(),
+      _ButtonType.destructive => _destructive(context),
+      _ButtonType.text => _text(),
     };
 
-    final isEnabled = onPressed != null && !isLoading;
-    final l10n = AppLocalizations.of(context);
+    return fullWidth ? SizedBox(width: double.infinity, child: child) : child;
+  }
 
-    return Semantics(
-      button: true,
-      enabled: isEnabled,
-      onTap: isEnabled ? onPressed : null,
-      liveRegion: isLoading,
-      excludeSemantics: true,
-      label: semanticLabel ?? label,
-      value: isLoading
-          ? (loadingSemanticLabel ?? l10n.semanticsActionInProgress)
-          : null,
-      child: isExpanded
-          ? SizedBox(width: double.infinity, child: button)
-          : button,
+  Widget _filled() => icon == null
+      ? FilledButton(onPressed: onPressed, child: Text(label))
+      : FilledButton.icon(
+          onPressed: onPressed,
+          icon: Icon(icon),
+          label: Text(label),
+        );
+
+  Widget _tonal(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+    final style = FilledButton.styleFrom(
+      backgroundColor: colors.primaryContainer,
+      foregroundColor: colors.onPrimaryContainer,
     );
+    return icon == null
+        ? FilledButton.tonal(
+            style: style,
+            onPressed: onPressed,
+            child: Text(label),
+          )
+        : FilledButton.tonalIcon(
+            style: style,
+            onPressed: onPressed,
+            icon: Icon(icon),
+            label: Text(label),
+          );
   }
 
-  Color _foregroundColor(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
-    return switch (variant) {
-      AafiatakButtonVariant.filled => scheme.onPrimary,
-      AafiatakButtonVariant.tonal => scheme.onSecondaryContainer,
-      AafiatakButtonVariant.outline => scheme.primary,
-      AafiatakButtonVariant.text => scheme.primary,
-      AafiatakButtonVariant.destructive => scheme.onError,
-    };
+  Widget _outlined() => icon == null
+      ? OutlinedButton(onPressed: onPressed, child: Text(label))
+      : OutlinedButton.icon(
+          onPressed: onPressed,
+          icon: Icon(icon),
+          label: Text(label),
+        );
+
+  Widget _destructive(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+    final style = FilledButton.styleFrom(
+      backgroundColor: colors.errorContainer,
+      foregroundColor: colors.onErrorContainer,
+    );
+    return icon == null
+        ? FilledButton(style: style, onPressed: onPressed, child: Text(label))
+        : FilledButton.icon(
+            style: style,
+            onPressed: onPressed,
+            icon: Icon(icon),
+            label: Text(label),
+          );
   }
+
+  Widget _text() => icon == null
+      ? TextButton(onPressed: onPressed, child: Text(label))
+      : TextButton.icon(
+          onPressed: onPressed,
+          icon: Icon(icon),
+          label: Text(label),
+        );
 }

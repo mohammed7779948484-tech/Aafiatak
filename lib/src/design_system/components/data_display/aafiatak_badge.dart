@@ -1,60 +1,58 @@
 import 'package:flutter/material.dart';
 
-import '../../foundations/foundations.dart';
 import '../feedback/aafiatak_feedback_tone.dart';
+import '../../foundations/foundations.dart';
 
+/// شارة صغيرة لعرض حالة أو تصنيف بجوار المحتوى.
+///
+/// اختر [tone] بحسب المعنى ولا تحدد ألوانًا محلية في الشاشة. هذه الشارة مكون
+/// عرض عام بلا تفاعل أو منطق أعمال، وليست بديلًا عن زر أو FilterChip.
 class AafiatakBadge extends StatelessWidget {
   const AafiatakBadge({
     super.key,
     required this.label,
     this.tone = AafiatakFeedbackTone.neutral,
-    this.icon,
   });
 
   final String label;
   final AafiatakFeedbackTone tone;
-  final Widget? icon;
 
   @override
   Widget build(BuildContext context) {
-    final colors = tone.colors(context);
-    final textStyle = Theme.of(context).textTheme.labelSmall
-        ?.copyWith(color: colors.foreground);
+    final colors = tone.colors;
 
-    return Semantics(
-      label: label,
-      excludeSemantics: true,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: colors.background,
-          borderRadius: AafiatakRadii.full,
-          border: Border.all(
-            color: colors.border,
-            width: AafiatakBorders.subtle,
+    return Container(
+      constraints: const BoxConstraints(minHeight: 28),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+      decoration: BoxDecoration(
+        color: colors.background,
+        borderRadius: AafiatakRadii.full,
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            width: 7,
+            height: 7,
+            decoration: BoxDecoration(
+              color: colors.foreground,
+              shape: BoxShape.circle,
+            ),
           ),
-        ),
-        child: Padding(
-          padding: const EdgeInsetsDirectional.symmetric(
-            horizontal: AafiatakSpacing.sm,
-            vertical: AafiatakSpacing.xxs,
+          const SizedBox(width: 6),
+          Flexible(
+            child: Text(
+              label,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: AafiatakTypography.labelSmall.copyWith(
+                color: colors.foreground,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
           ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              if (icon != null) ...<Widget>[
-                IconTheme(
-                  data: IconThemeData(
-                    color: colors.foreground,
-                    size: AafiatakSizes.iconInline,
-                  ),
-                  child: icon!,
-                ),
-                const SizedBox(width: AafiatakSpacing.xxs),
-              ],
-              Text(label, style: textStyle),
-            ],
-          ),
-        ),
+        ],
       ),
     );
   }

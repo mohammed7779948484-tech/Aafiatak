@@ -1,25 +1,13 @@
 import 'package:flutter/material.dart';
 
+/// الحواف الدائرية المشتركة للأسطح وعناصر التحكم.
+///
+/// تختار المكونات الحجم المناسب، لذلك لا تحتاج الشاشة غالبًا إلى تحديد
+/// `BorderRadius` محليًا أو إنشاء شكل مختلف لكل Feature.
 abstract final class AafiatakRadii {
   const AafiatakRadii._();
 
-  static const double smValue = 8;
-  static const double mdValue = 12;
-  static const double lgValue = 16;
-  static const double xlValue = 24;
-  static const double fullValue = 999;
-
-  static const sm = BorderRadius.all(Radius.circular(smValue));
-  static const md = BorderRadius.all(Radius.circular(mdValue));
-  static const lg = BorderRadius.all(Radius.circular(lgValue));
-  static const xl = BorderRadius.all(Radius.circular(xlValue));
-  static const full = BorderRadius.all(Radius.circular(fullValue));
-
-  static const button = md;
-  static const input = md;
-  static const card = lg;
-  static const dialog = xl;
-  static const bottomSheet = BorderRadius.vertical(
-    top: Radius.circular(xlValue),
-  );
+  static const medium = BorderRadius.all(Radius.circular(12));
+  static const large = BorderRadius.all(Radius.circular(16));
+  static const full = BorderRadius.all(Radius.circular(999));
 }

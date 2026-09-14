@@ -1,0 +1,152 @@
+{
+  "pass": true,
+  "rows": [
+    {
+      "screen": "PAT-01",
+      "required": 5,
+      "implemented": 6,
+      "pass": true,
+      "missing": []
+    },
+    {
+      "screen": "PAT-02",
+      "required": 5,
+      "implemented": 6,
+      "pass": true,
+      "missing": []
+    },
+    {
+      "screen": "PAT-03",
+      "required": 4,
+      "implemented": 5,
+      "pass": true,
+      "missing": []
+    },
+    {
+      "screen": "PAT-04",
+      "required": 4,
+      "implemented": 5,
+      "pass": true,
+      "missing": []
+    },
+    {
+      "screen": "PAT-05",
+      "required": 3,
+      "implemented": 4,
+      "pass": true,
+      "missing": []
+    },
+    {
+      "screen": "PAT-06",
+      "required": 7,
+      "implemented": 8,
+      "pass": true,
+      "missing": []
+    },
+    {
+      "screen": "PAT-07",
+      "required": 7,
+      "implemented": 7,
+      "pass": true,
+      "missing": []
+    },
+    {
+      "screen": "PAT-08",
+      "required": 6,
+      "implemented": 6,
+      "pass": true,
+      "missing": []
+    },
+    {
+      "screen": "PAT-09",
+      "required": 9,
+      "implemented": 9,
+      "pass": true,
+      "missing": []
+    },
+    {
+      "screen": "PAT-10",
+      "required": 2,
+      "implemented": 2,
+      "pass": true,
+      "missing": []
+    },
+    {
+      "screen": "PAT-11",
+      "required": 7,
+      "implemented": 8,
+      "pass": true,
+      "missing": []
+    },
+    {
+      "screen": "PAT-12",
+      "required": 7,
+      "implemented": 8,
+      "pass": true,
+      "missing": []
+    },
+    {
+      "screen": "PAT-13",
+      "required": 9,
+      "implemented": 10,
+      "pass": true,
+      "missing": []
+    },
+    {
+      "screen": "PAT-14",
+      "required": 9,
+      "implemented": 10,
+      "pass": true,
+      "missing": []
+    },
+    {
+      "screen": "PAT-15",
+      "required": 6,
+      "implemented": 7,
+      "pass": true,
+      "missing": []
+    },
+    {
+      "screen": "PAT-16",
+      "required": 5,
+      "implemented": 6,
+      "pass": true,
+      "missing": []
+    },
+    {
+      "screen": "PAT-17",
+      "required": 7,
+      "implemented": 7,
+      "pass": true,
+      "missing": []
+    },
+    {
+      "screen": "PAT-18",
+      "required": 3,
+      "implemented": 3,
+      "pass": true,
+      "missing": []
+    },
+    {
+      "screen": "PAT-19",
+      "required": 9,
+      "implemented": 9,
+      "pass": true,
+      "missing": []
+    },
+    {
+      "screen": "PAT-20",
+      "required": 9,
+      "implemented": 9,
+      "pass": true,
+      "missing": []
+    },
+    {
+      "screen": "PAT-21",
+      "required": 7,
+      "implemented": 7,
+      "pass": true,
+      "missing": []
+    }
+  ]
+}

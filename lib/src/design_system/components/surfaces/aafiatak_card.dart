@@ -2,38 +2,34 @@ import 'package:flutter/material.dart';
 
 import '../../foundations/foundations.dart';
 
+/// بطاقة موحّدة تعتمد مباشرة على [Card] من Material.
+///
+/// استخدمها للأسطح المتكررة بدل `Container` بحدود محلية. يأتي اللون والشكل
+/// من `CardThemeData`، ويضاف [InkWell] فقط عند تمرير [onTap]. البطاقة لا تجلب
+/// بيانات ولا تنفذ تنقلًا؛ الشاشة تمرر المحتوى والحدث.
 class AafiatakCard extends StatelessWidget {
   const AafiatakCard({
     super.key,
     required this.child,
-    this.padding = const EdgeInsetsDirectional.all(AafiatakSpacing.md),
+    this.elevated = false,
     this.onTap,
-    this.semanticLabel,
-    this.clipBehavior = Clip.antiAlias,
   });
 
   final Widget child;
-  final EdgeInsetsGeometry padding;
+  final bool elevated;
   final VoidCallback? onTap;
-  final String? semanticLabel;
-  final Clip clipBehavior;
 
   @override
   Widget build(BuildContext context) {
-    final content = Padding(padding: padding, child: child);
-    final cardChild = onTap == null
-        ? content
-        : InkWell(
-            onTap: onTap,
-            borderRadius: AafiatakRadii.card,
-            child: content,
-          );
+    final content = Padding(
+      padding: const EdgeInsets.all(AafiatakSpacing.space16),
+      child: child,
+    );
 
-    return Semantics(
-      container: true,
-      button: onTap != null,
-      label: semanticLabel,
-      child: Card(clipBehavior: clipBehavior, child: cardChild),
+    return Card(
+      elevation: elevated ? 2 : null,
+      clipBehavior: onTap == null ? Clip.none : Clip.antiAlias,
+      child: onTap == null ? content : InkWell(onTap: onTap, child: content),
     );
   }
 }

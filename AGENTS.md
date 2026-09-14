@@ -1,111 +1,74 @@
-# Agent guide — Aafiatak Flutter v1.3
+# Aafiatak Contributor Guide
 
-## Approved baseline
+## Scope
 
-| Area | Decision |
-|---|---|
-| Product | Aafiatak Patient mobile application |
-| Architecture | feature-first with explicit `app/`, `design_system/`, `features/`, `shared/` boundaries |
-| Current phase | frontend UI + feature-local mock data; no real backend integration |
-| SDK baseline | Flutter >=3.47.0, Dart >=3.13.0 <4.0.0 |
-| State / DI | Riverpod 3 |
-| Routing | go_router |
-| Theme | Aafiatak Material 3, light only |
-| Locale | Arabic (`ar`), RTL-first, Flutter `gen-l10n` |
-| Design System | `lib/src/design_system/` |
+Aafiatak is a university Flutter UI project for three students. It uses Arabic
+RTL screens, local mock data, light Material 3, and no backend or production
+infrastructure. Prefer the solution that is easiest to build, understand,
+explain, and maintain.
 
-## Product invariants that affect code
+## Baseline
 
-- Human-user authentication is passwordless phone + WhatsApp OTP.
-- Do not create email/password, social-login, SMS-authentication, or Forgot Password flows.
-- OTP length/expiry/resend/cooldown remain configuration-driven until approved.
-- Do not invent payment-provider specifics, backend technology, reminder timing, or ReservationHold duration.
-- `ReservationHold`, `Appointment`, `PaymentIntent`, `VisitInstance`, and `QueueEntry` are separate lifecycles.
-- `PAY_AT_FACILITY` must not create a PaymentIntent.
-- Patient does not self-check-in or self-reschedule.
+- Flutter `>=3.47.0`
+- Dart `>=3.13.0 <4.0.0`
+- `go_router` for routing
+- `StatefulWidget`, `setState`, and occasional `ValueNotifier` for UI state
+- Burgundy Monochrome colors from `lib/src/design_system/`
+- 10 shared components and 7 shared domain patterns
+- High-Fidelity reference: `Aafiatak_High_Fidelity_Prototype_v3.0/`
+
+Treat the High-Fidelity package as read-only. Translate its visual design into
+Flutter; do not copy browser-only implementation details such as a 430px phone
+simulation constraint.
+
+## Material First
+
+Use Flutter Material controls and style them through `ThemeData`. Keep Aafiatak
+wrappers thin. Do not rebuild buttons, text fields, cards, app bars, icon
+buttons, or navigation bars from `Container`, `Material`, and `InkWell`.
+
+Use the named `AafiatakButton` constructors for shared button consistency and
+`AafiatakSearchField` for repeated discovery/search inputs.
+
+Normal layout widgets such as `Row`, `Column`, `Padding`, `Expanded`, `Wrap`,
+and `Stack` are appropriate for compositions.
+
+## Product Rules
+
+- Authentication is passwordless phone plus WhatsApp OTP.
+- Do not add email/password, social login, SMS authentication, or Forgot Password.
+- OTP and reservation-hold timing remain configuration-driven.
+- `ReservationHold`, `Appointment`, `PaymentIntent`, `VisitInstance`, and
+  `QueueEntry` are separate lifecycles.
+- `PAY_AT_FACILITY` must not create a `PaymentIntent`.
+- Patients do not self-check-in or self-reschedule.
 - Arrival windows are not exact doctor-entry promises.
-- User-facing Arabic copy belongs in localization resources, not inline Dart literals.
+- Use directional layout APIs where direction matters.
+- Isolate phone numbers, OTPs, references, timestamps, and identifiers as LTR
+  only when needed.
 
-## Feature ownership
+## Structure
 
-Product presentation work goes under `features/<feature>/`. During the UI/mock phase use only the layers actually needed:
+Features may contain `screens/`, `widgets/`, and `mock_data.dart`. Add only what
+the feature needs. Do not create empty domain/data/repository/service layers.
 
-```text
-features/<feature>/
-├── presentation/
-│   ├── screens/
-│   ├── widgets/
-│   └── view_models/        # Riverpod Notifier/AsyncNotifier when useful
-└── data/
-    └── mock/               # deterministic feature-local fixtures
-```
+Write application strings directly in Arabic Dart code. Keep
+`flutter_localizations` for framework RTL behavior, but do not add app gen-l10n,
+ARB files, or an `l10n/` directory.
 
-Do not create empty repository/domain/service layers merely for symmetry.
-
-## Design System and Domain Patterns
-
-Import the foundation with:
+Import the shared design system with:
 
 ```dart
 import 'package:aafiatak/src/design_system/design_system.dart';
 ```
 
-Do not recreate a Design System primitive inside a feature.
-
-The next team-owned layer is `design_system/patterns/`. Domain Patterns are reusable visual compositions with product meaning (for example `DoctorCard`, `AppointmentCard`, `ArrivalWindowCard`, `ReservationHoldBanner`, `PaymentStatusBlock`). They:
-
-- are composed from approved Aafiatak primitives;
-- receive data/state/actions through explicit inputs;
-- do not call APIs, repositories, or navigation directly;
-- do not own business eligibility or lifecycle truth;
-- have exactly one implementation owner when shared between developers;
-- must not be duplicated under alternate names by another branch.
-
-Screen-specific widgets that are not reusable remain inside the owning feature rather than being promoted to Patterns.
-
-## `shared/` rule
-
-`shared/` is only for proven cross-feature, domain-neutral technical infrastructure that is not a Design System primitive and not app-shell code. Current approved module: `shared/media/`.
-
-Never place auth/session state, booking/payment models, feature mock data, feature widgets, or a generic `utils/` grab bag in `shared/` for convenience.
-
-## Localization
-
-- Add/modify visible copy in `lib/l10n/app_ar.arb`.
-- Run `flutter gen-l10n` after localization changes.
-- Do not hard-code visible Arabic strings in production Dart.
-- Use directional layout APIs (`start`/`end`) for RTL safety.
-- Isolate phone numbers, OTPs, references, and similar tokens as LTR when required.
-
-## Riverpod 3
-
-Use current `Notifier`/`AsyncNotifier` patterns. Do not add `flutter_riverpod/legacy.dart`, `StateNotifierProvider`, or `ChangeNotifierProvider` for new code.
-
-## Routing
-
-Routing is composed under `src/app/routing/`. Do not introduce a global `NavigatorState`, global `BuildContext`, or navigate from repositories/services/Domain Patterns.
-
-## Team Git rule
-
-- stable baseline: `main`;
-- integration branch: `develop`;
-- small feature/pattern branches from `develop`;
-- PR back to `develop`;
-- one owner per shared Domain Pattern;
-- prefer small dependency-first PRs over one giant developer branch.
-
-## Verification gate
-
-Before a PR is considered ready:
+## Verification
 
 ```bash
 flutter pub get
-flutter gen-l10n
-python scripts/static_design_system_audit.py
-python scripts/static_architecture_audit.py
-dart format --set-exit-if-changed lib test
+dart format lib
 flutter analyze
-flutter test
+flutter build apk --debug
 ```
 
-Before freezing the team baseline, also run a real debug device/simulator build. Never claim a Flutter CLI gate passed unless it actually ran.
+The project intentionally has no Flutter tests and no Python audit tooling.

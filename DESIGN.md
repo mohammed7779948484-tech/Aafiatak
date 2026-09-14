@@ -1,74 +1,50 @@
-# Aafiatak Design System — Flutter rules v1.3
+# Design
 
-Approved direction: **Quiet Vitality / Mineral Bloom**.
+## Direction
 
-## Location
+Aafiatak follows the read-only visual reference in
+`Aafiatak_High_Fidelity_Prototype_v3.0/`:
 
-```text
-lib/src/design_system/
-├── foundations/
-├── theme/
-└── components/
-```
+- Arabic RTL
+- phone UI
+- light Material 3
+- calm Burgundy Monochrome styling
+- clear spacing, cards, status blocks, and navigation
 
-Domain Patterns are intentionally the next team-owned layer, not part of this
-baseline archive.
+The Flutter implementation translates visual intent into native Material
+widgets. Browser-preview techniques such as the reference's 430px maximum
+width are not application constraints.
 
-## Material strategy
+## Palette
 
-Material 3 supplies platform behavior and accessibility mechanics. Aafiatak owns
-semantic colors, typography, geometry, motion, and stable component APIs.
+| Role | Value |
+|---|---|
+| Primary | `#800020` |
+| Canvas | `#E5E5E5` |
+| Surface | `#FFFFFF` |
+| Surface container | `#EFEFEF` |
+| Primary container | `#F7E9EC` |
+| Secondary container | `#EFEFEF` |
+| Primary text | `#1A1A1A` |
+| Secondary text | `#6E6E6E` |
+| Outline | `#E5E5E5` |
 
-```text
-Material primitive
-→ Aafiatak theme/component theme
-→ Aafiatak wrapper where a stable API is valuable
-→ Domain Pattern
-→ Feature screen
-```
-
-## Core visual rules
-
-- Primary Damson `#4A315D`
-- Secondary Sea Glass semantic `#3F786E`
-- Hold/Copper `#A85A41`
-- Canvas/Warm Porcelain `#F7F3EE`
-- Surface `#FFFDF9`
-- Ink `#25232B`
-- minimum touch target: 48dp
-- spacing scale: `0,4,8,12,16,20,24,32,40,48,64`
-- radii: `8,12,16,24,999`
-- motion: `80,140,220,320ms`
-
-Features consume `ColorScheme`, `TextTheme`, Aafiatak tokens, or
-`AafiatakSemanticColors`; no screen-local raw palette literals.
+Feedback remains monochrome. Burgundy communicates positive and held states;
+neutral charcoal and gray communicate information, warnings, and errors.
+Icons and Arabic copy carry meaning instead of unrelated green, orange, or
+blue status colors.
 
 ## Typography
 
-Approved family contract:
-- IBM Plex Sans Arabic
-- IBM Plex Sans
+`AafiatakTypography` defines a compact type scale. No custom font file is
+bundled, so Flutter uses the platform's Arabic-capable system font.
 
-Font binaries are not included in this archive.
+## Material First
 
-## Arabic / RTL / localization
-
-- Arabic is the MVP locale and composition is RTL-first.
-- Visible strings live in Flutter localization resources, not inline Dart literals.
-- Directional layout uses start/end APIs.
-- Back navigation uses Flutter platform behavior.
-- Phone, OTP, references, times and codes may use LTR isolation inside RTL pages.
-- Selected controls must not rely on color alone.
-
-## Component boundary
-
-Core primitives are domain-neutral. Examples:
-`AafiatakButton`, `AafiatakTextField`, `AafiatakCard`, `AafiatakListRow`,
-`AafiatakStatusBlock`, and `AafiatakPrimaryActionBar`.
-
-A component such as `AppointmentCard`, `ReservationHoldBanner`, or
-`QueueStatusBlock` has domain semantics and belongs to the upcoming Domain
-Patterns layer.
-
-Business eligibility/state transitions remain in feature state/ViewModels, not
-inside visual components or patterns.
+- Buttons use `FilledButton`, `OutlinedButton`, and `TextButton`.
+- `AafiatakButton` exposes named constructors for consistent team usage.
+- Inputs use `TextFormField` and `InputDecorationTheme`.
+- Search uses `SearchBar` and `SearchBarThemeData`.
+- Cards use `Card` and add `InkWell` only when tappable.
+- App bars use `AppBar` and `IconButton`.
+- Bottom navigation uses `NavigationBar` and `NavigationDestination`.

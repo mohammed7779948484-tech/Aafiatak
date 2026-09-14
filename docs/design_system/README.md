@@ -1,57 +1,60 @@
-# Aafiatak Flutter Design System — Foundation v1.3
+# Aafiatak Design System
 
-## Scope
+This university Flutter UI project uses a small Material 3 design system for
+Arabic RTL phone screens. The Burgundy Monochrome visual reference is
+`Aafiatak_High_Fidelity_Prototype_v3.0/`.
 
-This module implements the approved visual foundations, Material 3 theme, and domain-neutral primitives required before the team builds Domain Patterns and Patient screens.
+## Layers
 
-```text
-Flutter / Material 3
-        ↓
-foundations/
-        ↓
-theme/
-        ↓
-components/
-        ↓
-Domain Patterns   # next team-owned layer
-        ↓
-feature screens
-```
+1. Flutter Material widgets provide controls and interaction behavior.
+2. `ThemeData` applies Aafiatak colors, type scale, radii, and component styles.
+3. Ten small Aafiatak components reduce repeated UI code.
+4. Seven domain patterns compose those pieces for patient screens.
 
-## Public import
+Import the public API with:
 
 ```dart
 import 'package:aafiatak/src/design_system/design_system.dart';
 ```
 
-## Foundation groups
+## Core Components
 
-- `AafiatakPalette`
-- `AafiatakColors`
-- `AafiatakTypography`
-- `AafiatakSpacing`
-- `AafiatakRadii`
-- `AafiatakBorders`
-- `AafiatakElevation`
-- `AafiatakMotion`
-- `AafiatakSizes`
-- `AafiatakIcons`
+- `AafiatakButton`
+- `AafiatakTextField`
+- `AafiatakSearchField`
+- `AafiatakCard`
+- `AafiatakInfoRows`
+- `AafiatakBadge`
+- `AafiatakNotice`
+- `AafiatakStatusBlock`
+- `AafiatakSectionHeading`
+- `AafiatakEmptyState`
 
-## Theme
+## Domain Patterns
 
-- explicit Material 3 `ColorScheme`;
-- `AafiatakSemanticColors` ThemeExtension;
-- `AafiatakTheme.light` and component themes;
-- no dark theme in the current approved scope.
+- `DoctorCard`
+- `ServiceCard`
+- `FacilitySummary`
+- `AppointmentSummary`
+- `ReservationHoldBanner`
+- `ArrivalWindowCard`
+- `PolicyCard`
 
-## Component boundary
+The project does not bundle IBM Plex Sans Arabic. Flutter therefore uses the
+device's Arabic-capable system font.
 
-Primitives are domain-neutral and may be used by features or Domain Patterns. Product-specific compositions (Doctor, Appointment, Payment, ReservationHold, Visit/Queue, etc.) are not primitives and are intentionally deferred to team-owned Patterns.
+Use named button constructors such as `AafiatakButton.primary(...)` and
+`AafiatakButton.secondary(...)`. Application strings remain directly in Arabic
+Dart code; `flutter_localizations` supplies framework localization and RTL
+without an app gen-l10n or ARB layer.
 
-Visible strings are localization inputs/ARB resources rather than hard-coded reusable Arabic copy.
+## Team Conventions
 
-Cross-feature non-visual infrastructure is documented separately in `docs/architecture/SHARED_GUIDE.md`.
-
-## Team usage contract
-
-See `COMPONENT_USAGE_CONTRACTS_v1.3.md` for per-component purpose, variants, states, token/RTL/text-scaling/accessibility rules, demo states and do/don’t guidance.
+- Choose one of `AafiatakButton.primary`, `.tonal`, `.secondary`, `.text`, or
+  `.destructive`; pass `onPressed: null` for a disabled button.
+- Use `AafiatakSearchField` for discovery and `AafiatakTextField` for forms. Its
+  optional `label` is displayed above the Material field.
+- `AafiatakEmptyState` requires an icon, title, and message. Its action label
+  and callback are both optional but must be supplied together.
+- Use `PatientShell(showBrand: true)` for the home root header. For root section
+  screens use `showBrand: false` with `title`; detail screens use `root: false`.

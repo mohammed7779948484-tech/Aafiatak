@@ -1,0 +1,37 @@
+[
+  {
+    "state": "active",
+    "file": "PAT-04-active-phone.png",
+    "h": 1325,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "no-capacity",
+    "file": "PAT-04-no-capacity-phone.png",
+    "h": 1409,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "inactive",
+    "file": "PAT-04-inactive-phone.png",
+    "h": 1386,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "loading",
+    "file": "PAT-04-loading-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "error",
+    "file": "PAT-04-error-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  }
+]

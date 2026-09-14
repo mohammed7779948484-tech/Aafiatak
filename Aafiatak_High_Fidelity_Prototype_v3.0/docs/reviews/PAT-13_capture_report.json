@@ -1,0 +1,72 @@
+[
+  {
+    "state": "due-at-facility",
+    "file": "PAT-13-due-at-facility-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "processing",
+    "file": "PAT-13-processing-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "succeeded",
+    "file": "PAT-13-succeeded-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "failed",
+    "file": "PAT-13-failed-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "expired",
+    "file": "PAT-13-expired-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "under-review",
+    "file": "PAT-13-under-review-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "refund-pending",
+    "file": "PAT-13-refund-pending-phone.png",
+    "h": 848,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "refunded",
+    "file": "PAT-13-refunded-phone.png",
+    "h": 848,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "loading",
+    "file": "PAT-13-loading-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "error",
+    "file": "PAT-13-error-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  }
+]

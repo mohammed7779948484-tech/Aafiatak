@@ -1,75 +1,40 @@
-# Aafiatak Flutter architecture v1.3
+# Architecture
 
-## Current goal
-
-Provide a stable, team-splittable frontend baseline for the Patient MVP without
-inventing backend architecture or unresolved product decisions.
+Aafiatak is a Flutter UI project with mock data. Its structure is deliberately
+small so three students can work on separate screen groups.
 
 ```text
-lib/src/
-├── app/                         # composition, routing
-├── design_system/               # visual source of truth
-├── features/                    # patient feature ownership
-└── shared/
-    └── media/                    # cross-feature technical infrastructure
+lib/
+├── main.dart
+└── src/
+    ├── app/                 # app setup, router, patient shell
+    ├── design_system/       # theme, foundations, components, patterns
+    └── features/            # product screens, local widgets, mock data
 ```
 
-Localization resources live under `lib/l10n/` and are generated through Flutter
-`gen-l10n`.
-
-## UI/mock feature shape
+A feature should add only the folders it uses:
 
 ```text
-features/<feature>/
-├── presentation/
-│   ├── screens/
-│   ├── widgets/
-│   └── view_models/             # Riverpod Notifier/AsyncNotifier when needed
-└── data/
-    └── mock/                    # feature-local deterministic fixtures
+features/booking/
+├── screens/
+├── widgets/
+└── mock_data.dart
 ```
 
-Do not create empty layers merely for architectural symmetry.
+Do not add repositories, services, use cases, DTO layers, dependency injection,
+or app-wide state management for mock UI. Use local Flutter state and pass data
+and callbacks explicitly.
 
-## Dependency direction
+Shared visual controls belong in `design_system/components/`. Reusable patient
+compositions belong in `design_system/patterns/`. Feature-specific widgets stay
+with their feature.
 
-```text
-app ───────────→ features + design_system + shared + generated localizations
-features ──────→ design_system + shared + generated localizations
-shared ────────→ design_system + generated localizations where needed
-design_system ─→ Flutter/Material + generated localizations + approved DS packages
-```
+The starter follows the same structure at `features/starter/screens/`; it does
+not add a `presentation/` layer.
 
-Forbidden:
-- `design_system` importing a feature;
-- `shared` importing a feature;
-- one feature importing another feature's private implementation;
-- repositories/services using `BuildContext` or visual feedback APIs;
-- global navigator/root `BuildContext` singletons.
+Patient screens compose their `Scaffold`, app bar, and bottom navigation through
+`PatientShell`. Root screens can display either the Aafiatak brand or a section
+title, while route changes remain outside the shell.
 
-## Domain Patterns
-
-The team will add a layer such as:
-
-```text
-design_system/
-└── patterns/
-    ├── doctor/
-    ├── booking/
-    ├── appointment/
-    ├── payment/
-    └── visit_queue/
-```
-
-A Domain Pattern is a reusable visual composition with domain meaning. It may
-compose Design System primitives, but it must not own backend truth or perform
-API calls. Feature/ViewModel logic decides what state/actions are allowed.
-
-Every shared Pattern gets exactly one implementation owner to prevent duplicate
-`DoctorCard`/`PaymentStatusCard` variants across branches.
-
-## Backend evolution
-
-When real integration starts, introduce repositories/services around approved
-real data sources. App-wide sources of truth may then justify explicit `data/`
-and, only where useful, `domain/` layers. Do not place them in `shared/`.
+Routing is defined under `lib/src/app/routing/` with `go_router`. Widgets and
+domain patterns do not own navigation or data access.
