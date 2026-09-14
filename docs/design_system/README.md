@@ -1,37 +1,23 @@
-# Aafiatak Flutter Design System — Foundation v2.1 (Burgundy Monochrome)
+# Aafiatak Design System
 
-## Scope
+This university Flutter UI project uses a small Material 3 design system for
+Arabic RTL phone screens. The Burgundy Monochrome visual reference is
+`Aafiatak_High_Fidelity_Prototype_v3.0/`.
 
-This module implements the approved visual foundations, Material 3 theme, 9 domain-neutral primitives, and 7 domain patterns derived directly from the High-Fidelity Prototype (`Aafiatak_High_Fidelity_Prototype_v3.0`).
+## Layers
 
-```text
-Flutter / Material 3
-        ↓
-foundations/         # Colors, Spacing, Radii, Typography
-        ↓
-theme/               # Material 3 Theme mapping
-        ↓
-components/          # 9 Core primitives
-        ↓
-patterns/            # 7 Domain patterns
-        ↓
-features / shell     # Patient shell & feature screens
-```
+1. Flutter Material widgets provide controls and interaction behavior.
+2. `ThemeData` applies Aafiatak colors, type scale, radii, and component styles.
+3. Nine small Aafiatak components reduce repeated UI code.
+4. Seven domain patterns compose those pieces for patient screens.
 
-## Public Import
+Import the public API with:
 
 ```dart
 import 'package:aafiatak/src/design_system/design_system.dart';
 ```
 
-## Foundation Groups
-
-- `AafiatakColors` — Burgundy monochrome tokens (`#800020`, `#FFFFFF`, `#E5E5E5`, `#EFEFEF`, `#F7E9EC`, `#1A1A1A`, `#6E6E6E`) and feedback tones (`success`, `warning`, `error`, `info`, `neutral`, `hold`).
-- `AafiatakTypography` — Arabic scale (Display, H1, H2, H3, Body, BodySmall, Caption, Button) with system font fallbacks.
-- `AafiatakSpacing` — Spacing scale (`0, 4, 8, 12, 16, 20, 24, 32, 40, 48, 64`) with t-shirt and numeric aliases.
-- `AafiatakRadii` — Corner radii (`8, 12, 16, 24, 999`) with t-shirt and numeric aliases.
-
-## 9 Core Primitives
+## Core Components
 
 - `AafiatakButton`
 - `AafiatakTextField`
@@ -43,7 +29,7 @@ import 'package:aafiatak/src/design_system/design_system.dart';
 - `AafiatakSectionHeading`
 - `AafiatakEmptyState`
 
-## 7 Domain Patterns
+## Domain Patterns
 
 - `DoctorCard`
 - `ServiceCard`
@@ -53,3 +39,5 @@ import 'package:aafiatak/src/design_system/design_system.dart';
 - `ArrivalWindowCard`
 - `PolicyCard`
 
+The project does not bundle IBM Plex Sans Arabic. Flutter therefore uses the
+device's Arabic-capable system font.

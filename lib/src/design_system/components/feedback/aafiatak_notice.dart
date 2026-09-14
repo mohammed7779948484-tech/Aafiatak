@@ -4,63 +4,31 @@ import '../../foundations/foundations.dart';
 
 import 'aafiatak_feedback_tone.dart';
 
-typedef AafiatakNoticeTone = AafiatakFeedbackTone;
-
 /// Contextual inline notification block matching the High-Fidelity `.notice` pattern.
 class AafiatakNotice extends StatelessWidget {
-  const AafiatakNotice({
-    super.key,
-    String? text,
-    String? message,
-    this.tone = AafiatakFeedbackTone.info,
-  }) : text = message ?? text ?? '';
+  const AafiatakNotice({super.key, required this.message, required this.tone});
 
-  final String text;
+  final String message;
   final AafiatakFeedbackTone tone;
 
   @override
   Widget build(BuildContext context) {
-    Color backgroundColor;
-    Color textColor;
-    BorderSide borderSide = BorderSide.none;
-
-    switch (tone) {
-      case AafiatakFeedbackTone.primary:
-      case AafiatakFeedbackTone.success:
-      case AafiatakFeedbackTone.hold:
-        backgroundColor = AafiatakColors.primaryContainer;
-        textColor = AafiatakColors.onPrimaryContainer;
-      case AafiatakFeedbackTone.secondary:
-      case AafiatakFeedbackTone.info:
-      case AafiatakFeedbackTone.warning:
-      case AafiatakFeedbackTone.neutral:
-        backgroundColor = AafiatakColors.surfaceContainer;
-        textColor = AafiatakColors.textPrimary;
-      case AafiatakFeedbackTone.error:
-        backgroundColor = AafiatakColors.surfaceContainer;
-        textColor = AafiatakColors.textPrimary;
-        borderSide = const BorderSide(
-          color: Color(0x291A1A1A),
-          width: 1,
-        ); // rgba(26,26,26,.16)
-    }
+    final colors = tone.colors;
 
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(
-        horizontal: AafiatakSpacing.md,
-        vertical: AafiatakSpacing.sm,
+        horizontal: AafiatakSpacing.space16,
+        vertical: AafiatakSpacing.space12,
       ),
       decoration: BoxDecoration(
-        color: backgroundColor,
-        borderRadius: AafiatakRadii.lg,
-        border: borderSide != BorderSide.none
-            ? Border.fromBorderSide(borderSide)
-            : null,
+        color: colors.background,
+        borderRadius: AafiatakRadii.large,
+        border: Border.all(color: colors.border),
       ),
       child: Text(
-        text,
-        style: AafiatakTypography.bodySmall.copyWith(color: textColor),
+        message,
+        style: AafiatakTypography.bodySmall.copyWith(color: colors.foreground),
       ),
     );
   }

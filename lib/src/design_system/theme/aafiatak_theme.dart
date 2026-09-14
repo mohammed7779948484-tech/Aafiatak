@@ -53,8 +53,6 @@ abstract final class AafiatakTheme {
       brightness: Brightness.light,
       colorScheme: colorScheme,
       scaffoldBackgroundColor: AafiatakColors.canvas,
-      fontFamily: AafiatakTypography.arabicFamily,
-      fontFamilyFallback: AafiatakTypography.fallbackFamilies,
       textTheme: textTheme,
       dividerTheme: const DividerThemeData(
         color: AafiatakColors.outline,
@@ -76,23 +74,23 @@ abstract final class AafiatakTheme {
         elevation: 0,
         margin: EdgeInsets.zero,
         shape: RoundedRectangleBorder(
-          borderRadius: AafiatakRadii.card,
+          borderRadius: AafiatakRadii.large,
           side: BorderSide(color: AafiatakColors.outline, width: 1),
         ),
       ),
       filledButtonTheme: FilledButtonThemeData(
-        style: FilledButton.styleFrom(
-          backgroundColor: AafiatakColors.primary,
-          foregroundColor: AafiatakColors.onPrimary,
-          minimumSize: const Size(0, 48),
-          padding: const EdgeInsets.symmetric(
-            horizontal: AafiatakSpacing.md,
-            vertical: AafiatakSpacing.sm,
+        style: ButtonStyle(
+          minimumSize: const WidgetStatePropertyAll(Size(0, 48)),
+          padding: const WidgetStatePropertyAll(
+            EdgeInsets.symmetric(
+              horizontal: AafiatakSpacing.space16,
+              vertical: AafiatakSpacing.space12,
+            ),
           ),
-          shape: const RoundedRectangleBorder(
-            borderRadius: AafiatakRadii.button,
+          shape: const WidgetStatePropertyAll(
+            RoundedRectangleBorder(borderRadius: AafiatakRadii.medium),
           ),
-          textStyle: textTheme.labelLarge,
+          textStyle: WidgetStatePropertyAll(textTheme.labelLarge),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
@@ -101,12 +99,12 @@ abstract final class AafiatakTheme {
           backgroundColor: AafiatakColors.surface,
           minimumSize: const Size(0, 48),
           padding: const EdgeInsets.symmetric(
-            horizontal: AafiatakSpacing.md,
-            vertical: AafiatakSpacing.sm,
+            horizontal: AafiatakSpacing.space16,
+            vertical: AafiatakSpacing.space12,
           ),
           side: const BorderSide(color: AafiatakColors.outline, width: 1),
           shape: const RoundedRectangleBorder(
-            borderRadius: AafiatakRadii.button,
+            borderRadius: AafiatakRadii.medium,
           ),
           textStyle: textTheme.labelLarge,
         ),
@@ -116,11 +114,11 @@ abstract final class AafiatakTheme {
           foregroundColor: AafiatakColors.primary,
           minimumSize: const Size(0, 48),
           padding: const EdgeInsets.symmetric(
-            horizontal: AafiatakSpacing.md,
-            vertical: AafiatakSpacing.xs,
+            horizontal: AafiatakSpacing.space16,
+            vertical: AafiatakSpacing.space8,
           ),
           shape: const RoundedRectangleBorder(
-            borderRadius: AafiatakRadii.button,
+            borderRadius: AafiatakRadii.medium,
           ),
           textStyle: textTheme.labelLarge,
         ),
@@ -129,27 +127,27 @@ abstract final class AafiatakTheme {
         filled: true,
         fillColor: AafiatakColors.surface,
         contentPadding: const EdgeInsets.symmetric(
-          horizontal: AafiatakSpacing.md,
-          vertical: AafiatakSpacing.md,
+          horizontal: AafiatakSpacing.space16,
+          vertical: AafiatakSpacing.space16,
         ),
         border: const OutlineInputBorder(
-          borderRadius: AafiatakRadii.input,
+          borderRadius: AafiatakRadii.medium,
           borderSide: BorderSide(color: AafiatakColors.outline, width: 1),
         ),
         enabledBorder: const OutlineInputBorder(
-          borderRadius: AafiatakRadii.input,
+          borderRadius: AafiatakRadii.medium,
           borderSide: BorderSide(color: AafiatakColors.outline, width: 1),
         ),
         focusedBorder: const OutlineInputBorder(
-          borderRadius: AafiatakRadii.input,
+          borderRadius: AafiatakRadii.medium,
           borderSide: BorderSide(color: AafiatakColors.focus, width: 2),
         ),
         errorBorder: const OutlineInputBorder(
-          borderRadius: AafiatakRadii.input,
+          borderRadius: AafiatakRadii.medium,
           borderSide: BorderSide(color: AafiatakColors.error, width: 1),
         ),
         focusedErrorBorder: const OutlineInputBorder(
-          borderRadius: AafiatakRadii.input,
+          borderRadius: AafiatakRadii.medium,
           borderSide: BorderSide(color: AafiatakColors.error, width: 2),
         ),
         labelStyle: textTheme.bodySmall?.copyWith(
@@ -164,6 +162,8 @@ abstract final class AafiatakTheme {
         errorStyle: textTheme.bodySmall?.copyWith(
           color: AafiatakColors.textPrimary,
         ),
+        prefixIconColor: AafiatakColors.primary,
+        suffixIconColor: AafiatakColors.textSecondary,
       ),
       chipTheme: ChipThemeData(
         backgroundColor: AafiatakColors.surface,
@@ -201,6 +201,20 @@ abstract final class AafiatakTheme {
           }
           return const IconThemeData(color: AafiatakColors.textSecondary);
         }),
+      ),
+      iconButtonTheme: IconButtonThemeData(
+        style: IconButton.styleFrom(
+          foregroundColor: AafiatakColors.primary,
+          minimumSize: const Size.square(48),
+          shape: const RoundedRectangleBorder(
+            borderRadius: AafiatakRadii.large,
+          ),
+        ),
+      ),
+      bottomAppBarTheme: const BottomAppBarThemeData(
+        color: AafiatakColors.surface,
+        elevation: 0,
+        padding: EdgeInsets.zero,
       ),
     );
   }

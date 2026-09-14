@@ -27,7 +27,7 @@ class AafiatakInfoRows extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         for (var i = 0; i < rows.length; i++) ...<Widget>[
-          if (i > 0) const SizedBox(height: AafiatakSpacing.sm),
+          if (i > 0) const SizedBox(height: AafiatakSpacing.space12),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -40,7 +40,7 @@ class AafiatakInfoRows extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(width: AafiatakSpacing.sm),
+              const SizedBox(width: AafiatakSpacing.space12),
               Expanded(
                 child: Directionality(
                   textDirection: rows[i].isLtr
@@ -49,7 +49,7 @@ class AafiatakInfoRows extends StatelessWidget {
                   child: Text(
                     rows[i].value,
                     textAlign: rows[i].isLtr ? TextAlign.end : TextAlign.start,
-                    style: AafiatakTypography.label.copyWith(
+                    style: AafiatakTypography.labelMedium.copyWith(
                       color: AafiatakColors.textPrimary,
                       fontWeight: FontWeight.w600,
                     ),

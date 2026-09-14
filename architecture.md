@@ -1,70 +1,33 @@
-# Aafiatak Flutter Architecture v2.1 (Burgundy Monochrome)
+# Architecture
 
-## Current Goal
-
-Provide a clean, focused, team-splittable frontend baseline for the 3-student university team, strictly aligned with the High-Fidelity Prototype (`Aafiatak_High_Fidelity_Prototype_v3.0`).
+Aafiatak is a Flutter UI project with mock data. Its structure is deliberately
+small so three students can work on separate screen groups.
 
 ```text
 lib/
 ├── main.dart
 └── src/
-    ├── app/                         # composition, routing, patient shell
-    │   ├── patient_shell.dart       # PatientShell, AppBars, BottomNav, BottomAction
-    │   └── routing/                 # GoRouter configuration
-    ├── design_system/               # visual source of truth
-    │   ├── foundations/             # colors, typography, spacing, radii
-    │   ├── theme/                   # Material 3 light theme mapping
-    │   ├── components/              # 9 core primitives
-    │   └── patterns/                # 7 domain patterns
-    └── features/                    # patient feature ownership
-        └── starter/                 # QA showcase gallery
+    ├── app/                 # app setup, router, patient shell
+    ├── design_system/       # theme, foundations, components, patterns
+    └── features/            # product screens, local widgets, mock data
 ```
 
-## UI/Mock Feature Shape
+A feature should add only the folders it uses:
 
 ```text
-features/<feature>/
-├── presentation/
-│   ├── screens/
-│   └── widgets/
-└── data/
-    └── mock/                    # feature-local deterministic fixtures
+features/booking/
+├── screens/
+├── widgets/
+└── mock_data.dart
 ```
 
-Pure Flutter `StatefulWidget` / `ValueNotifier` is used where state is needed. Heavy state management abstractions (like Riverpod 3) and codegen have been removed.
+Do not add repositories, services, use cases, DTO layers, dependency injection,
+or app-wide state management for mock UI. Use local Flutter state and pass data
+and callbacks explicitly.
 
-## Dependency Direction
+Shared visual controls belong in `design_system/components/`. Reusable patient
+compositions belong in `design_system/patterns/`. Feature-specific widgets stay
+with their feature.
 
-```text
-app ───────────→ features + design_system
-features ──────→ design_system
-design_system ─→ Flutter / Material 3
-```
-
-Forbidden:
-- `design_system` importing a feature;
-- one feature importing another feature's private implementation;
-- repositories/services using `BuildContext` or visual feedback APIs;
-- global navigator/root `BuildContext` singletons.
-
-## Design System & Domain Patterns
-
-The Design System is organized into:
-1. **Foundations**: Tokens for colors, radii, spacing, and typography.
-2. **Theme**: Material 3 theme mapping with `CardThemeData`, `OutlineInputBorder`, component themes.
-3. **Components (9)**: Domain-neutral primitives (`AafiatakButton`, `AafiatakTextField`, `AafiatakCard`, `AafiatakInfoRows`, `AafiatakBadge`, `AafiatakNotice`, `AafiatakStatusBlock`, `AafiatakSectionHeading`, `AafiatakEmptyState`).
-4. **Patterns (7)**: Reusable domain compositions (`DoctorCard`, `ServiceCard`, `FacilitySummary`, `AppointmentSummary`, `ReservationHoldBanner`, `ArrivalWindowCard`, `PolicyCard`).
-
-## Verification Gate
-
-Before any branch or PR is merged:
-
-```bash
-flutter pub get
-python scripts/static_design_system_audit.py
-python scripts/static_architecture_audit.py
-dart format --set-exit-if-changed lib test
-flutter analyze
-flutter test
-```
-
+Routing is defined under `lib/src/app/routing/` with `go_router`. Widgets and
+domain patterns do not own navigation or data access.

@@ -6,39 +6,30 @@ import '../../foundations/foundations.dart';
 ///
 /// Features an H3 label on the start side and an optional meta subtitle or action on the end side.
 class AafiatakSectionHeading extends StatelessWidget {
-  const AafiatakSectionHeading({
-    super.key,
-    required this.label,
-    this.meta,
-    this.action,
-  });
+  const AafiatakSectionHeading({super.key, required this.label, this.meta});
 
   final String label;
   final String? meta;
-  final Widget? action;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.baseline,
-      textBaseline: TextBaseline.alphabetic,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Expanded(
           child: Text(
             label,
-            style: AafiatakTypography.h3.copyWith(
+            style: AafiatakTypography.titleLarge.copyWith(
               color: AafiatakColors.textPrimary,
               fontWeight: FontWeight.w600,
             ),
           ),
         ),
-        if (action != null)
-          action!
-        else if (meta != null && meta!.isNotEmpty)
+        if (meta != null && meta!.isNotEmpty)
           Text(
             meta!,
-            style: AafiatakTypography.caption.copyWith(
+            style: AafiatakTypography.labelSmall.copyWith(
               color: AafiatakColors.textSecondary,
             ),
           ),

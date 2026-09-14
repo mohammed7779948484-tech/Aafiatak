@@ -1,45 +1,11 @@
-/// Aafiatak's canonical 4dp spacing scale.
+/// Spacing values used by the High-Fidelity interface.
 abstract final class AafiatakSpacing {
   const AafiatakSpacing._();
 
-  static const double none = 0;
-  static const double xxs = 4;
-  static const double xs = 8;
-  static const double sm = 12;
-  static const double md = 16;
-  static const double lg = 20;
-  static const double xl = 24;
-  static const double x2l = 32;
-  static const double x3l = 40;
-  static const double x4l = 48;
-  static const double x5l = 64;
-
-  // Numeric token aliases
-  static const double space0 = none;
-  static const double space4 = xxs;
-  static const double space8 = xs;
-  static const double space12 = sm;
-  static const double space16 = md;
-  static const double space20 = lg;
-  static const double space24 = xl;
-  static const double space32 = x2l;
-  static const double space40 = x3l;
-  static const double space48 = x4l;
-  static const double space64 = x5l;
-
-  static const List<double> scale = <double>[
-    none,
-    xxs,
-    xs,
-    sm,
-    md,
-    lg,
-    xl,
-    x2l,
-    x3l,
-    x4l,
-    x5l,
-  ];
-
-  static const double pageHorizontal = md;
+  static const double space4 = 4;
+  static const double space8 = 8;
+  static const double space12 = 12;
+  static const double space16 = 16;
+  static const double space24 = 24;
+  static const double space32 = 32;
 }

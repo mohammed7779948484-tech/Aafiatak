@@ -4,4 +4,4 @@ library;
 export 'components/components.dart';
 export 'foundations/foundations.dart';
 export 'patterns/patterns.dart';
-export 'theme/theme.dart';
+export 'theme/aafiatak_theme.dart';

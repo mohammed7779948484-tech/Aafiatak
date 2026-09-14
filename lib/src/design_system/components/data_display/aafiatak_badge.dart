@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../foundations/foundations.dart';
 import '../feedback/aafiatak_feedback_tone.dart';
-
-typedef AafiatakBadgeTone = AafiatakFeedbackTone;
+import '../../foundations/foundations.dart';
 
 /// Pill badge widget matching the High-Fidelity .badge pattern.
 ///
@@ -20,32 +18,15 @@ class AafiatakBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color bg;
-    Color fg;
-
-    switch (tone) {
-      case AafiatakFeedbackTone.primary:
-      case AafiatakFeedbackTone.success:
-      case AafiatakFeedbackTone.hold:
-        bg = AafiatakColors.primaryContainer;
-        fg = AafiatakColors.onPrimaryContainer;
-      case AafiatakFeedbackTone.secondary:
-      case AafiatakFeedbackTone.info:
-      case AafiatakFeedbackTone.warning:
-        bg = AafiatakColors.surfaceContainer;
-        fg = AafiatakColors.textPrimary;
-      case AafiatakFeedbackTone.error:
-        bg = AafiatakColors.error;
-        fg = AafiatakColors.onError;
-      case AafiatakFeedbackTone.neutral:
-        bg = AafiatakColors.surfaceContainer;
-        fg = AafiatakColors.textSecondary;
-    }
+    final colors = tone.colors;
 
     return Container(
       constraints: const BoxConstraints(minHeight: 28),
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-      decoration: BoxDecoration(color: bg, borderRadius: AafiatakRadii.full),
+      decoration: BoxDecoration(
+        color: colors.background,
+        borderRadius: AafiatakRadii.full,
+      ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -53,13 +34,16 @@ class AafiatakBadge extends StatelessWidget {
           Container(
             width: 7,
             height: 7,
-            decoration: BoxDecoration(color: fg, shape: BoxShape.circle),
+            decoration: BoxDecoration(
+              color: colors.foreground,
+              shape: BoxShape.circle,
+            ),
           ),
           const SizedBox(width: 6),
           Text(
             label,
-            style: AafiatakTypography.caption.copyWith(
-              color: fg,
+            style: AafiatakTypography.labelSmall.copyWith(
+              color: colors.foreground,
               fontWeight: FontWeight.w600,
             ),
           ),

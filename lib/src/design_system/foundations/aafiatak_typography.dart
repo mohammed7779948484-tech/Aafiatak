@@ -2,120 +2,81 @@ import 'package:flutter/material.dart';
 
 import 'aafiatak_colors.dart';
 
-/// Approved Aafiatak type roles.
-///
-/// Font assets are intentionally not bundled in this starter delivery. Add the
-/// approved licensed assets later without changing this token API.
+/// Aafiatak type scale using the platform's Arabic-capable system font.
 abstract final class AafiatakTypography {
   const AafiatakTypography._();
 
-  static const String arabicFamily = 'IBM Plex Sans Arabic';
-  static const String latinFamily = 'IBM Plex Sans';
-  static const List<String> fallbackFamilies = <String>[
-    latinFamily,
-    'Noto Sans Arabic',
-    'Noto Sans',
-  ];
-
-  static const TextStyle display = TextStyle(
-    fontFamily: arabicFamily,
-    fontFamilyFallback: fallbackFamilies,
+  static const TextStyle displayLarge = TextStyle(
     fontSize: 32,
     height: 40 / 32,
     fontWeight: FontWeight.w700,
     color: AafiatakColors.textPrimary,
   );
-  static const TextStyle h1 = TextStyle(
-    fontFamily: arabicFamily,
-    fontFamilyFallback: fallbackFamilies,
+  static const TextStyle headlineLarge = TextStyle(
     fontSize: 28,
     height: 36 / 28,
     fontWeight: FontWeight.w700,
     color: AafiatakColors.textPrimary,
   );
-  static const TextStyle h2 = TextStyle(
-    fontFamily: arabicFamily,
-    fontFamilyFallback: fallbackFamilies,
+  static const TextStyle headlineMedium = TextStyle(
     fontSize: 24,
     height: 32 / 24,
     fontWeight: FontWeight.w700,
     color: AafiatakColors.textPrimary,
   );
-  static const TextStyle h3 = TextStyle(
-    fontFamily: arabicFamily,
-    fontFamilyFallback: fallbackFamilies,
+  static const TextStyle titleLarge = TextStyle(
     fontSize: 20,
     height: 28 / 20,
     fontWeight: FontWeight.w600,
     color: AafiatakColors.textPrimary,
   );
   static const TextStyle bodyLarge = TextStyle(
-    fontFamily: arabicFamily,
-    fontFamilyFallback: fallbackFamilies,
     fontSize: 18,
     height: 30 / 18,
-    fontWeight: FontWeight.w400,
     color: AafiatakColors.textPrimary,
   );
-  static const TextStyle body = TextStyle(
-    fontFamily: arabicFamily,
-    fontFamilyFallback: fallbackFamilies,
+  static const TextStyle bodyMedium = TextStyle(
     fontSize: 16,
     height: 27 / 16,
-    fontWeight: FontWeight.w400,
     color: AafiatakColors.textPrimary,
   );
+  static const TextStyle bodySmall = TextStyle(
+    fontSize: 14,
+    height: 23 / 14,
+    color: AafiatakColors.textSecondary,
+  );
   static const TextStyle labelLarge = TextStyle(
-    fontFamily: arabicFamily,
-    fontFamilyFallback: fallbackFamilies,
     fontSize: 16,
     height: 24 / 16,
     fontWeight: FontWeight.w600,
   );
-  static const TextStyle label = TextStyle(
-    fontFamily: arabicFamily,
-    fontFamilyFallback: fallbackFamilies,
+  static const TextStyle labelMedium = TextStyle(
     fontSize: 14,
     height: 22 / 14,
     fontWeight: FontWeight.w600,
   );
-  static const TextStyle bodySmall = TextStyle(
-    fontFamily: arabicFamily,
-    fontFamilyFallback: fallbackFamilies,
-    fontSize: 14,
-    height: 23 / 14,
-    fontWeight: FontWeight.w400,
-    color: AafiatakColors.textSecondary,
-  );
-  static const TextStyle caption = TextStyle(
-    fontFamily: arabicFamily,
-    fontFamilyFallback: fallbackFamilies,
+  static const TextStyle labelSmall = TextStyle(
     fontSize: 12,
     height: 20 / 12,
     fontWeight: FontWeight.w500,
     color: AafiatakColors.textSecondary,
   );
 
-  // Role aliases
-  static const TextStyle bodyMedium = body;
-  static const TextStyle titleMedium = labelLarge;
-  static const TextStyle titleSmall = label;
-
   static const TextTheme textTheme = TextTheme(
-    displayLarge: display,
-    displayMedium: h1,
-    displaySmall: h2,
-    headlineLarge: h1,
-    headlineMedium: h2,
-    headlineSmall: h3,
-    titleLarge: h3,
+    displayLarge: displayLarge,
+    displayMedium: headlineLarge,
+    displaySmall: headlineMedium,
+    headlineLarge: headlineLarge,
+    headlineMedium: headlineMedium,
+    headlineSmall: titleLarge,
+    titleLarge: titleLarge,
     titleMedium: labelLarge,
-    titleSmall: label,
+    titleSmall: labelMedium,
     bodyLarge: bodyLarge,
-    bodyMedium: body,
+    bodyMedium: bodyMedium,
     bodySmall: bodySmall,
     labelLarge: labelLarge,
-    labelMedium: label,
-    labelSmall: caption,
+    labelMedium: labelMedium,
+    labelSmall: labelSmall,
   );
 }

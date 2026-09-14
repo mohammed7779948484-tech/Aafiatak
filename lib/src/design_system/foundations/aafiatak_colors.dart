@@ -10,7 +10,6 @@ abstract final class AafiatakColors {
   const AafiatakColors._();
 
   // Three source anchors
-  static const brand = Color(0xFF800020);
   static const canvas = Color(0xFFE5E5E5);
   static const surface = Color(0xFFFFFFFF);
 
@@ -37,8 +36,8 @@ abstract final class AafiatakColors {
   // Secondary
   static const secondary = Color(0xFF800020);
   static const onSecondary = Color(0xFFFFFFFF);
-  static const secondaryContainer = Color(0xFFEFEFEF);
-  static const onSecondaryContainer = Color(0xFF1A1A1A);
+  static const secondaryContainer = Color(0xFFF7E9EC);
+  static const onSecondaryContainer = Color(0xFF5C0016);
 
   // Tertiary
   static const tertiary = Color(0xFF5C0016);
@@ -46,35 +45,11 @@ abstract final class AafiatakColors {
   static const tertiaryContainer = Color(0xFFF7E9EC);
   static const onTertiaryContainer = Color(0xFF5C0016);
 
-  // Monochrome status semantics:
-  // Positive / Hold: Brand Burgundy (#800020 / #F7E9EC / #5C0016)
-  static const success = Color(0xFF800020);
-  static const onSuccess = Color(0xFFFFFFFF);
-  static const successContainer = Color(0xFFF7E9EC);
-  static const onSuccessContainer = Color(0xFF5C0016);
-
-  static const hold = Color(0xFF800020);
-  static const onHold = Color(0xFFFFFFFF);
-  static const holdContainer = Color(0xFFF7E9EC);
-  static const onHoldContainer = Color(0xFF5C0016);
-
-  // Caution / Warning: Neutral charcoal axis (#1A1A1A / #EFEFEF)
-  static const warning = Color(0xFF1A1A1A);
-  static const onWarning = Color(0xFFFFFFFF);
-  static const warningContainer = Color(0xFFEFEFEF);
-  static const onWarningContainer = Color(0xFF1A1A1A);
-
   // Error / Critical: Solid charcoal chip or light container
   static const error = Color(0xFF1F1F1F);
   static const onError = Color(0xFFFFFFFF);
   static const errorContainer = Color(0xFFEFEFEF);
   static const onErrorContainer = Color(0xFF1A1A1A);
-
-  // Info: Charcoal
-  static const info = Color(0xFF1A1A1A);
-  static const onInfo = Color(0xFFFFFFFF);
-  static const infoContainer = Color(0xFFEFEFEF);
-  static const onInfoContainer = Color(0xFF1A1A1A);
 
   // Fixed & Overlays
   static const primaryFixed = Color(0xFFF7E9EC);
