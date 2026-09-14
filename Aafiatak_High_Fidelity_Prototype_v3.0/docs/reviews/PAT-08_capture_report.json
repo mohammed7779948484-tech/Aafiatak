@@ -1,0 +1,44 @@
+[
+  {
+    "state": "ready",
+    "file": "PAT-08-ready-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "handoff",
+    "file": "PAT-08-handoff-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "returned-unverified",
+    "file": "PAT-08-returned-unverified-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "connectivity-interrupted",
+    "file": "PAT-08-connectivity-interrupted-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "hold-near-expiry",
+    "file": "PAT-08-hold-near-expiry-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "hold-expired",
+    "file": "PAT-08-hold-expired-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  }
+]

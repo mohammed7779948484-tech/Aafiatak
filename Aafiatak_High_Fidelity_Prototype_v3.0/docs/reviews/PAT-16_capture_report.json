@@ -1,0 +1,44 @@
+[
+  {
+    "state": "loaded",
+    "file": "PAT-16-loaded-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "loading",
+    "file": "PAT-16-loading-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "error",
+    "file": "PAT-16-error-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "session-expired",
+    "file": "PAT-16-session-expired-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "logging-out",
+    "file": "PAT-16-logging-out-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "logged-out",
+    "file": "PAT-16-logged-out-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  }
+]

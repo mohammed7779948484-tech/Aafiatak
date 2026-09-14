@@ -1,0 +1,13 @@
+{
+  "screen": "PAT-12",
+  "state": "confirmed",
+  "width": 390,
+  "height": 844,
+  "metrics": {
+    "scrollWidth": 390,
+    "scrollHeight": 1077,
+    "clientWidth": 390
+  },
+  "errors": [],
+  "overflow": false
+}

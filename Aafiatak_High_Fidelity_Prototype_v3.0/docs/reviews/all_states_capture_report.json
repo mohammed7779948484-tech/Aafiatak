@@ -1,0 +1,1130 @@
+[
+  {
+    "screen": "PAT-01",
+    "state": "guest",
+    "file": "PAT-01-guest-phone.png",
+    "h": 1707,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-01",
+    "state": "patient",
+    "file": "PAT-01-patient-phone.png",
+    "h": 2027,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-01",
+    "state": "loading",
+    "file": "PAT-01-loading-phone.png",
+    "h": 900,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-01",
+    "state": "empty-discovery",
+    "file": "PAT-01-empty-discovery-phone.png",
+    "h": 866,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-01",
+    "state": "offline",
+    "file": "PAT-01-offline-phone.png",
+    "h": 2123,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-02",
+    "state": "initial",
+    "file": "PAT-02-initial-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-02",
+    "state": "searching",
+    "file": "PAT-02-searching-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-02",
+    "state": "results",
+    "file": "PAT-02-results-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-02",
+    "state": "no-results",
+    "file": "PAT-02-no-results-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-02",
+    "state": "offline",
+    "file": "PAT-02-offline-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-02",
+    "state": "error",
+    "file": "PAT-02-error-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-03",
+    "state": "active",
+    "file": "PAT-03-active-phone.png",
+    "h": 1307,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-03",
+    "state": "no-bookable",
+    "file": "PAT-03-no-bookable-phone.png",
+    "h": 1395,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-03",
+    "state": "inactive",
+    "file": "PAT-03-inactive-phone.png",
+    "h": 1395,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-03",
+    "state": "loading",
+    "file": "PAT-03-loading-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-03",
+    "state": "error",
+    "file": "PAT-03-error-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-04",
+    "state": "active",
+    "file": "PAT-04-active-phone.png",
+    "h": 1325,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-04",
+    "state": "no-capacity",
+    "file": "PAT-04-no-capacity-phone.png",
+    "h": 1409,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-04",
+    "state": "inactive",
+    "file": "PAT-04-inactive-phone.png",
+    "h": 1386,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-04",
+    "state": "loading",
+    "file": "PAT-04-loading-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-04",
+    "state": "error",
+    "file": "PAT-04-error-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-05",
+    "state": "loaded",
+    "file": "PAT-05-loaded-phone.png",
+    "h": 1481,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-05",
+    "state": "location-unavailable",
+    "file": "PAT-05-location-unavailable-phone.png",
+    "h": 1513,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-05",
+    "state": "loading",
+    "file": "PAT-05-loading-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-05",
+    "state": "error",
+    "file": "PAT-05-error-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-06",
+    "state": "loading",
+    "file": "PAT-06-loading-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-06",
+    "state": "bookable",
+    "file": "PAT-06-bookable-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-06",
+    "state": "no-capacity",
+    "file": "PAT-06-no-capacity-phone.png",
+    "h": 1012,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-06",
+    "state": "last-seat-held",
+    "file": "PAT-06-last-seat-held-phone.png",
+    "h": 1012,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-06",
+    "state": "time-cutoff",
+    "file": "PAT-06-time-cutoff-phone.png",
+    "h": 1012,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-06",
+    "state": "stale",
+    "file": "PAT-06-stale-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-06",
+    "state": "offline",
+    "file": "PAT-06-offline-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-06",
+    "state": "error",
+    "file": "PAT-06-error-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-07",
+    "state": "pre-hold-review",
+    "file": "PAT-07-pre-hold-review-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-07",
+    "state": "acquiring-hold",
+    "file": "PAT-07-acquiring-hold-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-07",
+    "state": "active-hold",
+    "file": "PAT-07-active-hold-phone.png",
+    "h": 937,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-07",
+    "state": "capacity-loss",
+    "file": "PAT-07-capacity-loss-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-07",
+    "state": "hold-expired",
+    "file": "PAT-07-hold-expired-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-07",
+    "state": "target-invalid",
+    "file": "PAT-07-target-invalid-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-07",
+    "state": "offline-unknown",
+    "file": "PAT-07-offline-unknown-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-08",
+    "state": "ready",
+    "file": "PAT-08-ready-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-08",
+    "state": "handoff",
+    "file": "PAT-08-handoff-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-08",
+    "state": "returned-unverified",
+    "file": "PAT-08-returned-unverified-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-08",
+    "state": "connectivity-interrupted",
+    "file": "PAT-08-connectivity-interrupted-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-08",
+    "state": "hold-near-expiry",
+    "file": "PAT-08-hold-near-expiry-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-08",
+    "state": "hold-expired",
+    "file": "PAT-08-hold-expired-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-09",
+    "state": "processing",
+    "file": "PAT-09-processing-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-09",
+    "state": "success-confirmed",
+    "file": "PAT-09-success-confirmed-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-09",
+    "state": "failed",
+    "file": "PAT-09-failed-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-09",
+    "state": "expired",
+    "file": "PAT-09-expired-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-09",
+    "state": "under-review",
+    "file": "PAT-09-under-review-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-09",
+    "state": "payment-succeeded-booking-unresolved",
+    "file": "PAT-09-payment-succeeded-booking-unresolved-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-09",
+    "state": "refund-pending",
+    "file": "PAT-09-refund-pending-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-09",
+    "state": "refunded",
+    "file": "PAT-09-refunded-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-09",
+    "state": "offline",
+    "file": "PAT-09-offline-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-10",
+    "state": "confirmed-paid",
+    "file": "PAT-10-confirmed-paid-phone.png",
+    "h": 1155,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-10",
+    "state": "confirmed-pay-at-facility",
+    "file": "PAT-10-confirmed-pay-at-facility-phone.png",
+    "h": 1178,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-11",
+    "state": "loading",
+    "file": "PAT-11-loading-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-11",
+    "state": "upcoming-populated",
+    "file": "PAT-11-upcoming-populated-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-11",
+    "state": "upcoming-empty",
+    "file": "PAT-11-upcoming-empty-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-11",
+    "state": "past-populated",
+    "file": "PAT-11-past-populated-phone.png",
+    "h": 963,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-11",
+    "state": "past-empty",
+    "file": "PAT-11-past-empty-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-11",
+    "state": "refreshing",
+    "file": "PAT-11-refreshing-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-11",
+    "state": "offline",
+    "file": "PAT-11-offline-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-11",
+    "state": "error",
+    "file": "PAT-11-error-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-12",
+    "state": "confirmed",
+    "file": "PAT-12-confirmed-phone.png",
+    "h": 1077,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-12",
+    "state": "cancelled-patient",
+    "file": "PAT-12-cancelled-patient-phone.png",
+    "h": 1036,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-12",
+    "state": "cancelled-facility",
+    "file": "PAT-12-cancelled-facility-phone.png",
+    "h": 1124,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-12",
+    "state": "payment-variant",
+    "file": "PAT-12-payment-variant-phone.png",
+    "h": 1077,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-12",
+    "state": "visit-queue-variant",
+    "file": "PAT-12-visit-queue-variant-phone.png",
+    "h": 1077,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-12",
+    "state": "manual-late",
+    "file": "PAT-12-manual-late-phone.png",
+    "h": 1124,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-12",
+    "state": "loading",
+    "file": "PAT-12-loading-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-12",
+    "state": "offline",
+    "file": "PAT-12-offline-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-13",
+    "state": "due-at-facility",
+    "file": "PAT-13-due-at-facility-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-13",
+    "state": "processing",
+    "file": "PAT-13-processing-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-13",
+    "state": "succeeded",
+    "file": "PAT-13-succeeded-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-13",
+    "state": "failed",
+    "file": "PAT-13-failed-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-13",
+    "state": "expired",
+    "file": "PAT-13-expired-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-13",
+    "state": "under-review",
+    "file": "PAT-13-under-review-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-13",
+    "state": "refund-pending",
+    "file": "PAT-13-refund-pending-phone.png",
+    "h": 848,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-13",
+    "state": "refunded",
+    "file": "PAT-13-refunded-phone.png",
+    "h": 848,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-13",
+    "state": "loading",
+    "file": "PAT-13-loading-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-13",
+    "state": "error",
+    "file": "PAT-13-error-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-14",
+    "state": "not-checked-in",
+    "file": "PAT-14-not-checked-in-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-14",
+    "state": "checked-in-waiting",
+    "file": "PAT-14-checked-in-waiting-phone.png",
+    "h": 885,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-14",
+    "state": "called",
+    "file": "PAT-14-called-phone.png",
+    "h": 902,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-14",
+    "state": "in-service",
+    "file": "PAT-14-in-service-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-14",
+    "state": "completed",
+    "file": "PAT-14-completed-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-14",
+    "state": "not-completed",
+    "file": "PAT-14-not-completed-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-14",
+    "state": "no-show",
+    "file": "PAT-14-no-show-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-14",
+    "state": "manual-late",
+    "file": "PAT-14-manual-late-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-14",
+    "state": "offline",
+    "file": "PAT-14-offline-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-14",
+    "state": "stale",
+    "file": "PAT-14-stale-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-15",
+    "state": "loading",
+    "file": "PAT-15-loading-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-15",
+    "state": "empty",
+    "file": "PAT-15-empty-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-15",
+    "state": "populated-unread",
+    "file": "PAT-15-populated-unread-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-15",
+    "state": "populated-read",
+    "file": "PAT-15-populated-read-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-15",
+    "state": "deep-link-stale",
+    "file": "PAT-15-deep-link-stale-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-15",
+    "state": "offline",
+    "file": "PAT-15-offline-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-15",
+    "state": "error",
+    "file": "PAT-15-error-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-16",
+    "state": "loaded",
+    "file": "PAT-16-loaded-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-16",
+    "state": "loading",
+    "file": "PAT-16-loading-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-16",
+    "state": "error",
+    "file": "PAT-16-error-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-16",
+    "state": "session-expired",
+    "file": "PAT-16-session-expired-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-16",
+    "state": "logging-out",
+    "file": "PAT-16-logging-out-phone.png",
+    "h": 1251,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-16",
+    "state": "logged-out",
+    "file": "PAT-16-logged-out-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-17",
+    "state": "pristine",
+    "file": "PAT-17-pristine-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-17",
+    "state": "editing",
+    "file": "PAT-17-editing-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-17",
+    "state": "validation-error",
+    "file": "PAT-17-validation-error-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-17",
+    "state": "saving",
+    "file": "PAT-17-saving-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-17",
+    "state": "saved",
+    "file": "PAT-17-saved-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-17",
+    "state": "save-failed",
+    "file": "PAT-17-save-failed-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-17",
+    "state": "offline",
+    "file": "PAT-17-offline-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-18",
+    "state": "default",
+    "file": "PAT-18-default-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-18",
+    "state": "return-intent",
+    "file": "PAT-18-return-intent-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-18",
+    "state": "session-expired-context",
+    "file": "PAT-18-session-expired-context-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-19",
+    "state": "idle",
+    "file": "PAT-19-idle-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-19",
+    "state": "editing",
+    "file": "PAT-19-editing-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-19",
+    "state": "invalid",
+    "file": "PAT-19-invalid-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-19",
+    "state": "requesting-otp",
+    "file": "PAT-19-requesting-otp-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-19",
+    "state": "existing-identity",
+    "file": "PAT-19-existing-identity-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-19",
+    "state": "unknown-identity",
+    "file": "PAT-19-unknown-identity-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-19",
+    "state": "provider-unavailable",
+    "file": "PAT-19-provider-unavailable-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-19",
+    "state": "rate-limited",
+    "file": "PAT-19-rate-limited-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-19",
+    "state": "accepted",
+    "file": "PAT-19-accepted-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-20",
+    "state": "waiting",
+    "file": "PAT-20-waiting-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-20",
+    "state": "verifying",
+    "file": "PAT-20-verifying-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-20",
+    "state": "invalid",
+    "file": "PAT-20-invalid-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-20",
+    "state": "expired",
+    "file": "PAT-20-expired-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-20",
+    "state": "already-used",
+    "file": "PAT-20-already-used-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-20",
+    "state": "rate-limited",
+    "file": "PAT-20-rate-limited-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-20",
+    "state": "provider-unavailable",
+    "file": "PAT-20-provider-unavailable-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-20",
+    "state": "verified-existing",
+    "file": "PAT-20-verified-existing-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-20",
+    "state": "verified-new",
+    "file": "PAT-20-verified-new-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-21",
+    "state": "pristine",
+    "file": "PAT-21-pristine-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-21",
+    "state": "editing",
+    "file": "PAT-21-editing-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-21",
+    "state": "validation-error",
+    "file": "PAT-21-validation-error-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-21",
+    "state": "creating",
+    "file": "PAT-21-creating-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-21",
+    "state": "success",
+    "file": "PAT-21-success-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-21",
+    "state": "failure-recoverable",
+    "file": "PAT-21-failure-recoverable-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "screen": "PAT-21",
+    "state": "duplicate-identity-conflict",
+    "file": "PAT-21-duplicate-identity-conflict-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  }
+]

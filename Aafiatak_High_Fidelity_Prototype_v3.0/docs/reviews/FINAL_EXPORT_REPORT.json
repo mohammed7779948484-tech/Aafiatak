@@ -1,0 +1,212 @@
+[
+  {
+    "screen": "PAT-01",
+    "title": "الرئيسية / اكتشف",
+    "state": "patient-populated",
+    "viewport_file": "PAT-01-patient-populated-viewport-4x.png",
+    "full_file": "PAT-01-patient-populated-full-3x.png",
+    "full_css_width": 390,
+    "full_css_height": 2015,
+    "overflow": false
+  },
+  {
+    "screen": "PAT-02",
+    "title": "البحث والنتائج",
+    "state": "results",
+    "viewport_file": "PAT-02-results-viewport-4x.png",
+    "full_file": "PAT-02-results-full-3x.png",
+    "full_css_width": 390,
+    "full_css_height": 844,
+    "overflow": false
+  },
+  {
+    "screen": "PAT-03",
+    "title": "تفاصيل الطبيب",
+    "state": "active",
+    "viewport_file": "PAT-03-active-viewport-4x.png",
+    "full_file": "PAT-03-active-full-3x.png",
+    "full_css_width": 390,
+    "full_css_height": 1297,
+    "overflow": false
+  },
+  {
+    "screen": "PAT-04",
+    "title": "تفاصيل الخدمة",
+    "state": "active",
+    "viewport_file": "PAT-04-active-viewport-4x.png",
+    "full_file": "PAT-04-active-full-3x.png",
+    "full_css_width": 390,
+    "full_css_height": 1315,
+    "overflow": false
+  },
+  {
+    "screen": "PAT-05",
+    "title": "تفاصيل المنشأة والفرع",
+    "state": "loaded",
+    "viewport_file": "PAT-05-loaded-viewport-4x.png",
+    "full_file": "PAT-05-loaded-full-3x.png",
+    "full_css_width": 390,
+    "full_css_height": 1481,
+    "overflow": false
+  },
+  {
+    "screen": "PAT-06",
+    "title": "التوفر / اختيار اليوم",
+    "state": "bookable",
+    "viewport_file": "PAT-06-bookable-viewport-4x.png",
+    "full_file": "PAT-06-bookable-full-3x.png",
+    "full_css_width": 390,
+    "full_css_height": 844,
+    "overflow": false
+  },
+  {
+    "screen": "PAT-07",
+    "title": "مراجعة الحجز والحجز المؤقت",
+    "state": "pre-hold-review",
+    "viewport_file": "PAT-07-pre-hold-review-viewport-4x.png",
+    "full_file": "PAT-07-pre-hold-review-full-3x.png",
+    "full_css_width": 390,
+    "full_css_height": 844,
+    "overflow": false
+  },
+  {
+    "screen": "PAT-08",
+    "title": "الدفع الكامل",
+    "state": "ready",
+    "viewport_file": "PAT-08-ready-viewport-4x.png",
+    "full_file": "PAT-08-ready-full-3x.png",
+    "full_css_width": 390,
+    "full_css_height": 844,
+    "overflow": false
+  },
+  {
+    "screen": "PAT-09",
+    "title": "نتيجة الدفع والمعالجة",
+    "state": "success-confirmed",
+    "viewport_file": "PAT-09-success-confirmed-viewport-4x.png",
+    "full_file": "PAT-09-success-confirmed-full-3x.png",
+    "full_css_width": 390,
+    "full_css_height": 844,
+    "overflow": false
+  },
+  {
+    "screen": "PAT-10",
+    "title": "تأكيد الحجز",
+    "state": "confirmed-paid",
+    "viewport_file": "PAT-10-confirmed-paid-viewport-4x.png",
+    "full_file": "PAT-10-confirmed-paid-full-3x.png",
+    "full_css_width": 390,
+    "full_css_height": 1155,
+    "overflow": false
+  },
+  {
+    "screen": "PAT-11",
+    "title": "مواعيدي",
+    "state": "upcoming-populated",
+    "viewport_file": "PAT-11-upcoming-populated-viewport-4x.png",
+    "full_file": "PAT-11-upcoming-populated-full-3x.png",
+    "full_css_width": 390,
+    "full_css_height": 844,
+    "overflow": false
+  },
+  {
+    "screen": "PAT-12",
+    "title": "تفاصيل الموعد",
+    "state": "confirmed",
+    "viewport_file": "PAT-12-confirmed-viewport-4x.png",
+    "full_file": "PAT-12-confirmed-full-3x.png",
+    "full_css_width": 390,
+    "full_css_height": 1081,
+    "overflow": false
+  },
+  {
+    "screen": "PAT-13",
+    "title": "الدفع قيد المعالجة",
+    "state": "succeeded",
+    "viewport_file": "PAT-13-succeeded-viewport-4x.png",
+    "full_file": "PAT-13-succeeded-full-3x.png",
+    "full_css_width": 390,
+    "full_css_height": 844,
+    "overflow": false
+  },
+  {
+    "screen": "PAT-14",
+    "title": "حالة الزيارة والطابور",
+    "state": "checked-in-waiting",
+    "viewport_file": "PAT-14-checked-in-waiting-viewport-4x.png",
+    "full_file": "PAT-14-checked-in-waiting-full-3x.png",
+    "full_css_width": 390,
+    "full_css_height": 885,
+    "overflow": false
+  },
+  {
+    "screen": "PAT-15",
+    "title": "مركز الإشعارات",
+    "state": "populated-unread",
+    "viewport_file": "PAT-15-populated-unread-viewport-4x.png",
+    "full_file": "PAT-15-populated-unread-full-3x.png",
+    "full_css_width": 390,
+    "full_css_height": 844,
+    "overflow": false
+  },
+  {
+    "screen": "PAT-16",
+    "title": "حسابي",
+    "state": "loaded",
+    "viewport_file": "PAT-16-loaded-viewport-4x.png",
+    "full_file": "PAT-16-loaded-full-3x.png",
+    "full_css_width": 390,
+    "full_css_height": 844,
+    "overflow": false
+  },
+  {
+    "screen": "PAT-17",
+    "title": "تعديل الملف الشخصي",
+    "state": "editing",
+    "viewport_file": "PAT-17-editing-viewport-4x.png",
+    "full_file": "PAT-17-editing-full-3x.png",
+    "full_css_width": 390,
+    "full_css_height": 844,
+    "overflow": false
+  },
+  {
+    "screen": "PAT-18",
+    "title": "الدخول إلى الحساب",
+    "state": "default",
+    "viewport_file": "PAT-18-default-viewport-4x.png",
+    "full_file": "PAT-18-default-full-3x.png",
+    "full_css_width": 390,
+    "full_css_height": 844,
+    "overflow": false
+  },
+  {
+    "screen": "PAT-19",
+    "title": "رقم الهاتف",
+    "state": "idle",
+    "viewport_file": "PAT-19-idle-viewport-4x.png",
+    "full_file": "PAT-19-idle-full-3x.png",
+    "full_css_width": 390,
+    "full_css_height": 844,
+    "overflow": false
+  },
+  {
+    "screen": "PAT-20",
+    "title": "التحقق برمز واتساب",
+    "state": "waiting",
+    "viewport_file": "PAT-20-waiting-viewport-4x.png",
+    "full_file": "PAT-20-waiting-full-3x.png",
+    "full_css_width": 390,
+    "full_css_height": 844,
+    "overflow": false
+  },
+  {
+    "screen": "PAT-21",
+    "title": "استكمال بيانات المريض",
+    "state": "editing",
+    "viewport_file": "PAT-21-editing-viewport-4x.png",
+    "full_file": "PAT-21-editing-full-3x.png",
+    "full_css_width": 390,
+    "full_css_height": 844,
+    "overflow": false
+  }
+]

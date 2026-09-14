@@ -1,0 +1,13 @@
+{
+  "screen": "PAT-10",
+  "state": "confirmed-paid",
+  "width": 390,
+  "height": 844,
+  "metrics": {
+    "scrollWidth": 390,
+    "scrollHeight": 1155,
+    "clientWidth": 390
+  },
+  "errors": [],
+  "overflow": false
+}

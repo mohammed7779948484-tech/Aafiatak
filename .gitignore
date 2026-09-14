@@ -1,0 +1,13 @@
+.dart_tool/
+build/
+coverage/
+lib/l10n/generated/
+*.iml
+.idea/
+.vscode/
+.DS_Store
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/

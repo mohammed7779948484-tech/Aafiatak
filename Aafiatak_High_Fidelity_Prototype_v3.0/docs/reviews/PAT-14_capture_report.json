@@ -1,0 +1,72 @@
+[
+  {
+    "state": "not-checked-in",
+    "file": "PAT-14-not-checked-in-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "checked-in-waiting",
+    "file": "PAT-14-checked-in-waiting-phone.png",
+    "h": 885,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "called",
+    "file": "PAT-14-called-phone.png",
+    "h": 902,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "in-service",
+    "file": "PAT-14-in-service-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "completed",
+    "file": "PAT-14-completed-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "not-completed",
+    "file": "PAT-14-not-completed-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "no-show",
+    "file": "PAT-14-no-show-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "manual-late",
+    "file": "PAT-14-manual-late-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "offline",
+    "file": "PAT-14-offline-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "stale",
+    "file": "PAT-14-stale-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  }
+]

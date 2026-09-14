@@ -1,0 +1,58 @@
+[
+  {
+    "state": "confirmed",
+    "file": "PAT-12-confirmed-phone.png",
+    "h": 1081,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "cancelled-by-patient",
+    "file": "PAT-12-cancelled-by-patient-phone.png",
+    "h": 1040,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "cancelled-by-facility",
+    "file": "PAT-12-cancelled-by-facility-phone.png",
+    "h": 1128,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "payment-variants",
+    "file": "PAT-12-payment-variants-phone.png",
+    "h": 1104,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "visit-queue-variants",
+    "file": "PAT-12-visit-queue-variants-phone.png",
+    "h": 1104,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "manual-late",
+    "file": "PAT-12-manual-late-phone.png",
+    "h": 1128,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "loading",
+    "file": "PAT-12-loading-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "offline",
+    "file": "PAT-12-offline-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  }
+]

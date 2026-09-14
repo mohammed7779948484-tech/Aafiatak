@@ -1,0 +1,65 @@
+[
+  {
+    "state": "processing",
+    "file": "PAT-09-processing-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "success-confirmed",
+    "file": "PAT-09-success-confirmed-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "failed",
+    "file": "PAT-09-failed-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "expired",
+    "file": "PAT-09-expired-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "under-review",
+    "file": "PAT-09-under-review-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "payment-succeeded-booking-unresolved",
+    "file": "PAT-09-payment-succeeded-booking-unresolved-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "refund-pending",
+    "file": "PAT-09-refund-pending-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "refunded",
+    "file": "PAT-09-refunded-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "state": "offline",
+    "file": "PAT-09-offline-phone.png",
+    "h": 844,
+    "overflow": false,
+    "errors": []
+  }
+]

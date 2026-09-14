@@ -1,0 +1,13 @@
+{
+  "screen": "PAT-12",
+  "state": "manual-late",
+  "width": 390,
+  "height": 844,
+  "metrics": {
+    "scrollWidth": 390,
+    "scrollHeight": 1124,
+    "clientWidth": 390
+  },
+  "errors": [],
+  "overflow": false
+}
