@@ -30,6 +30,7 @@ abstract final class AafiatakColors {
   // درجات شفافة مشتركة للحدود والأسطح والظل الخفيف.
   static const borderSubtle = Color(0x141A1A1A);
   static const borderEmphasis = Color(0x291A1A1A);
+  static const primaryBorderSubtle = Color(0x1F800020);
   static const surfaceTranslucent = Color(0xEBFFFFFF);
   static const shadowSubtle = Color(0x0E1A1A1A);
 

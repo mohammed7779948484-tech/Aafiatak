@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../foundations/foundations.dart';
-
 enum _ButtonType { primary, tonal, secondary, destructive, text }
 
 /// زر موحّد لتطبيق عافيتك يعتمد على أزرار Material 3 الأصلية.
@@ -60,9 +58,9 @@ class AafiatakButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final child = switch (_type) {
       _ButtonType.primary => _filled(),
-      _ButtonType.tonal => _tonal(),
+      _ButtonType.tonal => _tonal(context),
       _ButtonType.secondary => _outlined(),
-      _ButtonType.destructive => _destructive(),
+      _ButtonType.destructive => _destructive(context),
       _ButtonType.text => _text(),
     };
 
@@ -77,10 +75,11 @@ class AafiatakButton extends StatelessWidget {
           label: Text(label),
         );
 
-  Widget _tonal() {
+  Widget _tonal(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     final style = FilledButton.styleFrom(
-      backgroundColor: AafiatakColors.primaryContainer,
-      foregroundColor: AafiatakColors.onPrimaryContainer,
+      backgroundColor: colors.primaryContainer,
+      foregroundColor: colors.onPrimaryContainer,
     );
     return icon == null
         ? FilledButton.tonal(
@@ -104,10 +103,11 @@ class AafiatakButton extends StatelessWidget {
           label: Text(label),
         );
 
-  Widget _destructive() {
+  Widget _destructive(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     final style = FilledButton.styleFrom(
-      backgroundColor: AafiatakColors.errorContainer,
-      foregroundColor: AafiatakColors.onErrorContainer,
+      backgroundColor: colors.errorContainer,
+      foregroundColor: colors.onErrorContainer,
     );
     return icon == null
         ? FilledButton(style: style, onPressed: onPressed, child: Text(label))

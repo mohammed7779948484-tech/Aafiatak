@@ -41,7 +41,7 @@ extension AafiatakFeedbackToneX on AafiatakFeedbackTone {
         return const AafiatakToneColors(
           foreground: AafiatakColors.onPrimaryContainer,
           background: AafiatakColors.primaryContainer,
-          border: Color(0x1F800020),
+          border: AafiatakColors.primaryBorderSubtle,
         );
       case AafiatakFeedbackTone.secondary:
       case AafiatakFeedbackTone.info:

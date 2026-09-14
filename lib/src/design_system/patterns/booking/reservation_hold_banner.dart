@@ -22,7 +22,7 @@ class ReservationHoldBanner extends StatelessWidget {
       decoration: BoxDecoration(
         color: AafiatakColors.primaryContainer,
         borderRadius: AafiatakRadii.large,
-        border: Border.all(color: const Color(0x1F800020)),
+        border: Border.all(color: AafiatakColors.primaryBorderSubtle),
       ),
       child: Row(
         children: <Widget>[
