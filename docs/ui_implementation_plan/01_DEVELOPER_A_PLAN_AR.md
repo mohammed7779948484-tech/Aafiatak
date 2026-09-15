@@ -1,20 +1,31 @@
 # خطة Developer A — Discovery + Notifications + Profile
 
-## بطاقة المهمة والفرع
+## 1. بطاقة المهمة
 
 - الفرع: `feature/patient-discovery-profile`.
-- baseline: `2c130c407979fc555652ae643d19369f2f7aad0c`.
-- الملكية: `features/discovery/**` و`features/notifications/**` و`features/profile/**`.
+- **Inspected Baseline:** `2c130c407979fc555652ae643d19369f2f7aad0c` للمرجعية فقط.
+- **Implementation Baseline:** `<IMPLEMENTATION_BASELINE_SHA>` الذي يعلنه المنسق بعد دمج PR التخطيط إلى `develop`.
+- الملكية: `features/discovery/**`, `features/notifications/**`, `features/profile/**`.
 - الشاشات: PAT-01، PAT-02، PAT-03، PAT-04، PAT-05، PAT-15، PAT-16، PAT-17.
-- الحالات: PAT-01 `patient-populated/guest-populated`؛ وباقي الشاشات `results`, `active`, `active`, `loaded`, `populated-unread`, `loaded`, `editing`.
-- الحمل: 20.5 نقطة تنفيذ + 1.5 QA/PR = **22.0**.
-- Pilot: PAT-01، لأنه يختبر root shell والتركيب الطويل وDomain Patterns والنسخة guest/patient.
+- الحالات: **9** فقط.
+- الحمل: 20.5 تنفيذ + 1.5 QA/PR = **22.0**.
+- Pilot: PAT-01.
 
-القيم المشتركة التي لا يجوز تغييرها: `doc-001 / د. سارة عبدالله`، `fac-aafiatak-tahrir / مركز عافيتك التخصصي / فرع التحرير`، `svc-family-consult / استشارة طب الأسرة / 15,000 ر.ي`، `apt-af-28931 / AF-28931 / الأربعاء 18 سبتمبر 2026 / 10:00 – 10:30`، والمريض `أحمد بلال / أب / +[رمز الدولة] ••• ••15`.
+## 2. قاعدة الحالة المختارة
 
-## حدود الملكية
+نفذ كامل الـUI المرئي للحالة المختارة، حتى لو كان زر داخلها يقود إلى حالة غير مختارة. لا تنفذ الحالة الهدف، لكن لا تحذف الزر/الcontrol من التصميم. ينطبق هذا خصوصًا على PAT-16: زر «تسجيل الخروج» يبقى ظاهرًا في `loaded` رغم أن logged-out ليست ضمن الـ9 حالات.
 
-### الملفات التي تملكها
+## 3. Mock canonical
+
+- Doctor: `doc-001 / د. سارة عبدالله / طب الأسرة`.
+- Facility: `fac-aafiatak-tahrir / مركز عافيتك التخصصي / فرع التحرير`.
+- Service: `svc-family-consult / استشارة طب الأسرة / 15,000 ر.ي`.
+- Appointment: `apt-af-28931 / AF-28931 / الجمعة 18 سبتمبر 2026 / 10:00 – 10:30`.
+- Patient: `pat-001 / أحمد بلال / أب / +[رمز الدولة] ••• ••15`.
+
+ملاحظة: الـHF الخام كتب «الأربعاء 18 سبتمبر 2026»؛ الخطة تستخدم اليوم الصحيح «الجمعة» بشكل مقصود وموثق.
+
+## 4. الملفات التي تملكها
 
 ```text
 lib/src/features/discovery/mock_data.dart
@@ -23,6 +34,9 @@ lib/src/features/discovery/screens/search_screen.dart
 lib/src/features/discovery/screens/doctor_details_screen.dart
 lib/src/features/discovery/screens/service_details_screen.dart
 lib/src/features/discovery/screens/facility_details_screen.dart
+lib/src/features/discovery/widgets/home_hero.dart
+lib/src/features/discovery/widgets/quick_actions.dart
+lib/src/features/discovery/widgets/upcoming_appointment_section.dart
 lib/src/features/notifications/mock_data.dart
 lib/src/features/notifications/screens/notifications_screen.dart
 lib/src/features/notifications/widgets/notification_tile.dart
@@ -31,227 +45,205 @@ lib/src/features/profile/screens/profile_screen.dart
 lib/src/features/profile/screens/edit_profile_screen.dart
 ```
 
-### ممنوع لمسها
+## 5. ممنوع لمسها
 
-`lib/src/design_system/**`، `lib/src/app/**` بما فيها `patient_shell.dart` وملفا routing، `lib/main.dart`، `pubspec.yaml`، `pubspec.lock`، `features/starter/**`، وكل `Aafiatak_High_Fidelity_Prototype_v3.0/**`، وFeatures العضوين B وC. لا تضف dependency أو l10n أو ملف mock مشترك.
+`lib/src/design_system/**`, `lib/src/app/**`, `lib/main.dart`, `pubspec.yaml`, `pubspec.lock`, `features/starter/**`, Features B/C، وكل `Aafiatak_High_Fidelity_Prototype_v3.0/**`. لا تضف dependency أو l10n أو router import أو ملف mock عالمي.
 
-### عقد التنقل الذي تستهلكه
+## 6. Public Contracts التي يجب الالتزام بها
 
-لا تستورد `AppRoutes` ولا تستخدم `context.go/push`. مرر callbacks في constructors: home يستقبل search/availability/doctor/service/facility/appointment/notifications/root-tab؛ search يستقبل doctor/service/facility؛ details تستقبل الوجهات المبينة في المهام؛ notification dispatch يبقى في الشاشة حسب `NotificationKind`. سيصل Developer B هذه callbacks في integration PR.
+- `HomeScreen`: `HomeAudience` + callbacks للبحث والتوفر والطبيب والخدمة والمنشأة والموعد والإشعارات و`ValueChanged<PatientTab>`.
+- `SearchScreen`: callbacks doctor/service/facility مع IDs.
+- `DoctorDetailsScreen`: `doctorId` + callbacks facility/service/availability.
+- `ServiceDetailsScreen`: `serviceId` + callbacks facility/availability.
+- `FacilityDetailsScreen`: `facilityId` + callbacks doctor/service/showLocation/call.
+- `NotificationsScreen`: callbacks appointment/payment/visit حسب `NotificationKind`.
+- `ProfileScreen`: callbacks edit/notifications/rootTab/logoutRequested.
+- `EditProfileScreen`: `ValueChanged<String> onSave`.
 
-| route name | path | علاقتك به |
-|---|---|---|
-| `home` | `/` | PAT-01؛ `audience=patient|guest` للـQA |
-| `search` | `/search` | PAT-02 |
-| `doctorDetails` | `/doctors/:doctorId` | PAT-03، id=`doc-001` |
-| `serviceDetails` | `/services/:serviceId` | PAT-04، id=`svc-family-consult` |
-| `facilityDetails` | `/facilities/:facilityId` | PAT-05، id=`fac-aafiatak-tahrir` |
-| `availability` | `/availability` | destination يملكه B |
-| `appointmentDetails` | `/appointments/:appointmentId` | destination للإشعار/home، id=`apt-af-28931` |
-| `paymentDetails` | `/appointments/:appointmentId/payment` | destination payment notification |
-| `visitQueue` | `/appointments/:appointmentId/visit` | destination queue notification |
-| `notifications` | `/notifications` | PAT-15 |
-| `profile` | `/profile` | PAT-16 |
-| `editProfile` | `/profile/edit` | PAT-17 |
-| `appointments` | `/appointments` | root tab destination يملكه C |
+لا تستورد `AppRoutes` أو `go_router`; Developer B يربط هذه callbacks لاحقًا.
 
-قاعدة `Must Not Touch` أعلاه تنطبق على كل Task أدناه حتى لو لم تُكرر داخل بند المهمة.
+## 7. Routes التي تستهلكها
 
-## التسلسل الصارم
+- `/` PAT-01؛ `audience` يسمح patient أو guest، default patient.
+- `/search` PAT-02.
+- `/doctors/:doctorId` PAT-03.
+- `/services/:serviceId` PAT-04.
+- `/facilities/:facilityId` PAT-05.
+- `/availability` وجهة يملكها B.
+- `/appointments/:appointmentId` وجهة موعد يملكها C.
+- `/appointments/:appointmentId/payment` وجهة الدفع يملكها B.
+- `/appointments/:appointmentId/visit` وجهة الطابور يملكها C.
+- `/notifications` PAT-15.
+- `/profile` PAT-16.
+- `/profile/edit` PAT-17.
+- `/appointments` root tab يملكه C.
+
+## 8. التسلسل الصارم
 
 ### A-00 — تجهيز الفرع
 
-- الهدف: ضمان بدء العمل من baseline نفسه.
-- يعتمد على: اعتماد الخطة؛ النوع `SHARED`.
+- يعتمد على: اعتماد ودمج PR التخطيط وإعلان `IMPLEMENTATION_BASELINE_SHA`؛ `SHARED`.
 - ينشئ/يعدل: لا شيء.
-- التنفيذ: `git fetch --all --prune` ثم `git switch -c feature/patient-discovery-profile 2c130c407979fc555652ae643d19369f2f7aad0c` ثم `flutter pub get` و`git status`.
-- القبول/التحقق: HEAD مطابق وworking tree نظيفة.
+- التنفيذ:
+
+```bash
+git fetch --all --prune
+git switch -c feature/patient-discovery-profile <IMPLEMENTATION_BASELINE_SHA>
+git status
+git rev-parse HEAD
+flutter pub get
+```
+
+- القبول: HEAD يساوي SHA المعلن والشجرة نظيفة.
 - commit: لا commit.
 - التالي: A-01.
 
 ### A-01 — Pilot: PAT-01 Home
 
-- الهدف: تنفيذ الصفحة الرئيسية بالحالتين المعتمدتين فقط.
-- يعتمد على: A-00؛ `SHARED` baseline/DS/mock contract. PAT-02/PAT-06/PAT-12 تبعيات `SOFT` عبر callbacks.
-- المرجع: `src/ts/screens/PAT01.ts` وحالتي `patient-populated`, `guest-populated` وCSS `home-hero/home-discovery`.
-- ينشئ: `lib/src/features/discovery/mock_data.dart` و`lib/src/features/discovery/screens/home_screen.dart`.
-- يعدل: لا شيء.
-- يستخدم: `PatientShell.root`, `AafiatakSearchField`, `AafiatakButton`, `AafiatakCard`, `AafiatakBadge`, `AafiatakSectionHeading`, `AafiatakInfoRows`, `DoctorCard`, `ServiceCard`.
-- Feature-local files: لا شيء؛ التكرار بين الشاشات تغطيه Patterns الحالية.
-- private: `_HomeHero`, `_QuickActions`, `_UpcomingAppointmentSection`, `_AvailabilityFeaturePanel`.
-- Mock Data: اكتب subset كامل discovery للdoctor/facility/services/appointment بالقيم canonical؛ static CTA/title copy يبقى في الشاشة.
-- الحالة: `StatelessWidget` مع enum `HomeAudience { patient, guest }` وconstructor default patient؛ guest يحذف قسم الموعد القادم فقط.
-- التنقل: entry `/`; callbacks إلى search، availability، doctor، service، facility، appointment، notifications، و`ValueChanged<PatientTab>` للجذر.
-- ملاحظات: لا تنقل قيد 430px من الويب؛ استخدم العرض المتاح و`EdgeInsetsDirectional`.
-- القبول: ترتيب hero→search→CTA→quick actions→optional appointment→feature panel→doctors→services؛ الفرق بين الحالتين محدد؛ brand app bar وhome nav؛ لا loading/empty/offline/error.
-- التحقق: format للملفين، analyze، screenshots 360×800 و390×844 للحالتين، وفحص scroll/bottom nav.
+- الحالات: `patient-populated`, `guest-populated` فقط.
+- يعتمد على: A-00؛ destination routes `SOFT`.
+- المرجع: `PAT01.ts` + CSS المشترك.
+- ينشئ:
+  - `discovery/mock_data.dart`
+  - `discovery/screens/home_screen.dart`
+  - `discovery/widgets/home_hero.dart`
+  - `discovery/widgets/quick_actions.dart`
+  - `discovery/widgets/upcoming_appointment_section.dart`
+- يستخدم: `PatientShell.root(scrollable:true)`, SearchField, Button, Card, Badge, SectionHeading, InfoRows, DoctorCard, ServiceCard.
+- private داخل screen: `_AvailabilityFeaturePanel` وأقسام صغيرة لا تستحق ملفًا مستقلًا.
+- لماذا extraction: الصفحة طويلة؛ `HomeHero`, `QuickActions`, `UpcomingAppointmentSection` sections واضحة وكبيرة بما يكفي لإبقاء screen ملف تركيب، دون تفتيت كل Row.
+- Mock: discovery subset بالقيم canonical؛ بيانات إضافية محلية للبطاقات الثانوية مسموحة بشرط ألا تغير الكيان canonical عبر Features.
+- الحالة: `StatelessWidget` مع `HomeAudience { patient, guest }`; guest يخفي الموعد القادم فقط.
+- التنقل: callbacks حسب العقد العام.
+- القبول: الترتيب البصري مطابق للHF، guest/patient مختلفان فقط بما يفرضه المرجع، لا loading/empty/offline/error، bottom nav home، لا overflow 360px.
+- التحقق: format، analyze، screenshots 360×800 و390×844 للحالتين.
 - commit: `feat(discovery): implement home pilot states`.
 - التالي: A-02.
 
 ### A-02 — Pilot Gate
 
-- الهدف: مراجعة معيار الفريق قبل التوسع.
-- يعتمد على: A-01؛ `HARD`.
-- ينشئ/يعدل: إصلاحات في ملفي A-01 فقط عند الحاجة.
-- فحص: public DS import، RTL، عدم over-componentization، canonical mock، callbacks بلا router import، لا overflow أو لون محلي.
-- القبول: checklist موقع ذاتيًا وصور الحالتين و`flutter analyze` نظيف.
-- commit: ضم الإصلاحات الصغيرة إلى commit pilot أو `fix(discovery): align home pilot with ui baseline`.
+- يعتمد على A-01؛ `HARD`.
+- يعدل فقط ملفات Pilot عند الحاجة.
+- يفحص: public DS import، RTL، extraction المتزن، canonical data، callbacks بلا router، scrolling، no overflow/no local random colors.
+- القبول: screenshots + `flutter analyze` نظيف.
+- commit عند الحاجة: `fix(discovery): align home pilot with ui baseline`.
 - التالي: A-03.
 
 ### A-03 — PAT-02 Search Results
 
-- الهدف: عرض نتائج البحث المختلطة المعتمدة فقط.
-- يعتمد على: A-02 `HARD`؛ وجهات details `SOFT`.
-- المرجع/الحالة: `PAT02.ts`, `results` فقط.
-- ينشئ: `lib/src/features/discovery/screens/search_screen.dart`.
-- يعدل: لا شيء؛ يقرأ `discovery/mock_data.dart`.
-- يستخدم: `PatientShell.detail`, `AafiatakSearchField`, `AafiatakBadge`, `AafiatakCard`, Material `FilterChip` أو `ChoiceChip` من theme.
-- Feature-local: لا ملف. private: `_SearchFilters`, `_SearchSummary`, `_SearchResultTile`.
-- Mock: query «طب الأسرة» وثلاث نتائج Doctor/Service/Facility canonical.
-- الحالة: `StatelessWidget`; chips مرئية فقط، ولا تنفيذ filter/no-results.
-- التنقل: home → search؛ result callbacks إلى PAT-03/04/05.
-- القبول: 3 نتائج، النوع ليس لونًا فقط، chevron RTL صحيح، لا initial/searching/no-results/error.
-- التحقق: format/analyze وفحص keyboard inset و360px.
-- commit: يمكن جمعه مع A-04..A-06 تحت `feat(discovery): implement search and detail screens`.
+- الحالة: `results` فقط.
+- ينشئ: `discovery/screens/search_screen.dart`.
+- يستخدم: `PatientShell.detail(scrollable:true)`, SearchField, Badge, Card، Material FilterChip/ChoiceChip من Theme.
+- private: `_SearchFilters`, `_SearchSummary`, `_SearchResultTile`؛ النتيجة متكررة داخل شاشة واحدة لكن لا تستحق global component.
+- Mock: query «طب الأسرة» وثلاث نتائج doctor/service/facility.
+- الحالة: Stateless.
+- القبول: SearchField + chips + 3 results كما في HF؛ لا initial/searching/no-results.
+- commit: ضمن `feat(discovery): implement search and detail screens`.
 - التالي: A-04.
 
 ### A-04 — PAT-03 Doctor Details
 
-- الهدف: تفاصيل الطبيب active.
-- يعتمد على: A-02 وملف discovery mock من A-01؛ `HARD`. PAT-06 `SOFT`.
-- المرجع/الحالة: `PAT03.ts`, active.
-- ينشئ: `lib/src/features/discovery/screens/doctor_details_screen.dart`.
-- يعدل: لا شيء.
-- يستخدم: `PatientShell.detail`, `AafiatakCard`, `AafiatakSectionHeading`, `AafiatakInfoRows`, `AafiatakButton`, `FacilitySummary`, `ServiceCard`.
-- private: `_DoctorProfileHeader`, `_ProfessionalBio`; لا Feature-local file.
-- Mock: doctor bio/qualification/department/services/hours/facility.
-- الحالة: `StatelessWidget`.
-- التنقل: search/home/facility entry؛ callbacks facility، service، availability.
-- القبول: هوية الطبيب، نبذة، منشأة، خدمتان، ساعات؛ bottom action متاح؛ لا inactive/no-availability/loading/error.
-- التحقق: scroll طويل وLTR للساعات وanalyze.
-- commit: مع حزمة discovery details.
+- الحالة: `active`.
+- ينشئ: `doctor_details_screen.dart`.
+- يستخدم: `PatientShell.detail(scrollable:true)`, Card, SectionHeading, InfoRows, Button, FacilitySummary, ServiceCard.
+- private: `_DoctorProfileHeader`, `_ProfessionalBio`.
+- Mock: bio/qualification/department/services/hours/facility.
+- callbacks: facility/service/availability.
+- القبول: كل أقسام `active` مرئية، bottom action «عرض المواعيد المتاحة»، لا inactive/no-availability/loading/error.
 - التالي: A-05.
 
 ### A-05 — PAT-04 Service Details
 
-- الهدف: تنفيذ الخدمة active وسياسة الدفع الثابتة.
-- يعتمد على: A-02 وA-01 mock؛ `HARD`. PAT-06 `SOFT`.
-- المرجع/الحالة: `PAT04.ts`, active.
-- ينشئ: `lib/src/features/discovery/screens/service_details_screen.dart`.
-- يعدل: لا شيء.
-- يستخدم: `PatientShell.detail`, `AafiatakBadge`, `AafiatakCard`, `AafiatakSectionHeading`, `AafiatakButton`, `PolicyCard`, `FacilitySummary`.
+- الحالة: `active`.
+- ينشئ: `service_details_screen.dart`.
+- يستخدم: `PatientShell.detail(scrollable:true)`, Badge, Card, SectionHeading, Button, PolicyCard, FacilitySummary.
 - private: `_ServiceHero`, `_ServicePricePanel`, `_EstimatedDuration`.
-- Mock: service id/name/amount/full payment/duration/doctor/facility.
-- الحالة: `StatelessWidget`.
-- التنقل: discovery entries؛ callbacks facility وavailability.
-- القبول: amount LTR و`ر.ي`، policy معروضة وغير قابلة للتبديل، 3 PolicyCards، bottom CTA؛ لا no-capacity/inactive/error.
-- التحقق: 360px، text scale عادي، format/analyze.
-- commit: مع حزمة discovery details.
+- Mock: service/amount/full-payment/duration/facility.
+- القبول: policy cards الثلاثة ومدة الخدمة وfacility summary وbottom action كلها موجودة؛ لا no-capacity/inactive/error.
 - التالي: A-06.
 
 ### A-06 — PAT-05 Facility Details
 
-- الهدف: loaded facility بلا تكامل خرائط.
-- يعتمد على: A-02 وA-01 mock؛ `HARD`.
-- المرجع/الحالة: `PAT05.ts`, loaded.
-- ينشئ: `lib/src/features/discovery/screens/facility_details_screen.dart`.
-- يعدل: لا شيء.
-- يستخدم: `PatientShell.detail`, `AafiatakBadge`, `AafiatakCard`, `AafiatakSectionHeading`, `AafiatakInfoRows`, `AafiatakButton`, `AafiatakNotice`, `DoctorCard`, `ServiceCard`.
+- الحالة: `loaded`.
+- ينشئ: `facility_details_screen.dart`.
+- يستخدم: `PatientShell.detail(scrollable:true)`, Badge, Card, SectionHeading, InfoRows, Button, Notice, DoctorCard, ServiceCard.
 - private: `_FacilityIdentity`, `_LocationPreview`.
-- Mock: address/city/region/masked phone/hours + doctor/services.
-- الحالة: `StatelessWidget`؛ «اتصال» و«عرض الموقع» UI callbacks فقط.
-- التنقل: entry من discovery/confirmation/appointment؛ doctor/service callbacks.
-- القبول: preview محايد، لا map SDK، phone LTR، notice السعة المنشورة، لا location-unavailable/loading/error.
-- التحقق: taps تستدعي callbacks وformat/analyze.
+- callbacks: showLocation/call/doctor/service presentation-only أو navigation callbacks حسب العقد.
+- القبول: preview محايد بلا SDK خرائط، address/contact/hours، doctor/services، notice السعة، phone LTR.
 - commit: `feat(discovery): implement search and detail screens`.
 - التالي: A-07.
 
 ### A-07 — PAT-15 Notifications
 
-- الهدف: populated-unread قابل للقراءة والتنقل حسب النوع.
-- يعتمد على: A-02؛ `HARD` pilot gate. PAT-12/13/14 `SOFT`.
-- المرجع/الحالة: `PAT15.ts`, populated-unread.
-- ينشئ: `lib/src/features/notifications/mock_data.dart`, `lib/src/features/notifications/widgets/notification_tile.dart`, `lib/src/features/notifications/screens/notifications_screen.dart`.
-- يعدل: لا شيء.
-- يستخدم: `PatientShell.detail`, `AafiatakCard`, `AafiatakFeedbackTone`, Material icons.
-- Feature Widget: `NotificationTile` لأنه يتكرر 3 مرات ويعزل layout وunread semantics؛ لا ينفذ navigation. private في الشاشة: `_NotificationList` فقط إن حسن القراءة.
-- Mock: queue/appointment/payment notifications من HF، الأولان unread، timestamps canonical.
-- الحالة: `StatelessWidget`; لا mark-as-read behavior.
-- التنقل: app bars entry؛ الشاشة تحول `NotificationKind` إلى onVisit/onAppointment/onPayment callbacks.
-- القبول: unread يظهر بالنقطة وبنص «غير مقروء»، 3 عناصر بترتيب زمني، لا deep-link-stale/empty/error.
-- التحقق: Semantics، 360px، format/analyze.
+- الحالة: `populated-unread`.
+- ينشئ: `notifications/mock_data.dart`, `notifications/widgets/notification_tile.dart`, `notifications/screens/notifications_screen.dart`.
+- Scroll: `NotificationsScreen` body يملك `ListView`; لا `PatientShell.scrollable:true` حتى لا يحدث nested scrolling.
+- `NotificationTile`: presentation-only، لا navigation داخله.
+- الشاشة dispatch حسب `NotificationKind` إلى callbacks appointment/payment/visit.
+- القبول: 3 عناصر، unread يظهر بالنقطة والنص وليس اللون فقط، لا mark-as-read أو stale/empty/error states.
 - commit: `feat(notifications): implement unread notification center`.
 - التالي: A-08.
 
 ### A-08 — PAT-16 Profile
 
-- الهدف: loaded profile root.
-- يعتمد على: A-02؛ `HARD` pilot gate.
-- المرجع/الحالة: `PAT16.ts`, loaded.
-- ينشئ: `lib/src/features/profile/mock_data.dart`, `lib/src/features/profile/screens/profile_screen.dart`.
-- يعدل: لا شيء.
-- يستخدم: `PatientShell.root`, `AafiatakCard`, `AafiatakInfoRows`, `AafiatakSectionHeading`, `AafiatakButton`.
-- private: `_ProfileHero`; لا widgets directory.
-- Mock: canonical patient name/initials/masked phone.
-- الحالة: `StatelessWidget`.
-- التنقل: root tab entry؛ edit وnotifications وroot tab callbacks.
-- القبول: profile hero وبيانات الحساب وedit؛ لا session/logout states ولا زر logout يؤدي لحالة غير معتمدة.
-- التحقق: bottom nav active profile، phone LTR، format/analyze.
-- commit: يمكن جمعه مع A-09.
+- الحالة: `loaded` فقط.
+- ينشئ: `profile/mock_data.dart`, `profile/screens/profile_screen.dart`.
+- يستخدم: `PatientShell.root(scrollable:true)`, Card, InfoRows, SectionHeading, Button.
+- private: `_ProfileHero`.
+- **Retained-State Fidelity:** يعرض زري «تعديل البيانات» و«تسجيل الخروج» كما في HF. `onLogoutRequested` presentation-only ولا ينشئ logged-out state.
+- التنقل: edit/notifications/root tab/logoutRequested callbacks.
+- القبول: root title «حسابي»، profile hero وبيانات الحساب، الهاتف LTR، الزران مرئيان.
+- commit: مع A-09.
 - التالي: A-09.
 
 ### A-09 — PAT-17 Edit Profile
 
-- الهدف: editing form للاسم فقط.
-- يعتمد على: A-08 mock؛ `HARD`.
-- المرجع/الحالة: `PAT17.ts`, editing.
-- ينشئ: `lib/src/features/profile/screens/edit_profile_screen.dart`.
-- يعدل: لا شيء.
-- يستخدم: `PatientShell.detail`, `AafiatakTextField`, `AafiatakCard`, `AafiatakSectionHeading`, `AafiatakButton`.
+- الحالة: `editing` فقط.
+- ينشئ: `edit_profile_screen.dart`.
+- يستخدم: `PatientShell.detail(scrollable:true)`, TextField, Card, SectionHeading, Button.
 - private: `_VerifiedPhoneCard`.
-- Mock: initial full name وmasked verified phone من profile mock.
-- الحالة: `StatefulWidget` مع `TextEditingController` وdispose؛ لا validation/saving/saved/error UI. الحفظ يستدعي callback فقط.
-- التنقل: profile entry؛ save/back إلى profile وفق router callback.
-- القبول: الاسم قابل للتحرير، الهاتف مرئي وغير قابل للتعديل، keyboard مناسب، لا حقول إضافية.
-- التحقق: lifecycle controller، keyboard overflow، format/analyze.
+- StatefulWidget مع TextEditingController وdispose؛ حقل الاسم فقط، الهاتف readonly.
+- زر الحفظ موجود كما في HF ويرسل `onSave` فقط؛ لا saved/error UI.
+- القبول: keyboard لا يحجب bottom content، لا validation/saving/saved states.
 - commit: `feat(profile): implement profile and edit screens`.
 - التالي: A-10.
 
 ### A-10 — Feature QA
 
-- يعتمد على: A-03..A-09؛ `HARD`.
-- ينشئ: لا شيء. يعدل: ملفات ملكية A فقط لإصلاح visual/RTL.
-- افحص الحالات التسع المعتمدة، قيم mock، callbacks، long scroll، bottom bars، 360/390، وعدم وجود state زائد.
-- تحقق أن `rg "app_routes|go_router|Provider|Bloc|Riverpod" lib/src/features/discovery lib/src/features/notifications lib/src/features/profile` لا يكشف اعتمادًا ممنوعًا.
-- commit: `fix(ui): polish discovery notifications and profile` عند الحاجة.
+- يعتمد على A-03 إلى A-09؛ `HARD`.
+- يفحص **8 شاشات و9 حالات** فقط.
+- يفحص Retained-State Fidelity خصوصًا PAT-16 logout control.
+- يفحص 360/390، scroll، bottom bars، RTL/LTR، canonical mocks، constructor contracts.
+- `rg "app_routes|go_router|Provider|Bloc|Riverpod"` على Features A يجب ألا يكشف اعتمادًا ممنوعًا.
+- commit عند الحاجة: `fix(ui): polish discovery notifications and profile`.
 - التالي: A-11.
 
 ### A-11 — Validation Gate
 
-- يعتمد على: A-10؛ `HARD`.
-- الأوامر: `dart format lib/src/features/discovery lib/src/features/notifications lib/src/features/profile`; ثم format check لكل `lib`; `flutter analyze`; `flutter build apk --debug` إن كانت Android متاحة؛ `git diff --check`; `git status`.
-- القبول: كل الأوامر ناجحة ولا ملفات خارج الملكية.
-- commit: لا commit إلا formatting/fix ضمن commit QA.
+- format لملفات A ثم format check لكل `lib`.
+- `flutter analyze`.
+- `flutter build apk --debug` إذا Android متاحة.
+- `git diff --check` و`git status`.
+- القبول: لا ملفات خارج الملكية.
 - التالي: A-12.
 
 ### A-12 — PR Ready
 
-- يعتمد على: A-11؛ `HARD`.
-- قبل الدفع: راجع `git diff 2c130c4...HEAD --name-only` وHigh-Fidelity diff يجب أن يكون فارغًا.
-- PR: `feature/patient-discovery-profile → develop`، مع قائمة PAT، الحالات العشر، screenshots للPilot، نتائج analyze/build، وعقد callbacks التي ينتظرها integration owner.
-- CodeRabbit: عالج الملاحظات الصحيحة على الفرع نفسه؛ لا توسع scope أو تعدل shared files.
-- branch ready عندما تكون checks نظيفة وreview threads محلولة ولا توجد TODOs معمارية.
-- commit أخير عند الحاجة: `fix(ui): address review feedback for discovery profile scope`.
-- التالي: انتظار الدمج؛ لا تنفيذ routing.
+- PR: `feature/patient-discovery-profile → develop`.
+- وصف PR يذكر **8 شاشات و9 حالات**، Pilot screenshots، نتائج analyze/build، و`IMPLEMENTATION_BASELINE_SHA`.
+- CodeRabbit fixes على نفس الفرع.
+- ممنوع routing أو shared changes.
+- commit review عند الحاجة: `fix(ui): address review feedback for discovery profile scope`.
 
-## PR checklist المختصر
+## 9. PR Checklist
 
-- [ ] 8 شاشات و9 حالات فقط.
-- [ ] Pilot PAT-01 موثق بالحالتين.
-- [ ] لا ملف غير مملوك ولا تعديل High-Fidelity.
-- [ ] لا duplicate global component، ولا widgets directory فارغ.
-- [ ] canonical mock values ثابتة.
-- [ ] callbacks تطابق route contract ولا `go_router` داخل Feature.
-- [ ] RTL/LTR والـoverflow مفحوصة.
+- [ ] 8 شاشات، 9 حالات فقط.
+- [ ] PAT-01 بالحالتين وصور 360/390.
+- [ ] `HomeScreen` غير متكدس؛ ملفات widgets الثلاثة موجودة ومبررة.
+- [ ] PAT-16 يحافظ على logout button بصريًا بلا logged-out state.
+- [ ] no router imports / no shared changes / no HF changes.
+- [ ] canonical date = الجمعة 18 سبتمبر 2026.
+- [ ] Scroll strategy مطبقة، PAT-15 بلا nested ListView.
+- [ ] constructor/callback contracts مطابقة للMaster.
 - [ ] format/analyze/build و`git diff --check` ناجحة.
-- [ ] PR إلى `develop` وCodeRabbit fixes على الفرع نفسه.
+- [ ] CodeRabbit threads محلولة قبل الدمج.
