@@ -82,7 +82,7 @@ lib/src/app/routing/app_router.dart
 - `/appointments` PAT-11.
 - `/appointments/:appointmentId` PAT-12.
 - `/appointments/:appointmentId/payment` PAT-13.
-- `/appointments/:appointmentId/visit` PAT-14؛ `state`: waiting أو called أو completed، default waiting.
+- `/appointments/:appointmentId/visit` PAT-14؛ `state`: checked-in-waiting أو called أو completed، default checked-in-waiting.
 - `/notifications` PAT-15.
 - `/profile` PAT-16.
 - `/profile/edit` PAT-17.
@@ -90,6 +90,17 @@ lib/src/app/routing/app_router.dart
 - `/auth/phone` PAT-19؛ `intent`: login أو register، default login.
 - `/auth/otp` PAT-20؛ `intent`: login أو register، default login.
 - `/auth/complete-profile` PAT-21.
+
+### Route parsing mappings — إلزامية
+
+- `policy=facility` → `BookingPaymentPolicy.payAtFacility`.
+- `policy=paid` أو query مفقود أو أي قيمة غير معروفة → `BookingPaymentPolicy.paid`.
+- لا تستخدم parsing مباشرًا باسم enum لـ`policy`.
+- `state=checked-in-waiting` → `VisitQueueDemoState.waiting`.
+- `state=called` → `VisitQueueDemoState.called`.
+- `state=completed` → `VisitQueueDemoState.completed`.
+- `state` المفقود أو غير المعروف → `VisitQueueDemoState.waiting`.
+- اسم HF/route canonical للحالة الأولى هو `checked-in-waiting`، بينما اسم enum المحلي المختصر هو `waiting`؛ هذا mapping مقصود ولا يغيّر نطاق الحالات.
 
 ## 7. التسلسل الصارم
 
@@ -235,12 +246,14 @@ git switch -c integration/patient-ui-navigation
 - يعدل **فقط** `app_routes.dart` و`app_router.dart`.
 - يضيف 21 route names/paths.
 - يستبدل Starter كـinitial destination بـPAT-01.
-- parse آمن للIDs/query؛ defaults: audience patient، policy paid، visit waiting، auth intent login.
+- parse آمن للIDs/query؛ defaults: audience patient، policy `BookingPaymentPolicy.paid`، visit `VisitQueueDemoState.waiting`، auth intent login.
+- **PAT-10 mapping:** إذا كانت query `policy=facility` فمرر `BookingPaymentPolicy.payAtFacility`. إذا كانت `paid` أو مفقودة أو غير معروفة فمرر `BookingPaymentPolicy.paid`. لا تستخدم `Enum.values.byName` أو parsing مباشر باسم enum.
+- **PAT-14 mapping:** `checked-in-waiting` → `VisitQueueDemoState.waiting`، و`called`/`completed` إلى القيم المناظرة؛ المفقود أو غير المعروف → `VisitQueueDemoState.waiting`.
 - يربط كل constructor/callback حسب Master؛ لا يغير signatures.
 - presentation-only callbacks مثل cancel/logout/refresh/availability-alert/resend لا تنشئ omitted states؛ تبقى آمنة وبلا crash.
 - يربط root tabs home/appointments/profile والإشعارات.
 - لا redirects/auth guards/StatefulShellRoute/nested architecture.
-- القبول: 21 paths تفتح PAT الصحيح، back يعمل، booking/auth flows كاملة، invalid query يرجع default بلا crash.
+- القبول: 21 paths تفتح PAT الصحيح، back يعمل، booking/auth flows كاملة، invalid query يرجع default بلا crash، وpay-at-facility يفتح `BookingPaymentPolicy.payAtFacility` فعليًا.
 - validation: format/analyze/build + manual flows 390×844.
 - commit: `feat(routing): integrate patient ui navigation`.
 - التالي: B-12.
@@ -249,7 +262,7 @@ git switch -c integration/patient-ui-navigation
 
 - يفحص 21 destination و28 state.
 - flows: home→search→details؛ doctor/service→availability→review→payment→result→confirmation→appointment؛ root tabs؛ notifications؛ login flow؛ register flow.
-- queries: audience, policy, visit state, auth intent.
+- queries: audience، policy paid/facility، visit `checked-in-waiting`/called/completed، auth intent.
 - diff يحتوي route files فقط.
 - PR `integration/patient-ui-navigation → develop`; CodeRabbit fixes على نفس الفرع.
 - commit review عند الحاجة: `fix(routing): address patient navigation review feedback`.
@@ -270,6 +283,8 @@ git switch -c integration/patient-ui-navigation
 ### Integration PR
 
 - [ ] 21 routes وdefaults مطابقة.
+- [ ] `policy=facility` يتحول إلى `BookingPaymentPolicy.payAtFacility`، وبقية/المفقود/غير المعروف إلى `BookingPaymentPolicy.paid`.
+- [ ] `state=checked-in-waiting` يتحول إلى `VisitQueueDemoState.waiting`.
 - [ ] `app_router.dart` و`app_routes.dart` فقط في diff.
 - [ ] لا Feature patches.
 - [ ] callbacks/root nav/back/notification destinations تعمل.

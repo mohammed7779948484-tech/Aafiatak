@@ -231,7 +231,7 @@ lib/src/features/
 | `appointments` | `/appointments` | لا شيء |
 | `appointmentDetails` | `/appointments/:appointmentId` | canonical `apt-af-28931` |
 | `paymentDetails` | `/appointments/:appointmentId/payment` | canonical `apt-af-28931` |
-| `visitQueue` | `/appointments/:appointmentId/visit` | `state`: waiting أو called أو completed، default waiting |
+| `visitQueue` | `/appointments/:appointmentId/visit` | `state`: `checked-in-waiting` أو `called` أو `completed`، default `checked-in-waiting` |
 | `notifications` | `/notifications` | لا شيء |
 | `profile` | `/profile` | لا شيء |
 | `editProfile` | `/profile/edit` | لا شيء |
@@ -239,6 +239,11 @@ lib/src/features/
 | `phone` | `/auth/phone` | `intent`: login أو register، default login |
 | `whatsappOtp` | `/auth/otp` | `intent`: login أو register، default login |
 | `completeProfile` | `/auth/complete-profile` | لا شيء |
+
+### Route parsing mappings — إلزامية
+
+- PAT-10: `policy=facility` يتحول صراحةً إلى `BookingPaymentPolicy.payAtFacility`. القيمة `paid` أو query المفقود أو أي قيمة غير معروفة تتحول إلى `BookingPaymentPolicy.paid`. لا تستخدم parsing مباشرًا باسم enum.
+- PAT-14: اسم الحالة canonical في High-Fidelity والعقد الخارجي هو `checked-in-waiting`. عند بناء Flutter يتحول `state=checked-in-waiting` إلى `VisitQueueDemoState.waiting`؛ أما `called` و`completed` فيتحولان إلى القيم المناظرة. query المفقود أو غير المعروف يعود إلى `VisitQueueDemoState.waiting`. لا تستخدم parsing مباشرًا باسم enum.
 
 Feature screens لا تستورد `go_router` أو `app_routes.dart`. كل التنقل الخارجي عبر callbacks. Developer B يملك route integration بعد دمج Feature PRs الثلاثة.
 
@@ -261,7 +266,7 @@ Feature screens لا تستورد `go_router` أو `app_routes.dart`. كل ال�
 | PAT-11 | `AppointmentsScreen` يأخذ callbacks appointment/notifications/rootTab و`onPastRequested` presentation-only |
 | PAT-12 | `AppointmentDetailsScreen` يأخذ `appointmentId` وcallbacks facility/showQr/cancelRequested presentation-only |
 | PAT-13 | `PaymentDetailsScreen` يأخذ `appointmentId` وcallbacks appointment/refreshRequested presentation-only |
-| PAT-14 | `VisitQueueScreen` يأخذ `VisitQueueDemoState initialState` |
+| PAT-14 | `VisitQueueScreen` يأخذ `VisitQueueDemoState initialState`؛ القيمة المحلية `waiting` تقابل الحالة الخارجية `checked-in-waiting` |
 | PAT-15 | `NotificationsScreen` يأخذ callbacks appointment/payment/visit حسب `NotificationKind` |
 | PAT-16 | `ProfileScreen` يأخذ callbacks edit/notifications/rootTab/logoutRequested presentation-only |
 | PAT-17 | `EditProfileScreen` يأخذ `ValueChanged<String> onSave` |
@@ -352,7 +357,7 @@ Pilot gate لكل عضو: screenshots عند 360×800 و390×844، RTL/LTR صح�
 - notifications إلى appointment/payment/visit.
 - auth login: auth → phone → OTP → home.
 - auth register: auth → phone → OTP → complete profile → home.
-- Query defaults لـPAT-01 وPAT-10 وPAT-14 وAuth intent.
+- Query defaults لـPAT-01 وPAT-10 وPAT-14 وAuth intent، مع تطبيق mappings المحددة في قسم Routes.
 - جميع 21 destination قابلة للوصول، وجميع 28 state قابلة للمراجعة بدون debug controls ظاهرة للمستخدم.
 
 ## 18. مراجعات الخطة بعد التصحيح
@@ -366,7 +371,7 @@ Pilot gate لكل عضو: screenshots عند 360×800 و390×844، RTL/LTR صح�
 - **Scroll Audit:** PASS — strategy محددة لكل PAT لتجنب overflow/nested scrolling.
 - **Architecture Audit:** PASS — لا state package ولا layers ولا l10n زائد.
 - **Mock Audit:** PASS — canonical متسقة، وتصحيح يوم 18 سبتمبر موثق.
-- **Markdown/Route Audit:** PASS — لا قيم query تستخدم pipe غير مهرب داخل جداول؛ القيم مكتوبة كقوائم allowed values.
+- **Markdown/Route Audit:** PASS — لا قيم query تستخدم pipe غير مهرب داخل جداول؛ القيم مكتوبة كقوائم allowed values، وPAT-10/PAT-14 mappings صريحة.
 - **Workload Audit:** PASS — 22.0 / 21.5 / 22.5.
 - **Member Consistency Audit:** PASS — ملفات A/B/C تستخدم Implementation Baseline placeholder نفسه وتتفق مع Master.
 - **Student Usability Audit:** PASS — كل ملف عضو self-contained ومهامه بالترتيب مع Creates/Uses/Acceptance/Validation/Commit.

@@ -55,7 +55,7 @@ lib/src/features/auth/widgets/verified_phone_summary.dart
 
 - PAT-11 `AppointmentsScreen`: appointment callback + notifications + rootTab + `onPastRequested` presentation-only.
 - PAT-12 `AppointmentDetailsScreen`: `appointmentId` + facility/showQr/cancelRequested callbacks؛ cancel presentation-only.
-- PAT-14 `VisitQueueScreen`: `VisitQueueDemoState initialState` بقيم waiting/called/completed.
+- PAT-14 `VisitQueueScreen`: `VisitQueueDemoState initialState` بقيم waiting/called/completed. الحالة الخارجية canonical `checked-in-waiting` تتحول إلى القيمة المحلية `waiting`.
 - PAT-18 `AuthEntryScreen`: `ValueChanged<AuthIntent> onPhoneRequested`, `onBrowseTap`.
 - PAT-19 `PhoneScreen`: `AuthIntent`, `onOtpRequested`.
 - PAT-20 `WhatsAppOtpScreen`: `AuthIntent`, changePhone/verifyRequested/resendRequested callbacks.
@@ -69,7 +69,7 @@ Feature files لا تستورد router. B يربطها بعد الدمج.
 - `/appointments` PAT-11.
 - `/appointments/:appointmentId` PAT-12.
 - `/facilities/:facilityId` وجهة من PAT-12 يملكها A.
-- `/appointments/:appointmentId/visit` PAT-14؛ `state`: waiting أو called أو completed، default waiting.
+- `/appointments/:appointmentId/visit` PAT-14؛ `state`: checked-in-waiting أو called أو completed، default checked-in-waiting. في integration يحول B `checked-in-waiting` إلى `VisitQueueDemoState.waiting` صراحةً.
 - `/notifications` وجهة root app bar يملكها A.
 - `/profile` root tab يملكه A.
 - `/auth` PAT-18.
@@ -182,11 +182,12 @@ flutter pub get
 
 ### C-08 — PAT-14 Visit Queue
 
-- الحالات: `checked-in-waiting`, `called`, `completed`.
+- الحالات الخارجية المعتمدة: `checked-in-waiting`, `called`, `completed`.
 - ينشئ: `visit/mock_data.dart`, `visit/screens/visit_queue_screen.dart`.
 - يستخدم: `PatientShell.detail(scrollable:true)`, StatusBlock, Card, Notice, SectionHeading, AppointmentSummary, ArrivalWindowCard.
 - private: `_QueueMetrics`, `_CalledQueuePanel`, `_LastUpdateCard`.
 - public enum في الملف `VisitQueueDemoState { waiting, called, completed }` وconstructor `initialState`.
+- mapping المقصود: HF/route `checked-in-waiting` → `VisitQueueDemoState.waiting`; `called` → `.called`; `completed` → `.completed`. لا تستخدم parsing مباشرًا لاسم enum.
 - لا developer controls ظاهرة لتبديل state؛ route query يعرضها بعد integration.
 - waiting يعرض approximateAhead=3 وlast update؛ called callout؛ completed status فقط.
 - لا check-in/reschedule/rejoin buttons.
@@ -225,7 +226,7 @@ flutter pub get
 - [ ] PAT-20 Pilot يثبت LTR/RTL وfocus/dispose والcontrols المرئية كاملة.
 - [ ] PAT-11 segmented control ظاهر بلا past state.
 - [ ] PAT-12 cancel button ظاهر بلا cancelled state.
-- [ ] PAT-14 ثلاث حالات فقط، لا self-check-in/reschedule.
+- [ ] PAT-14 ثلاث حالات خارجية فقط: `checked-in-waiting`, `called`, `completed`، مع mapping صريح إلى enum المحلي `waiting/called/completed`.
 - [ ] Auth WhatsApp OTP فقط؛ لا SMS/password/email/social implementation.
 - [ ] PAT-21 editing/success فقط وحقل الاسم وحده.
 - [ ] canonical date = الجمعة 18 سبتمبر 2026.
