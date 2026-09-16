@@ -45,7 +45,7 @@ class _StarterScreenState extends State<StarterScreen> {
             const SizedBox(height: AafiatakSpacing.space4),
             const Text.rich(
               TextSpan(
-                style: AafiatakTypography.displayLarge,
+                style: AafiatakTypography.display,
                 children: <InlineSpan>[
                   TextSpan(text: 'ابدأ رحلتك الصحية '),
                   TextSpan(
@@ -58,7 +58,7 @@ class _StarterScreenState extends State<StarterScreen> {
             const SizedBox(height: AafiatakSpacing.space8),
             const Text(
               'واجهة عربية خفيفة ببيانات تجريبية واتجاه بصري برغندي أحادي اللون.',
-              style: AafiatakTypography.bodyMedium,
+              style: AafiatakTypography.body,
             ),
             const SizedBox(height: AafiatakSpacing.space24),
             AafiatakSearchField(

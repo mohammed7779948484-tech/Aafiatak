@@ -33,7 +33,7 @@ class ReservationHoldBanner extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'تم حجز السعة لك مؤقتًا',
-                  style: AafiatakTypography.labelMedium.copyWith(
+                  style: AafiatakTypography.label.copyWith(
                     color: AafiatakColors.onPrimaryContainer,
                     fontWeight: FontWeight.w700,
                   ),
@@ -41,7 +41,7 @@ class ReservationHoldBanner extends StatelessWidget {
                 const SizedBox(height: 2),
                 Text(
                   'أكمل الخطوة التالية قبل انتهاء الحجز المؤقت.',
-                  style: AafiatakTypography.labelSmall.copyWith(
+                  style: AafiatakTypography.caption.copyWith(
                     color: AafiatakColors.onPrimaryContainer,
                   ),
                 ),
@@ -53,7 +53,7 @@ class ReservationHoldBanner extends StatelessWidget {
             textDirection: TextDirection.ltr,
             child: Text(
               countdown,
-              style: AafiatakTypography.titleLarge.copyWith(
+              style: AafiatakTypography.h3.copyWith(
                 color: AafiatakColors.primary,
                 fontWeight: FontWeight.w700,
               ),

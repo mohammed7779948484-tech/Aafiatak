@@ -58,7 +58,7 @@ class AafiatakEmptyState extends StatelessWidget {
             Text(
               title,
               textAlign: TextAlign.center,
-              style: AafiatakTypography.titleLarge,
+              style: AafiatakTypography.h3,
             ),
             const SizedBox(height: AafiatakSpacing.space8),
             Text(

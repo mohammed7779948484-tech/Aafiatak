@@ -21,7 +21,13 @@ lib/dev_preview.dart
 
 هذا الملف ليس جزءًا من التطبيق النهائي، ولا يُرفع في Commit أو PR.
 
-أضفه محليًا إلى `.git/info/exclude`:
+أضفه محليًا إلى `.git/info/exclude`. في PowerShell:
+
+```powershell
+Add-Content -LiteralPath '.git/info/exclude' -Value '/lib/dev_preview.dart'
+```
+
+وفي shell متوافق مع POSIX:
 
 ```bash
 printf '\n/lib/dev_preview.dart\n' >> .git/info/exclude
@@ -148,6 +154,11 @@ PAT-21 success
 ```
 
 بهذا تكون **كل الحالات الـ28** قابلة للرؤية فعليًا أثناء التطوير قبل Route Integration النهائي.
+
+يفتح Developer B حالتي PAT-06 من القائمة بتمرير
+`AvailabilityDemoState.bookable` أو `AvailabilityDemoState.noCapacity` إلى
+`AvailabilityScreen.initialState`؛ لا يعتمد الوصول إلى `no-capacity` على Debug
+control داخل الشاشة.
 
 ## 5. التنقل داخل نطاق العضو أثناء التطوير
 
@@ -289,6 +300,9 @@ BookingPaymentPolicy.paid
 BookingPaymentPolicy.payAtFacility
 ```
 
+PAT-06 يفتح مرتين بالطريقة نفسها باستخدام `AvailabilityDemoState.bookable`
+و`AvailabilityDemoState.noCapacity`.
+
 PAT-01 يفتح بقيمتي audience المتفقتين. PAT-21 يمكن الوصول إلى `success` من التفاعل المحلي الطبيعي، ويمكن أيضًا توفير Entry معاينة مباشر فقط إذا كان constructor الحالي يسمح بذلك من دون تغيير public contract المتفق عليه.
 
 إذا كانت الحالة الثانية ناتجة طبيعيًا من `setState` داخل الشاشة مثل PAT-07 أو PAT-21، يجب أيضًا اختبار الانتقال الفعلي إليها، وليس الاكتفاء بفتحها منفردة.
@@ -429,6 +443,7 @@ Appointments → Appointment Details → Visit Queue
 ويتم اختبار query/default mappings المحددة في Master، خصوصًا:
 
 - PAT-10 `policy=facility` → `BookingPaymentPolicy.payAtFacility`.
+- PAT-06 `state=no-capacity` → `AvailabilityDemoState.noCapacity`.
 - PAT-14 `state=checked-in-waiting` → `VisitQueueDemoState.waiting`.
 
 بعد Route Integration يجب أن تكون **21 شاشة و28 حالة** قابلة للمراجعة داخل التطبيق الحقيقي بدون Debug controls.

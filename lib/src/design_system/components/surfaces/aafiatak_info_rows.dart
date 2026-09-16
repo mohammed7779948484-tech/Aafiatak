@@ -54,7 +54,7 @@ class AafiatakInfoRows extends StatelessWidget {
                   child: Text(
                     rows[i].value,
                     textAlign: rows[i].isLtr ? TextAlign.end : TextAlign.start,
-                    style: AafiatakTypography.labelMedium.copyWith(
+                    style: AafiatakTypography.label.copyWith(
                       color: AafiatakColors.textPrimary,
                       fontWeight: FontWeight.w600,
                     ),

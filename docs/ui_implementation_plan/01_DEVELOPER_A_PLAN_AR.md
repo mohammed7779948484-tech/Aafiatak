@@ -3,8 +3,7 @@
 ## 1. بطاقة المهمة
 
 - الفرع: `feature/patient-discovery-profile`.
-- **Inspected Baseline:** `2c130c407979fc555652ae643d19369f2f7aad0c` للمرجعية فقط.
-- **Implementation Baseline:** `<IMPLEMENTATION_BASELINE_SHA>` الذي يعلنه المنسق بعد دمج PR التخطيط إلى `develop`.
+- **Implementation Baseline:** `<IMPLEMENTATION_BASELINE_SHA>` الذي يعلنه المنسق من أحدث `origin/develop` بعد دفع تنظيف Design System.
 - الملكية: `features/discovery/**`, `features/notifications/**`, `features/profile/**`.
 - الشاشات: PAT-01، PAT-02، PAT-03، PAT-04، PAT-05، PAT-15، PAT-16، PAT-17.
 - الحالات: **9** فقط.
@@ -82,7 +81,7 @@ lib/src/features/profile/screens/edit_profile_screen.dart
 
 ### A-00 — تجهيز الفرع
 
-- يعتمد على: اعتماد ودمج PR التخطيط وإعلان `IMPLEMENTATION_BASELINE_SHA`؛ `SHARED`.
+- يعتمد على: دفع تنظيف Design System وإعلان `IMPLEMENTATION_BASELINE_SHA`؛ `SHARED`.
 - ينشئ/يعدل: لا شيء.
 - التنفيذ:
 
@@ -145,11 +144,11 @@ flutter pub get
 
 - الحالة: `active`.
 - ينشئ: `doctor_details_screen.dart`.
-- يستخدم: `PatientShell.detail(scrollable:true)`, Card, SectionHeading, InfoRows, Button, FacilitySummary, ServiceCard.
+- يستخدم: `PatientShell.detail(scrollable:true, bottomAction: ...)`, Card, SectionHeading, InfoRows, Button, FacilitySummary, ServiceCard.
 - private: `_DoctorProfileHeader`, `_ProfessionalBio`.
 - Mock: bio/qualification/department/services/hours/facility.
 - callbacks: facility/service/availability.
-- القبول: كل أقسام `active` مرئية، bottom action «عرض المواعيد المتاحة»، لا inactive/no-availability/loading/error.
+- القبول: كل أقسام `active` مرئية، وbottom action الثابت «عرض المواعيد المتاحة»، لا inactive/no-availability/loading/error.
 - التالي: A-05.
 
 ### A-05 — PAT-04 Service Details

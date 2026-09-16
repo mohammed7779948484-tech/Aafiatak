@@ -48,7 +48,7 @@ class ServiceCard extends StatelessWidget {
             textDirection: TextDirection.ltr,
             child: Text(
               price,
-              style: AafiatakTypography.titleLarge.copyWith(
+              style: AafiatakTypography.h3.copyWith(
                 color: AafiatakColors.primary,
                 fontWeight: FontWeight.w700,
               ),

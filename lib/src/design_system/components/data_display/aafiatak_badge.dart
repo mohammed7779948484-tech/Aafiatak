@@ -8,11 +8,7 @@ import '../../foundations/foundations.dart';
 /// اختر [tone] بحسب المعنى ولا تحدد ألوانًا محلية في الشاشة. هذه الشارة مكون
 /// عرض عام بلا تفاعل أو منطق أعمال، وليست بديلًا عن زر أو FilterChip.
 class AafiatakBadge extends StatelessWidget {
-  const AafiatakBadge({
-    super.key,
-    required this.label,
-    this.tone = AafiatakFeedbackTone.neutral,
-  });
+  const AafiatakBadge({super.key, required this.label, required this.tone});
 
   final String label;
   final AafiatakFeedbackTone tone;
@@ -46,7 +42,7 @@ class AafiatakBadge extends StatelessWidget {
               label,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: AafiatakTypography.labelSmall.copyWith(
+              style: AafiatakTypography.caption.copyWith(
                 color: colors.foreground,
                 fontWeight: FontWeight.w600,
               ),

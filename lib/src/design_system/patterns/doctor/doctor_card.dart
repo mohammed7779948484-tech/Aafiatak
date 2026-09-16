@@ -37,7 +37,7 @@ class DoctorCard extends StatelessWidget {
             decoration: BoxDecoration(
               color: AafiatakColors.primaryContainer,
               borderRadius: AafiatakRadii.large,
-              border: Border.all(color: const Color(0x1A800020)),
+              border: Border.all(color: AafiatakColors.primaryBorderFaint),
             ),
             alignment: Alignment.center,
             child: Text(
@@ -75,14 +75,14 @@ class DoctorCard extends StatelessWidget {
                 textDirection: TextDirection.ltr,
                 child: Text(
                   price,
-                  style: AafiatakTypography.labelMedium.copyWith(
+                  style: AafiatakTypography.label.copyWith(
                     color: AafiatakColors.primary,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
               ),
               const SizedBox(height: 2),
-              const Text('سعر الخدمة', style: AafiatakTypography.labelSmall),
+              const Text('سعر الخدمة', style: AafiatakTypography.caption),
             ],
           ),
         ],

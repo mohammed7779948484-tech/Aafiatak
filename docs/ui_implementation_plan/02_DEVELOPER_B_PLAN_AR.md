@@ -4,8 +4,7 @@
 
 - فرع التنفيذ: `feature/patient-booking-payment`.
 - فرع التكامل اللاحق: `integration/patient-ui-navigation`.
-- **Inspected Baseline:** `2c130c407979fc555652ae643d19369f2f7aad0c` للمرجعية فقط.
-- **Implementation Baseline:** `<IMPLEMENTATION_BASELINE_SHA>` بعد دمج PR التخطيط.
+- **Implementation Baseline:** `<IMPLEMENTATION_BASELINE_SHA>` من أحدث `origin/develop` بعد دفع تنظيف Design System.
 - الملكية على Feature branch: `features/booking/**`, `features/payment/**`.
 - الشاشات: PAT-06، PAT-07، PAT-08، PAT-09، PAT-10، PAT-13.
 - الحالات: **9**.
@@ -58,7 +57,7 @@ lib/src/app/routing/app_router.dart
 
 ## 5. Public Contracts
 
-- PAT-06 `AvailabilityScreen`: `onReviewTap`, `onAvailabilityAlertRequested`.
+- PAT-06 `AvailabilityScreen`: `AvailabilityDemoState initialState`, `onReviewTap`, `onAvailabilityAlertRequested`.
 - PAT-07 `BookingReviewScreen`: `onPaymentTap`; state transition داخلي.
 - PAT-08 `PaymentScreen`: `onPaymentResultTap`.
 - PAT-09 `PaymentResultScreen`: `onConfirmationTap`.
@@ -74,7 +73,7 @@ lib/src/app/routing/app_router.dart
 - `/doctors/:doctorId` PAT-03.
 - `/services/:serviceId` PAT-04.
 - `/facilities/:facilityId` PAT-05.
-- `/availability` PAT-06.
+- `/availability` PAT-06؛ `state`: bookable أو no-capacity، default bookable.
 - `/booking/review` PAT-07.
 - `/payment` PAT-08.
 - `/payment/result` PAT-09.
@@ -106,7 +105,7 @@ lib/src/app/routing/app_router.dart
 
 ### B-00 — تجهيز Feature Branch
 
-- يعتمد على دمج الخطة وإعلان `IMPLEMENTATION_BASELINE_SHA`؛ `SHARED`.
+- يعتمد على دفع تنظيف Design System وإعلان `IMPLEMENTATION_BASELINE_SHA`؛ `SHARED`.
 
 ```bash
 git fetch --all --prune
@@ -147,11 +146,12 @@ flutter pub get
 - ينشئ: `booking/widgets/availability_day_tile.dart`, `booking/screens/availability_screen.dart`.
 - يستخدم: `PatientShell.detail(scrollable:true)`, Card, SectionHeading, Notice, Button, AppointmentSummary, ArrivalWindowCard.
 - `AvailabilityDayTile`: local booking widget متكرر للأيام.
-- StatefulWidget + enum private `_AvailabilityView`.
+- StatefulWidget + enum عام في الملف `AvailabilityDemoState { bookable, noCapacity }` وconstructor `initialState` حتى يفتح preview والـroute الحالتين صراحةً.
 - Mock days 14–20 بالتواريخ/أيام الأسبوع الصحيحة، selected day 18.
 - **في `no-capacity` يجب أن تبقى**: AppointmentSummary، Calendar، Arrival Window مع `—`، Notice، قسم «هل تريد معرفة متى تتوفر سعة؟»، زر «أشعرني عند التوفر»، وbottom action «اختر يومًا آخر».
 - `onAvailabilityAlertRequested` presentation-only؛ لا subscription logic.
 - CTA bookable فقط يستدعي `onReviewTap`.
+- mapping التكامل: `state=no-capacity` → `AvailabilityDemoState.noCapacity`، وما عدا ذلك → `.bookable`.
 - القبول: لا time picker، Arrival Window ليست doctor-entry time، لا loading/last-seat/time-cutoff/stale/offline/error.
 - commit مع B-04: `feat(booking): implement availability and confirmation screens`.
 - التالي: B-04.
@@ -248,6 +248,7 @@ git switch -c integration/patient-ui-navigation
 - يستبدل Starter كـinitial destination بـPAT-01.
 - parse آمن للIDs/query؛ defaults: audience patient، policy `BookingPaymentPolicy.paid`، visit `VisitQueueDemoState.waiting`، auth intent login.
 - **PAT-10 mapping:** إذا كانت query `policy=facility` فمرر `BookingPaymentPolicy.payAtFacility`. إذا كانت `paid` أو مفقودة أو غير معروفة فمرر `BookingPaymentPolicy.paid`. لا تستخدم `Enum.values.byName` أو parsing مباشر باسم enum.
+- **PAT-06 mapping:** إذا كانت query `state=no-capacity` فمرر `AvailabilityDemoState.noCapacity`. إذا كانت `bookable` أو مفقودة أو غير معروفة فمرر `AvailabilityDemoState.bookable`.
 - **PAT-14 mapping:** `checked-in-waiting` → `VisitQueueDemoState.waiting`، و`called`/`completed` إلى القيم المناظرة؛ المفقود أو غير المعروف → `VisitQueueDemoState.waiting`.
 - يربط كل constructor/callback حسب Master؛ لا يغير signatures.
 - presentation-only callbacks مثل cancel/logout/refresh/availability-alert/resend لا تنشئ omitted states؛ تبقى آمنة وبلا crash.
@@ -262,7 +263,7 @@ git switch -c integration/patient-ui-navigation
 
 - يفحص 21 destination و28 state.
 - flows: home→search→details؛ doctor/service→availability→review→payment→result→confirmation→appointment؛ root tabs؛ notifications؛ login flow؛ register flow.
-- queries: audience، policy paid/facility، visit `checked-in-waiting`/called/completed، auth intent.
+- queries: audience، availability bookable/no-capacity، policy paid/facility، visit `checked-in-waiting`/called/completed، auth intent.
 - diff يحتوي route files فقط.
 - PR `integration/patient-ui-navigation → develop`; CodeRabbit fixes على نفس الفرع.
 - commit review عند الحاجة: `fix(routing): address patient navigation review feedback`.
@@ -284,6 +285,7 @@ git switch -c integration/patient-ui-navigation
 
 - [ ] 21 routes وdefaults مطابقة.
 - [ ] `policy=facility` يتحول إلى `BookingPaymentPolicy.payAtFacility`، وبقية/المفقود/غير المعروف إلى `BookingPaymentPolicy.paid`.
+- [ ] `availability?state=no-capacity` يتحول إلى `AvailabilityDemoState.noCapacity`، وبقية/المفقود/غير المعروف إلى `.bookable`.
 - [ ] `state=checked-in-waiting` يتحول إلى `VisitQueueDemoState.waiting`.
 - [ ] `app_router.dart` و`app_routes.dart` فقط في diff.
 - [ ] لا Feature patches.

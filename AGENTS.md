@@ -14,6 +14,7 @@ explain, and maintain.
 - `go_router` for routing
 - `StatefulWidget`, `setState`, and occasional `ValueNotifier` for UI state
 - Burgundy Monochrome colors from `lib/src/design_system/`
+- IBM Plex Sans Arabic bundled at weights 400, 500, 600, and 700
 - 10 shared components and 7 shared domain patterns
 - High-Fidelity reference: `Aafiatak_High_Fidelity_Prototype_v3.0/`
 
@@ -71,4 +72,6 @@ flutter analyze
 flutter build apk --debug
 ```
 
-The project intentionally has no Flutter tests and no Python audit tooling.
+The Flutter implementation intentionally has no tests and does not use Python
+audit tooling. Scripts inside the read-only High-Fidelity package are not part
+of the Flutter verification workflow.

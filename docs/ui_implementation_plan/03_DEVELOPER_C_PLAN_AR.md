@@ -3,8 +3,7 @@
 ## 1. بطاقة المهمة
 
 - الفرع: `feature/patient-appointments-auth`.
-- **Inspected Baseline:** `2c130c407979fc555652ae643d19369f2f7aad0c` للمرجعية فقط.
-- **Implementation Baseline:** `<IMPLEMENTATION_BASELINE_SHA>` بعد دمج PR التخطيط.
+- **Implementation Baseline:** `<IMPLEMENTATION_BASELINE_SHA>` من أحدث `origin/develop` بعد دفع تنظيف Design System.
 - الملكية: `features/appointments/**`, `features/visit/**`, `features/auth/**`.
 - الشاشات: PAT-11، PAT-12، PAT-14، PAT-18، PAT-19، PAT-20، PAT-21.
 - الحالات: **10**.
@@ -81,7 +80,7 @@ Feature files لا تستورد router. B يربطها بعد الدمج.
 
 ### C-00 — تجهيز الفرع
 
-- يعتمد على دمج الخطة وإعلان `IMPLEMENTATION_BASELINE_SHA`; `SHARED`.
+- يعتمد على دفع تنظيف Design System وإعلان `IMPLEMENTATION_BASELINE_SHA`; `SHARED`.
 
 ```bash
 git fetch --all --prune
@@ -146,9 +145,10 @@ flutter pub get
 
 - الحالات: `editing`, `success`.
 - ينشئ: `complete_patient_profile_screen.dart`.
-- يستخدم: `PatientShell.detail(scrollable:true)`, TextField, Card, StatusBlock, Button, AuthIntro, VerifiedPhoneSummary.
+- يستخدم: `PatientShell.detail(scrollable:true, bottomAction: ...)`, TextField, Card, StatusBlock, Button, AuthIntro, VerifiedPhoneSummary.
 - private: `_SuccessContent`.
 - StatefulWidget + enum private `_ProfileCompletionView`; CTA editing يعمل `setState(success)`، success CTA يستدعي `onFinished`.
+- في `success` يبقى زر «متابعة» داخل body كما في HF، ويبقى bottom action «إكمال التسجيل» ظاهرًا لأنه جزء من الحالة المرجعية المختارة؛ لا تدمجهما في زر واحد.
 - حقل الاسم فقط، phone verified readonly.
 - لا validation/creating/failure/duplicate states.
 - commit auth group: `feat(auth): implement account access flow`.
@@ -158,7 +158,7 @@ flutter pub get
 
 - الحالة: `upcoming-populated`.
 - ينشئ: `appointments/mock_data.dart`, `appointments/widgets/appointment_list_card.dart`, `appointments/screens/appointments_screen.dart`.
-- يستخدم: `PatientShell.root(scrollable:true)`, Card, Badge, InfoRows, Button، Material segmented control حسب Theme.
+- يستخدم: `PatientShell.root(scrollable:true)`, Card, Badge, InfoRows, Button، Material segmented control حسب Theme مع `showSelectedIcon:false`.
 - `AppointmentListCard`: feature-local.
 - **Retained-State Fidelity:** Segmented «القادمة / السابقة» يبقى ظاهرًا مع القادمة selected. `onPastRequested` presentation-only؛ لا تنفذ past-populated/past-empty.
 - root nav appointments active، notification/rootTab callbacks.

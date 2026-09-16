@@ -58,6 +58,9 @@ class AafiatakRootAppBar extends StatelessWidget
                 Text(
                   'عافيتك',
                   style: TextStyle(
+                    fontFamily: AafiatakTypography.fontFamily,
+                    fontSize: 18,
+                    height: 24 / 18,
                     color: AafiatakColors.primary,
                     fontWeight: FontWeight.w700,
                   ),
@@ -119,7 +122,7 @@ class AafiatakDetailAppBar extends StatelessWidget
                 screenId!,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: AafiatakTypography.labelSmall,
+                style: AafiatakTypography.caption,
               ),
             ),
           Text(title, maxLines: 1, overflow: TextOverflow.ellipsis),
@@ -179,7 +182,7 @@ class AafiatakBottomAction extends StatelessWidget {
     return BottomAppBar(
       child: DecoratedBox(
         decoration: const BoxDecoration(
-          border: Border(top: BorderSide(color: AafiatakColors.outline)),
+          border: Border(top: BorderSide(color: AafiatakColors.borderSubtle)),
         ),
         child: Padding(
           padding: const EdgeInsets.all(AafiatakSpacing.space16),

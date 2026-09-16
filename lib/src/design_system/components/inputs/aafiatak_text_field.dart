@@ -65,7 +65,7 @@ class AafiatakTextField extends StatelessWidget {
       children: <Widget>[
         if (visibleLabel != null) ...<Widget>[
           ExcludeSemantics(
-            child: Text(visibleLabel, style: AafiatakTypography.labelMedium),
+            child: Text(visibleLabel, style: AafiatakTypography.label),
           ),
           const SizedBox(height: AafiatakSpacing.space8),
         ],

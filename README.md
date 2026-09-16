@@ -9,6 +9,7 @@ phone interfaces. It has no backend or production infrastructure.
 - Flutter Material 3, light mode only
 - Arabic locale and RTL-first layouts
 - Burgundy Monochrome palette
+- Bundled IBM Plex Sans Arabic typography at weights 400, 500, 600, and 700
 - Native Material controls styled through `ThemeData`
 - Ten shared UI components and seven patient-domain patterns
 - Arabic strings written directly in Dart; no app gen-l10n or ARB layer
@@ -39,5 +40,6 @@ flutter analyze
 flutter build apk --debug
 ```
 
-See `SETUP.md`, `DESIGN.md`, `architecture.md`, and
-`docs/design_system/README.md` for the small set of project guides.
+See `SETUP.md`, `DESIGN.md`, `architecture.md`,
+`docs/design_system/README.md`, and `docs/ui_implementation_plan/README.md` for
+the small set of project guides.

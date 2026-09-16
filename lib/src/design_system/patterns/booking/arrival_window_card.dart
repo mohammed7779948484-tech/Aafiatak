@@ -26,13 +26,13 @@ class ArrivalWindowCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Text(title, style: AafiatakTypography.labelSmall),
+          Text(title, style: AafiatakTypography.caption),
           const SizedBox(height: AafiatakSpacing.space8),
           Directionality(
             textDirection: TextDirection.ltr,
             child: Text(
               arrivalWindow,
-              style: AafiatakTypography.headlineMedium.copyWith(
+              style: AafiatakTypography.h2.copyWith(
                 color: AafiatakColors.primary,
                 fontWeight: FontWeight.w700,
               ),

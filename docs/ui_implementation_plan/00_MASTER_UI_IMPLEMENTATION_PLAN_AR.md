@@ -1,25 +1,22 @@
 # الخطة الرئيسية لتنفيذ واجهات المريض
 
-> الحالة: خطة تنفيذ نهائية بانتظار اعتماد PR التخطيطي. هذا الملف هو مصدر الحقيقة لفريق Flutter.
+> الحالة: خطة تنفيذ نهائية. يبدأ فريق Flutter فقط من خط الأساس المعلن بعد دفع تنظيف Design System إلى `develop`.
 
 ## 1. خط الأساس ونقطة بدء التنفيذ
 
 - المستودع: `mohammed7779948484-tech/Aafiatak`.
-- فرع التطوير الذي تم فحصه تفصيليًا: `develop`.
-- **Inspected Baseline SHA:** `2c130c407979fc555652ae643d19369f2f7aad0c`.
-- حالة الشجرة عند الفحص: نظيفة ومتزامنة مع `origin/develop`.
-- نتيجة `git rev-list --left-right --count origin/main...develop` كانت `1 0`؛ الرقم الأول يعني أن `main` كان يتقدم بــcommit واحد فقط، بينما لم يكن لدى `develop` commit منفرد مقابل `main`. الملفات عند نقطة المقارنة كانت متطابقة؛ الفرق كان merge commit فقط.
-- فرع التخطيط: `planning/ui-team-execution-plan`.
+- فرع التطوير المعتمد: `develop`.
+- لا يحفظ هذا المستند SHA ثابتًا لأنه يصبح قديمًا عند أي commit جديد.
 
 ### Implementation Baseline — قاعدة إلزامية
 
-لا تنطلق فروع التنفيذ من SHA الفحص القديم بعد دمج هذا PR. بعد اعتماد ودمج PR التخطيط إلى `develop` ينفذ المنسق:
+بعد دفع تنظيف Design System إلى `develop`، وقبل إنشاء فروع التنفيذ مباشرة، ينفذ المنسق:
 
 ```bash
-git fetch --all --prune
+git fetch origin develop
 git switch develop
 git pull --ff-only origin develop
-git rev-parse HEAD
+git rev-parse origin/develop
 ```
 
 يسجل الناتج باسم **`IMPLEMENTATION_BASELINE_SHA`** ويرسله للأعضاء الثلاثة. كل فروع التنفيذ الثلاثة يجب أن تبدأ من **نفس** هذا SHA، ويكتب في وصف كل Feature PR. ممنوع استخدام checkout أقدم أو مختلف.
@@ -74,6 +71,12 @@ import 'package:aafiatak/src/design_system/design_system.dart';
 
 لا يعدل أي طالب `lib/src/design_system/**`. إذا ظهر عائق حقيقي يثبت في أكثر من شاشة، يرفع كملاحظة/issue ويعالج بقرار منفصل.
 
+- الخط المضمّن: `IBMPlexSansArabic` بأوزان 400 و500 و600 و700.
+- Typography API: `display`, `h1`, `h2`, `h3`, `bodyLarge`, `body`, `labelLarge`, `label`, `bodySmall`, `caption`.
+- Feedback tones: `primary`, `secondary`, `success`, `warning`, `info`, `hold` فقط.
+- حذف feedback `error` لا يلغي `ColorScheme.error*` المستخدم للتحقق والأزرار المدمرة.
+- `inputBoundary` الأقوى قرار وصول مقصود ولا يعاد إلى حد النموذج الأخف.
+
 ## 5. Features والحالات المختارة
 
 | Feature | الشاشات |
@@ -119,7 +122,7 @@ import 'package:aafiatak/src/design_system/design_system.dart';
 |---|---|---|---|---|---:|
 | PAT-01 | `home_screen.dart` | discovery | patient-populated, guest-populated | root، `scrollable:true` | 4.0 |
 | PAT-02 | `search_screen.dart` | discovery | results | detail، `scrollable:true` | 2.5 |
-| PAT-03 | `doctor_details_screen.dart` | discovery | active | detail، `scrollable:true` | 2.5 |
+| PAT-03 | `doctor_details_screen.dart` | discovery | active | detail + bottomAction، `scrollable:true` | 2.5 |
 | PAT-04 | `service_details_screen.dart` | discovery | active | detail + bottomAction، `scrollable:true` | 2.5 |
 | PAT-05 | `facility_details_screen.dart` | discovery | loaded | detail، `scrollable:true` | 2.5 |
 | PAT-06 | `availability_screen.dart` | booking | bookable, no-capacity | detail + bottomAction، `scrollable:true` | 3.5 |
@@ -137,7 +140,7 @@ import 'package:aafiatak/src/design_system/design_system.dart';
 | PAT-18 | `auth_entry_screen.dart` | auth | default | detail، `scrollable:true` | 1.5 |
 | PAT-19 | `phone_screen.dart` | auth | idle | detail + bottomAction، `scrollable:true` | 2.5 |
 | PAT-20 | `whatsapp_otp_screen.dart` | auth | waiting | detail + bottomAction، `scrollable:true` | 3.0 |
-| PAT-21 | `complete_patient_profile_screen.dart` | auth | editing, success | detail، `scrollable:true` | 3.5 |
+| PAT-21 | `complete_patient_profile_screen.dart` | auth | editing, success | detail + bottomAction، `scrollable:true` | 3.5 |
 
 ## 7. البنية الدقيقة المقترحة
 
@@ -223,7 +226,7 @@ lib/src/features/
 | `doctorDetails` | `/doctors/:doctorId` | `doctorId`، canonical `doc-001` |
 | `serviceDetails` | `/services/:serviceId` | `serviceId`، canonical `svc-family-consult` |
 | `facilityDetails` | `/facilities/:facilityId` | `facilityId`، canonical `fac-aafiatak-tahrir` |
-| `availability` | `/availability` | لا شيء |
+| `availability` | `/availability` | `state`: bookable أو no-capacity، default bookable |
 | `bookingReview` | `/booking/review` | الحالة local |
 | `payment` | `/payment` | لا شيء |
 | `paymentResult` | `/payment/result` | لا شيء |
@@ -243,6 +246,7 @@ lib/src/features/
 ### Route parsing mappings — إلزامية
 
 - PAT-10: `policy=facility` يتحول صراحةً إلى `BookingPaymentPolicy.payAtFacility`. القيمة `paid` أو query المفقود أو أي قيمة غير معروفة تتحول إلى `BookingPaymentPolicy.paid`. لا تستخدم parsing مباشرًا باسم enum.
+- PAT-06: `state=no-capacity` يتحول صراحةً إلى `AvailabilityDemoState.noCapacity`. القيمة `bookable` أو query المفقود أو أي قيمة غير معروفة تتحول إلى `AvailabilityDemoState.bookable`.
 - PAT-14: اسم الحالة canonical في High-Fidelity والعقد الخارجي هو `checked-in-waiting`. عند بناء Flutter يتحول `state=checked-in-waiting` إلى `VisitQueueDemoState.waiting`؛ أما `called` و`completed` فيتحولان إلى القيم المناظرة. query المفقود أو غير المعروف يعود إلى `VisitQueueDemoState.waiting`. لا تستخدم parsing مباشرًا باسم enum.
 
 Feature screens لا تستورد `go_router` أو `app_routes.dart`. كل التنقل الخارجي عبر callbacks. Developer B يملك route integration بعد دمج Feature PRs الثلاثة.
@@ -258,7 +262,7 @@ Feature screens لا تستورد `go_router` أو `app_routes.dart`. كل ال�
 | PAT-03 | `DoctorDetailsScreen` يأخذ `doctorId` وcallbacks facility/service/availability |
 | PAT-04 | `ServiceDetailsScreen` يأخذ `serviceId` وcallbacks facility/availability |
 | PAT-05 | `FacilityDetailsScreen` يأخذ `facilityId` وcallbacks doctor/service/showLocation/call |
-| PAT-06 | `AvailabilityScreen` يأخذ `onReviewTap` و`onAvailabilityAlertRequested` |
+| PAT-06 | `AvailabilityScreen` يأخذ `AvailabilityDemoState initialState` و`onReviewTap` و`onAvailabilityAlertRequested` |
 | PAT-07 | `BookingReviewScreen` يأخذ `onPaymentTap` فقط؛ الانتقال بين الحالتين محلي |
 | PAT-08 | `PaymentScreen` يأخذ `onPaymentResultTap` |
 | PAT-09 | `PaymentResultScreen` يأخذ `onConfirmationTap` |
@@ -273,7 +277,7 @@ Feature screens لا تستورد `go_router` أو `app_routes.dart`. كل ال�
 | PAT-18 | `AuthEntryScreen` يأخذ `ValueChanged<AuthIntent> onPhoneRequested` و`onBrowseTap` |
 | PAT-19 | `PhoneScreen` يأخذ `AuthIntent` و`onOtpRequested` |
 | PAT-20 | `WhatsAppOtpScreen` يأخذ `AuthIntent` وcallbacks changePhone/verifyRequested/resendRequested presentation-only |
-| PAT-21 | `CompletePatientProfileScreen` يأخذ `onFinished`؛ editing إلى success محلي |
+| PAT-21 | `CompletePatientProfileScreen` يأخذ `onFinished`؛ editing إلى success محلي، ويحتفظ success بزر «متابعة» داخل body مع bottom action المرجعي |
 
 الـcallback presentation-only يجب أن يبقي العنصر Enabled بصريًا إذا كان كذلك في High-Fidelity، لكنه لا ينشئ State خارج الـ28.
 
@@ -320,7 +324,7 @@ Pilot gate لكل عضو: screenshots عند 360×800 و390×844، RTL/LTR صح�
 
 ## 15. Git / PR Workflow
 
-1. بعد دمج هذا PR، المنسق يعلن `IMPLEMENTATION_BASELINE_SHA`.
+1. بعد دفع تنظيف Design System وجلب أحدث `origin/develop`، المنسق يعلن `IMPLEMENTATION_BASELINE_SHA`.
 2. A وB وC ينشئون فروعهم من SHA نفسه.
 3. لا تعديل مباشر على `develop` أو `main`.
 4. كل عضو يعمل 3–5 commits منطقية تقريبًا: Pilot، Features، QA/review fixes.
@@ -357,7 +361,7 @@ Pilot gate لكل عضو: screenshots عند 360×800 و390×844، RTL/LTR صح�
 - notifications إلى appointment/payment/visit.
 - auth login: auth → phone → OTP → home.
 - auth register: auth → phone → OTP → complete profile → home.
-- Query defaults لـPAT-01 وPAT-10 وPAT-14 وAuth intent، مع تطبيق mappings المحددة في قسم Routes.
+- Query defaults لـPAT-01 وPAT-06 وPAT-10 وPAT-14 وAuth intent، مع تطبيق mappings المحددة في قسم Routes.
 - جميع 21 destination قابلة للوصول، وجميع 28 state قابلة للمراجعة بدون debug controls ظاهرة للمستخدم.
 
 ## 18. مراجعات الخطة بعد التصحيح
@@ -376,11 +380,10 @@ Pilot gate لكل عضو: screenshots عند 360×800 و390×844، RTL/LTR صح�
 - **Member Consistency Audit:** PASS — ملفات A/B/C تستخدم Implementation Baseline placeholder نفسه وتتفق مع Master.
 - **Student Usability Audit:** PASS — كل ملف عضو self-contained ومهامه بالترتيب مع Creates/Uses/Acceptance/Validation/Commit.
 
-### Baseline validation الذي نفذه Agent قبل إعداد الخطة
+### Baseline validation قبل بدء الفروع
 
-- `flutter pub get`: ناجح.
-- `dart format --output=none --set-exit-if-changed lib`: ناجح، 0 تغييرات.
-- `flutter analyze`: ناجح، بلا issues.
-- `flutter build apk --debug`: ناجح.
+قبل إعلان `IMPLEMENTATION_BASELINE_SHA` يشغّل المنسق `flutter pub get` وformat
+check و`flutter analyze`، ويبني APK debug عندما تكون Android tooling متاحة.
 
-لا يوجد blocker تخطيطي متبقٍ بعد اعتماد ودمج هذا PR وتسجيل `IMPLEMENTATION_BASELINE_SHA` الجديد.
+لا يوجد blocker تخطيطي متبقٍ بعد دفع تنظيف Design System وتسجيل
+`IMPLEMENTATION_BASELINE_SHA` من أحدث `origin/develop`.

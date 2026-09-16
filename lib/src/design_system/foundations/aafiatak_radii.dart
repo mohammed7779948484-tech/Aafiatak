@@ -9,5 +9,6 @@ abstract final class AafiatakRadii {
 
   static const medium = BorderRadius.all(Radius.circular(12));
   static const large = BorderRadius.all(Radius.circular(16));
+  static const extraLarge = BorderRadius.all(Radius.circular(24));
   static const full = BorderRadius.all(Radius.circular(999));
 }

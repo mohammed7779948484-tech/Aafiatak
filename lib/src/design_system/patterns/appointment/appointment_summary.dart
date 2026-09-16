@@ -37,9 +37,7 @@ class AppointmentSummary extends StatelessWidget {
           const SizedBox(height: AafiatakSpacing.space8),
           Text(
             doctor,
-            style: AafiatakTypography.titleLarge.copyWith(
-              fontWeight: FontWeight.w700,
-            ),
+            style: AafiatakTypography.h3.copyWith(fontWeight: FontWeight.w700),
           ),
           const SizedBox(height: 2),
           Text('$facility · $branch', style: AafiatakTypography.bodySmall),

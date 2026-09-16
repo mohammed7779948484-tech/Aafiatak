@@ -24,7 +24,7 @@ class AafiatakSectionHeading extends StatelessWidget {
           flex: 2,
           child: Text(
             label,
-            style: AafiatakTypography.titleLarge.copyWith(
+            style: AafiatakTypography.h3.copyWith(
               color: AafiatakColors.textPrimary,
               fontWeight: FontWeight.w600,
             ),
@@ -37,7 +37,7 @@ class AafiatakSectionHeading extends StatelessWidget {
               visibleMeta,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: AafiatakTypography.labelSmall.copyWith(
+              style: AafiatakTypography.caption.copyWith(
                 color: AafiatakColors.textSecondary,
               ),
             ),

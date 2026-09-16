@@ -12,27 +12,27 @@ abstract final class AafiatakTheme {
   static const ColorScheme colorScheme = ColorScheme(
     brightness: Brightness.light,
     primary: AafiatakColors.primary,
-    onPrimary: AafiatakColors.onPrimary,
+    onPrimary: AafiatakColors.surface,
     primaryContainer: AafiatakColors.primaryContainer,
     onPrimaryContainer: AafiatakColors.onPrimaryContainer,
-    primaryFixed: AafiatakColors.primaryFixed,
+    primaryFixed: AafiatakColors.primaryContainer,
     primaryFixedDim: AafiatakColors.primaryFixedDim,
     onPrimaryFixed: AafiatakColors.onPrimaryContainer,
-    secondary: AafiatakColors.secondary,
-    onSecondary: AafiatakColors.onSecondary,
-    secondaryContainer: AafiatakColors.secondaryContainer,
-    onSecondaryContainer: AafiatakColors.onSecondaryContainer,
-    secondaryFixed: AafiatakColors.secondaryFixed,
-    secondaryFixedDim: AafiatakColors.secondaryFixedDim,
+    secondary: AafiatakColors.primary,
+    onSecondary: AafiatakColors.surface,
+    secondaryContainer: AafiatakColors.surfaceContainer,
+    onSecondaryContainer: AafiatakColors.textPrimary,
+    secondaryFixed: AafiatakColors.surfaceContainer,
+    secondaryFixedDim: AafiatakColors.surfaceHighest,
     onSecondaryFixed: AafiatakColors.textPrimary,
-    tertiary: AafiatakColors.tertiary,
-    onTertiary: AafiatakColors.onTertiary,
-    tertiaryContainer: AafiatakColors.tertiaryContainer,
-    onTertiaryContainer: AafiatakColors.onTertiaryContainer,
-    error: AafiatakColors.error,
-    onError: AafiatakColors.onError,
-    errorContainer: AafiatakColors.errorContainer,
-    onErrorContainer: AafiatakColors.onErrorContainer,
+    tertiary: AafiatakColors.onPrimaryContainer,
+    onTertiary: AafiatakColors.surface,
+    tertiaryContainer: AafiatakColors.primaryContainer,
+    onTertiaryContainer: AafiatakColors.onPrimaryContainer,
+    error: AafiatakColors.critical,
+    onError: AafiatakColors.surface,
+    errorContainer: AafiatakColors.surfaceContainer,
+    onErrorContainer: AafiatakColors.textPrimary,
     surface: AafiatakColors.surface,
     onSurface: AafiatakColors.textPrimary,
     surfaceDim: AafiatakColors.canvas,
@@ -55,10 +55,11 @@ abstract final class AafiatakTheme {
       useMaterial3: true,
       brightness: Brightness.light,
       colorScheme: colorScheme,
+      fontFamily: AafiatakTypography.fontFamily,
       scaffoldBackgroundColor: AafiatakColors.canvas,
       textTheme: textTheme,
       dividerTheme: const DividerThemeData(
-        color: AafiatakColors.outline,
+        color: AafiatakColors.borderSubtle,
         thickness: 1,
         space: 1,
       ),
@@ -69,7 +70,7 @@ abstract final class AafiatakTheme {
         elevation: 0,
         scrolledUnderElevation: 0,
         centerTitle: false,
-        titleTextStyle: textTheme.titleLarge?.copyWith(
+        titleTextStyle: textTheme.labelLarge?.copyWith(
           fontWeight: FontWeight.w700,
         ),
       ),
@@ -80,7 +81,7 @@ abstract final class AafiatakTheme {
         margin: EdgeInsets.zero,
         shape: RoundedRectangleBorder(
           borderRadius: AafiatakRadii.large,
-          side: BorderSide(color: AafiatakColors.outline, width: 1),
+          side: BorderSide(color: AafiatakColors.borderSubtle, width: 1),
         ),
       ),
       // الأحجام والحواف مشتركة، بينما يحدد نوع الزر ألوانه الدلالية.
@@ -147,15 +148,15 @@ abstract final class AafiatakTheme {
         ),
         focusedBorder: const OutlineInputBorder(
           borderRadius: AafiatakRadii.medium,
-          borderSide: BorderSide(color: AafiatakColors.focus, width: 2),
+          borderSide: BorderSide(color: AafiatakColors.primary, width: 2),
         ),
         errorBorder: const OutlineInputBorder(
           borderRadius: AafiatakRadii.medium,
-          borderSide: BorderSide(color: AafiatakColors.error, width: 1),
+          borderSide: BorderSide(color: AafiatakColors.critical, width: 1),
         ),
         focusedErrorBorder: const OutlineInputBorder(
           borderRadius: AafiatakRadii.medium,
-          borderSide: BorderSide(color: AafiatakColors.error, width: 2),
+          borderSide: BorderSide(color: AafiatakColors.critical, width: 2),
         ),
         labelStyle: textTheme.bodySmall?.copyWith(
           color: AafiatakColors.textSecondary,
@@ -201,7 +202,7 @@ abstract final class AafiatakTheme {
         labelStyle: textTheme.labelMedium?.copyWith(
           color: WidgetStateColor.resolveWith((states) {
             if (states.contains(WidgetState.selected)) {
-              return AafiatakColors.onPrimary;
+              return AafiatakColors.surface;
             }
             return AafiatakColors.textPrimary;
           }),
@@ -209,9 +210,40 @@ abstract final class AafiatakTheme {
         secondaryLabelStyle: textTheme.labelMedium?.copyWith(
           color: AafiatakColors.onPrimaryContainer,
         ),
-        side: const BorderSide(color: AafiatakColors.outline, width: 1),
+        side: WidgetStateBorderSide.resolveWith((states) {
+          return BorderSide(
+            color: states.contains(WidgetState.selected)
+                ? AafiatakColors.primary
+                : AafiatakColors.outline,
+          );
+        }),
         shape: const RoundedRectangleBorder(borderRadius: AafiatakRadii.full),
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        padding: const EdgeInsets.symmetric(
+          horizontal: AafiatakSpacing.space12,
+          vertical: AafiatakSpacing.space8,
+        ),
+      ),
+      segmentedButtonTheme: SegmentedButtonThemeData(
+        style: ButtonStyle(
+          minimumSize: const WidgetStatePropertyAll(Size(0, 44)),
+          backgroundColor: WidgetStateProperty.resolveWith((states) {
+            return states.contains(WidgetState.selected)
+                ? AafiatakColors.surface
+                : AafiatakColors.surfaceContainer;
+          }),
+          foregroundColor: WidgetStateProperty.resolveWith((states) {
+            return states.contains(WidgetState.selected)
+                ? AafiatakColors.primary
+                : AafiatakColors.textSecondary;
+          }),
+          textStyle: WidgetStatePropertyAll(textTheme.labelMedium),
+          side: const WidgetStatePropertyAll(
+            BorderSide(color: Colors.transparent),
+          ),
+          shape: const WidgetStatePropertyAll(
+            RoundedRectangleBorder(borderRadius: AafiatakRadii.medium),
+          ),
+        ),
       ),
       // يترك NavigationBar مسؤولًا عن التفاعل مع تطبيق هوية عافيتك فقط.
       navigationBarTheme: NavigationBarThemeData(
@@ -223,10 +255,12 @@ abstract final class AafiatakTheme {
             return textTheme.labelSmall?.copyWith(
               color: AafiatakColors.primary,
               fontWeight: FontWeight.w700,
+              height: 18 / 12,
             );
           }
           return textTheme.labelSmall?.copyWith(
             color: AafiatakColors.textSecondary,
+            height: 18 / 12,
           );
         }),
         iconTheme: WidgetStateProperty.resolveWith((states) {
