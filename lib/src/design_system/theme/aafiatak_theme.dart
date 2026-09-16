@@ -225,13 +225,18 @@ abstract final class AafiatakTheme {
       ),
       segmentedButtonTheme: SegmentedButtonThemeData(
         style: ButtonStyle(
-          minimumSize: const WidgetStatePropertyAll(Size(0, 44)),
           backgroundColor: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.disabled)) {
+              return AafiatakColors.surfaceContainer;
+            }
             return states.contains(WidgetState.selected)
                 ? AafiatakColors.surface
                 : AafiatakColors.surfaceContainer;
           }),
           foregroundColor: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.disabled)) {
+              return AafiatakColors.outlineStrong;
+            }
             return states.contains(WidgetState.selected)
                 ? AafiatakColors.primary
                 : AafiatakColors.textSecondary;

@@ -168,6 +168,7 @@ control داخل الشاشة.
 
 ```dart
 AvailabilityScreen(
+  initialState: AvailabilityDemoState.bookable,
   onReviewTap: () {
     Navigator.of(context).push(
       MaterialPageRoute(
