@@ -1,0 +1,4 @@
+enum AuthIntent {
+  login,
+  register,
+}

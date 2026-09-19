@@ -26,37 +26,45 @@ class ServiceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AafiatakCard(
-      onTap: onTap,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          AafiatakBadge(
-            label: badgeLabel,
-            tone: AafiatakFeedbackTone.secondary,
-          ),
-          const SizedBox(height: AafiatakSpacing.space8),
-          Text(
-            title,
-            style: AafiatakTypography.labelLarge.copyWith(
-              fontWeight: FontWeight.w700,
+    return SizedBox(
+      width: double.infinity,
+      child: AafiatakCard(
+        onTap: onTap,
+
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            AafiatakBadge(
+              label: badgeLabel,
+              tone: AafiatakFeedbackTone.secondary,
             ),
-          ),
-          const SizedBox(height: AafiatakSpacing.space4),
-          Directionality(
-            textDirection: TextDirection.ltr,
-            child: Text(
-              price,
-              style: AafiatakTypography.h3.copyWith(
-                color: AafiatakColors.primary,
+            const SizedBox(height: AafiatakSpacing.space8),
+            Text(
+              title,
+              style: AafiatakTypography.labelLarge.copyWith(
                 fontWeight: FontWeight.w700,
               ),
             ),
-          ),
-          const SizedBox(height: AafiatakSpacing.space4),
-          Text(policy, style: AafiatakTypography.bodySmall),
-        ],
+            const SizedBox(height: AafiatakSpacing.space4),
+            Align(
+              alignment: AlignmentDirectional.centerEnd,
+
+              child: Directionality(
+                textDirection: TextDirection.ltr,
+                child: Text(
+                  price,
+                  style: AafiatakTypography.h3.copyWith(
+                    color: AafiatakColors.primary,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: AafiatakSpacing.space4),
+            Text(policy, style: AafiatakTypography.bodySmall),
+          ],
+        ),
       ),
     );
   }
