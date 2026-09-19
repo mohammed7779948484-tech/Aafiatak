@@ -6,12 +6,12 @@ import '../../foundations/foundations.dart';
 ///
 /// لا يعني اشتراك المكونات في هذا النوع أنها تعرض اللون بالطريقة نفسها؛
 /// تختار الشارة والملاحظة وكتلة الحالة التكوين المناسب للسياق.
-enum AafiatakFeedbackTone { primary, secondary, success, warning, info, hold }
+enum AafiatakFeedbackTone { primary, secondary, success, warning, info }
 
 /// مجموعة ألوان بسيطة تستخدمها مكونات الحالة المشتركة.
 @immutable
 class AafiatakToneColors {
-  const AafiatakToneColors({
+  const AafiatakToneColors._({
     required this.foreground,
     required this.background,
   });
@@ -26,15 +26,14 @@ extension AafiatakFeedbackToneX on AafiatakFeedbackTone {
     switch (this) {
       case AafiatakFeedbackTone.primary:
       case AafiatakFeedbackTone.success:
-      case AafiatakFeedbackTone.hold:
-        return const AafiatakToneColors(
+        return const AafiatakToneColors._(
           foreground: AafiatakColors.onPrimaryContainer,
           background: AafiatakColors.primaryContainer,
         );
       case AafiatakFeedbackTone.secondary:
       case AafiatakFeedbackTone.info:
       case AafiatakFeedbackTone.warning:
-        return const AafiatakToneColors(
+        return const AafiatakToneColors._(
           foreground: AafiatakColors.textPrimary,
           background: AafiatakColors.surfaceContainer,
         );

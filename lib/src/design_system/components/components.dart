@@ -6,6 +6,5 @@ export 'feedback/aafiatak_status_block.dart';
 export 'inputs/aafiatak_text_field.dart';
 export 'inputs/aafiatak_search_field.dart';
 export 'layout/aafiatak_section_heading.dart';
-export 'states/aafiatak_empty_state.dart';
 export 'surfaces/aafiatak_card.dart';
 export 'surfaces/aafiatak_info_rows.dart';

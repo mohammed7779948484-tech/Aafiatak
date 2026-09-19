@@ -28,12 +28,10 @@ class WhatsAppOtpScreen extends StatefulWidget {
   final ValueChanged<String> onVerifyRequested;
 
   @override
-  State<WhatsAppOtpScreen> createState() =>
-      _WhatsAppOtpScreenState();
+  State<WhatsAppOtpScreen> createState() => _WhatsAppOtpScreenState();
 }
 
-class _WhatsAppOtpScreenState
-    extends State<WhatsAppOtpScreen> {
+class _WhatsAppOtpScreenState extends State<WhatsAppOtpScreen> {
   String _otpCode = AuthMockData.waitingOtpFixture;
 
   void _handleOtpChanged(String value) {
@@ -60,9 +58,7 @@ class _WhatsAppOtpScreenState
       ),
 
       body: Padding(
-        padding:  EdgeInsets.all(
-          AafiatakSpacing.space16,
-        ),
+        padding: EdgeInsets.all(AafiatakSpacing.space16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
@@ -72,27 +68,20 @@ class _WhatsAppOtpScreenState
               description: Text.rich(
                 TextSpan(
                   children: <InlineSpan>[
-                     TextSpan(
-                      text:
-                      'أرسلنا رمزًا لمرة واحدة إلى الرقم ',
-                    ),
+                    TextSpan(text: 'أرسلنا رمزًا لمرة واحدة إلى الرقم '),
                     WidgetSpan(
-                      alignment:
-                      PlaceholderAlignment.middle,
+                      alignment: PlaceholderAlignment.middle,
                       child: Directionality(
-                        textDirection:
-                        TextDirection.ltr,
+                        textDirection: TextDirection.ltr,
                         child: Text(
                           widget.phone,
-                          style:
-                          AafiatakTypography
-                              .bodySmall,
+                          style: AafiatakTypography.bodySmall,
                         ),
                       ),
                     ),
-                     TextSpan(
+                    TextSpan(
                       text:
-                      '. اكتب الرمز كما وصلك في واتساب. '
+                          '. اكتب الرمز كما وصلك في واتساب. '
                           'عدد الخانات ومدة الصلاحية يتبعان إعدادات الخدمة.',
                     ),
                   ],
@@ -100,75 +89,57 @@ class _WhatsAppOtpScreenState
               ),
             ),
 
-             SizedBox(
-              height: AafiatakSpacing.space24,
-            ),
+            SizedBox(height: AafiatakSpacing.space24),
 
             AafiatakCard(
               child: OtpInput(
                 length: AuthMockData.otpLength,
-                initialValue:
-                AuthMockData.waitingOtpFixture,
+                initialValue: AuthMockData.waitingOtpFixture,
                 onChanged: _handleOtpChanged,
               ),
             ),
 
-             SizedBox(
-              height: AafiatakSpacing.space16,
-            ),
+            SizedBox(height: AafiatakSpacing.space16),
 
             AafiatakCard(
               child: Column(
-                crossAxisAlignment:
-                CrossAxisAlignment.stretch,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                   AafiatakInfoRows(
+                  AafiatakInfoRows(
                     rows: <InfoRowItem>[
                       InfoRowItem(
                         label: 'إعادة الإرسال',
-                        value:
-                        'تتاح عند السماح بإعادة الإرسال',
+                        value: 'تتاح عند السماح بإعادة الإرسال',
                       ),
                     ],
                   ),
 
-                   SizedBox(
-                    height: AafiatakSpacing.space16,
-                  ),
+                  SizedBox(height: AafiatakSpacing.space16),
 
-                   Divider(),
+                  Divider(),
 
-                   SizedBox(
-                    height: AafiatakSpacing.space16,
-                  ),
+                  SizedBox(height: AafiatakSpacing.space16),
 
-                   VerifiedPhoneSummary(
+                  VerifiedPhoneSummary(
                     phone:
-                    // AuthMockData.maskedPhone
-                     widget.phone,
+                        // AuthMockData.maskedPhone
+                        widget.phone,
                   ),
 
-                   SizedBox(
-                    height: AafiatakSpacing.space20,
-                  ),
+                  SizedBox(height: AafiatakSpacing.space20),
 
                   AafiatakButton.secondary(
                     label: 'تغيير الرقم',
                     fullWidth: true,
-                    onPressed:
-                    widget.onChangePhone,
+                    onPressed: widget.onChangePhone,
                   ),
 
-                   SizedBox(
-                    height: AafiatakSpacing.space12,
-                  ),
+                  SizedBox(height: AafiatakSpacing.space12),
 
                   AafiatakButton.tonal(
                     label: 'إعادة الإرسال',
                     fullWidth: true,
-                    onPressed:
-                    widget
-                        .onResendRequested,
+                    onPressed: widget.onResendRequested,
                   ),
                 ],
               ),

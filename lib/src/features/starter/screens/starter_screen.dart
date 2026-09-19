@@ -13,13 +13,6 @@ class StarterScreen extends StatefulWidget {
 
 class _StarterScreenState extends State<StarterScreen> {
   PatientTab _currentTab = PatientTab.home;
-  final TextEditingController _searchController = TextEditingController();
-
-  @override
-  void dispose() {
-    _searchController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,10 +54,7 @@ class _StarterScreenState extends State<StarterScreen> {
               style: AafiatakTypography.body,
             ),
             const SizedBox(height: AafiatakSpacing.space24),
-            AafiatakSearchField(
-              controller: _searchController,
-              hintText: 'ابحث عن طبيب أو تخصص أو خدمة',
-            ),
+            const AafiatakSearchField(hintText: 'ابحث عن طبيب أو تخصص أو خدمة'),
             const SizedBox(height: AafiatakSpacing.space12),
             const AafiatakTextField(
               label: 'اسم المريض',
@@ -160,21 +150,8 @@ class _StarterScreenState extends State<StarterScreen> {
                 AafiatakButton.primary(label: 'أساسي', onPressed: () {}),
                 AafiatakButton.tonal(label: 'لوني', onPressed: () {}),
                 AafiatakButton.secondary(label: 'ثانوي', onPressed: () {}),
-                AafiatakButton.destructive(label: 'حذف', onPressed: () {}),
                 AafiatakButton.text(label: 'نصي', onPressed: () {}),
-                const AafiatakButton.primary(
-                  label: 'غير مفعّل',
-                  onPressed: null,
-                ),
               ],
-            ),
-            const _SectionGap(),
-            AafiatakEmptyState.withAction(
-              icon: Icons.calendar_month_outlined,
-              title: 'لا توجد مواعيد سابقة',
-              message: 'ستظهر المواعيد المكتملة في هذا السجل.',
-              actionLabel: 'استكشف الخدمات',
-              onAction: () {},
             ),
             const SizedBox(height: AafiatakSpacing.space32),
           ],

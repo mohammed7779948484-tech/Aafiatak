@@ -14,14 +14,7 @@ class AafiatakTextField extends StatelessWidget {
     this.label,
     this.hintText,
     this.helperText,
-    this.errorText,
     this.keyboardType,
-    this.onChanged,
-    this.onFieldSubmitted,
-    this.enabled = true,
-    this.maxLines = 1,
-    this.prefixIcon,
-    this.suffixIcon,
     this.textDirection,
   });
 
@@ -29,14 +22,7 @@ class AafiatakTextField extends StatelessWidget {
   final String? label;
   final String? hintText;
   final String? helperText;
-  final String? errorText;
   final TextInputType? keyboardType;
-  final ValueChanged<String>? onChanged;
-  final ValueChanged<String>? onFieldSubmitted;
-  final bool enabled;
-  final int maxLines;
-  final Widget? prefixIcon;
-  final Widget? suffixIcon;
   final TextDirection? textDirection;
 
   @override
@@ -44,19 +30,9 @@ class AafiatakTextField extends StatelessWidget {
     final visibleLabel = label;
     final field = TextFormField(
       controller: controller,
-      enabled: enabled,
       keyboardType: keyboardType,
-      maxLines: maxLines,
-      onChanged: onChanged,
-      onFieldSubmitted: onFieldSubmitted,
       textDirection: textDirection,
-      decoration: InputDecoration(
-        hintText: hintText,
-        helperText: helperText,
-        errorText: errorText,
-        prefixIcon: prefixIcon,
-        suffixIcon: suffixIcon,
-      ),
+      decoration: InputDecoration(hintText: hintText, helperText: helperText),
     );
 
     return Column(

@@ -5,31 +5,31 @@ import '../foundations/foundations.dart';
 /// المصدر المركزي لتنسيق عناصر Material 3 في تطبيق عافيتك.
 ///
 /// تعتمد الشاشات على [light] بدل تكرار الألوان والحواف محليًا. يربط
-/// [colorScheme] أدوار Material بالقيم المرجعية دون تغيير معنى أي Token.
+/// [light] أدوار Material بالقيم المرجعية دون تغيير معنى أي Token.
 abstract final class AafiatakTheme {
   const AafiatakTheme._();
 
-  static const ColorScheme colorScheme = ColorScheme(
+  static const ColorScheme _colorScheme = ColorScheme(
     brightness: Brightness.light,
     primary: AafiatakColors.primary,
     onPrimary: AafiatakColors.surface,
     primaryContainer: AafiatakColors.primaryContainer,
     onPrimaryContainer: AafiatakColors.onPrimaryContainer,
     primaryFixed: AafiatakColors.primaryContainer,
-    primaryFixedDim: AafiatakColors.primaryFixedDim,
+    primaryFixedDim: AafiatakColors.primaryContainer,
     onPrimaryFixed: AafiatakColors.onPrimaryContainer,
     secondary: AafiatakColors.primary,
     onSecondary: AafiatakColors.surface,
     secondaryContainer: AafiatakColors.surfaceContainer,
     onSecondaryContainer: AafiatakColors.textPrimary,
     secondaryFixed: AafiatakColors.surfaceContainer,
-    secondaryFixedDim: AafiatakColors.surfaceHighest,
+    secondaryFixedDim: AafiatakColors.surfaceContainer,
     onSecondaryFixed: AafiatakColors.textPrimary,
     tertiary: AafiatakColors.onPrimaryContainer,
     onTertiary: AafiatakColors.surface,
     tertiaryContainer: AafiatakColors.primaryContainer,
     onTertiaryContainer: AafiatakColors.onPrimaryContainer,
-    error: AafiatakColors.critical,
+    error: AafiatakColors.textPrimary,
     onError: AafiatakColors.surface,
     errorContainer: AafiatakColors.surfaceContainer,
     onErrorContainer: AafiatakColors.textPrimary,
@@ -40,12 +40,12 @@ abstract final class AafiatakTheme {
     surfaceContainerLowest: AafiatakColors.surface,
     surfaceContainerLow: AafiatakColors.surfaceLow,
     surfaceContainer: AafiatakColors.surfaceContainer,
-    surfaceContainerHigh: AafiatakColors.surfaceHigh,
-    surfaceContainerHighest: AafiatakColors.surfaceHighest,
+    surfaceContainerHigh: AafiatakColors.surfaceContainer,
+    surfaceContainerHighest: AafiatakColors.surfaceContainer,
     onSurfaceVariant: AafiatakColors.textSecondary,
     outline: AafiatakColors.outline,
     outlineVariant: AafiatakColors.outlineStrong,
-    scrim: AafiatakColors.scrim,
+    scrim: AafiatakColors.textPrimary,
   );
 
   static ThemeData get light {
@@ -54,7 +54,7 @@ abstract final class AafiatakTheme {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.light,
-      colorScheme: colorScheme,
+      colorScheme: _colorScheme,
       fontFamily: AafiatakTypography.fontFamily,
       scaffoldBackgroundColor: AafiatakColors.canvas,
       textTheme: textTheme,
@@ -130,7 +130,7 @@ abstract final class AafiatakTheme {
           textStyle: textTheme.labelLarge,
         ),
       ),
-      // الحدود وحالات التركيز والخطأ لكل TextFormField تأتي من هنا.
+      // الحدود وحالات التركيز لكل TextFormField تأتي من هنا.
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: AafiatakColors.surface,
@@ -150,28 +150,12 @@ abstract final class AafiatakTheme {
           borderRadius: AafiatakRadii.medium,
           borderSide: BorderSide(color: AafiatakColors.primary, width: 2),
         ),
-        errorBorder: const OutlineInputBorder(
-          borderRadius: AafiatakRadii.medium,
-          borderSide: BorderSide(color: AafiatakColors.critical, width: 1),
-        ),
-        focusedErrorBorder: const OutlineInputBorder(
-          borderRadius: AafiatakRadii.medium,
-          borderSide: BorderSide(color: AafiatakColors.critical, width: 2),
-        ),
-        labelStyle: textTheme.bodySmall?.copyWith(
-          color: AafiatakColors.textSecondary,
-        ),
         hintStyle: textTheme.bodyMedium?.copyWith(
           color: AafiatakColors.textSecondary,
         ),
         helperStyle: textTheme.bodySmall?.copyWith(
           color: AafiatakColors.textSecondary,
         ),
-        errorStyle: textTheme.bodySmall?.copyWith(
-          color: AafiatakColors.textPrimary,
-        ),
-        prefixIconColor: AafiatakColors.primary,
-        suffixIconColor: AafiatakColors.textSecondary,
       ),
       // يحاكي SearchBar حقل البحث المرتفع قليلًا في المرجع البصري.
       searchBarTheme: SearchBarThemeData(
@@ -197,8 +181,6 @@ abstract final class AafiatakTheme {
       chipTheme: ChipThemeData(
         backgroundColor: AafiatakColors.surface,
         selectedColor: AafiatakColors.primary,
-        disabledColor: AafiatakColors.surfaceContainer,
-        secondarySelectedColor: AafiatakColors.primaryContainer,
         labelStyle: textTheme.labelMedium?.copyWith(
           color: WidgetStateColor.resolveWith((states) {
             if (states.contains(WidgetState.selected)) {
@@ -206,9 +188,6 @@ abstract final class AafiatakTheme {
             }
             return AafiatakColors.textPrimary;
           }),
-        ),
-        secondaryLabelStyle: textTheme.labelMedium?.copyWith(
-          color: AafiatakColors.onPrimaryContainer,
         ),
         side: WidgetStateBorderSide.resolveWith((states) {
           return BorderSide(
@@ -226,17 +205,11 @@ abstract final class AafiatakTheme {
       segmentedButtonTheme: SegmentedButtonThemeData(
         style: ButtonStyle(
           backgroundColor: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.disabled)) {
-              return AafiatakColors.surfaceContainer;
-            }
             return states.contains(WidgetState.selected)
                 ? AafiatakColors.surface
                 : AafiatakColors.surfaceContainer;
           }),
           foregroundColor: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.disabled)) {
-              return AafiatakColors.outlineStrong;
-            }
             return states.contains(WidgetState.selected)
                 ? AafiatakColors.primary
                 : AafiatakColors.textSecondary;

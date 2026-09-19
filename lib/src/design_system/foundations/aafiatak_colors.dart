@@ -13,14 +13,11 @@ abstract final class AafiatakColors {
   static const surface = Color(0xFFFFFFFF);
   static const surfaceLow = Color(0xFFF7F7F7);
   static const surfaceContainer = Color(0xFFEFEFEF);
-  static const surfaceHigh = Color(0xFFEDEDED);
-  static const surfaceHighest = Color(0xFFD9D9D9);
 
   // المحتوى والمحور المحايد.
   static const textPrimary = Color(0xFF1A1A1A);
   static const textSecondary = Color(0xFF6E6E6E);
   static const outlineStrong = Color(0xFFB5B5B5);
-  static const critical = Color(0xFF1F1F1F);
 
   // الاسم الدلالي الوحيد للقيمة المشتركة بين الخلفية والحدود المرجعية.
   static const outline = canvas;
@@ -33,7 +30,6 @@ abstract final class AafiatakColors {
   static const primary = Color(0xFF800020);
   static const primaryContainer = Color(0xFFF7E9EC);
   static const onPrimaryContainer = Color(0xFF5C0016);
-  static const primaryFixedDim = Color(0xFFEBD0D6);
 
   // درجات شفافة ذات مستهلكين حقيقيين في النظام المشترك.
   static const borderSubtle = Color(0x141A1A1A);
@@ -41,5 +37,4 @@ abstract final class AafiatakColors {
   static const primaryBorderSubtle = Color(0x1F800020);
   static const surfaceTranslucent = Color(0xEBFFFFFF);
   static const shadowSubtle = Color(0x0E1A1A1A);
-  static const scrim = Color(0x9E141213);
 }

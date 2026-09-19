@@ -21,48 +21,41 @@ class AuthEntryScreen extends StatelessWidget {
       title: 'الدخول الة الحساب',
       scrollable: true,
 
-      
-      
       body: Padding(
-          padding:  const EdgeInsets.all(
-        AafiatakSpacing.space16, ),
+        padding: const EdgeInsets.all(AafiatakSpacing.space16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Icon(Icons.import_contacts ),
+            Icon(Icons.import_contacts),
             const AuthIntro(
-                eyebrow: "حساب المريض",
-                title: "الدخول إلى حسابك",
-                description: Text("استخدم رقم هاتفك ورمز تحقق لمرة واحدة يُرسل عبر واتساب")),
-          const  SizedBox(
-              height: AafiatakSpacing.space16
+              eyebrow: "حساب المريض",
+              title: "الدخول إلى حسابك",
+              description: Text(
+                "استخدم رقم هاتفك ورمز تحقق لمرة واحدة يُرسل عبر واتساب",
+              ),
             ),
+            const SizedBox(height: AafiatakSpacing.space16),
             _PasswordlessInfoCard(),
-            const  SizedBox(
-                height: AafiatakSpacing.space16
+            const SizedBox(height: AafiatakSpacing.space16),
+            AafiatakButton.primary(
+              label: "تسجيل الدخول",
+              onPressed: () {
+                onPhoneRequested(AuthIntent.login);
+              },
             ),
-            AafiatakButton.primary(label: "تسجيل الدخول",
-                onPressed: (){
-              onPhoneRequested(AuthIntent.login);
-                }),
-            const  SizedBox(
-                height: AafiatakSpacing.space20
+            const SizedBox(height: AafiatakSpacing.space20),
+            AafiatakButton.tonal(
+              label: "انشاء حساب مريض",
+              onPressed: () {
+                onPhoneRequested(AuthIntent.register);
+              },
             ),
-            AafiatakButton.tonal(label: "انشاء حساب مريض",
-                onPressed: (){
-                  onPhoneRequested(AuthIntent.register);
-                }),
-            const  SizedBox(
-                height: AafiatakSpacing.space32
-            ),
-            AafiatakButton.text(label: "العوده لتصفح",
-                onPressed: onBrowseTap)
-            
+            const SizedBox(height: AafiatakSpacing.space32),
+            AafiatakButton.text(label: "العوده لتصفح", onPressed: onBrowseTap),
           ],
         ),
-      
-
-    ));
+      ),
+    );
   }
 }
 
@@ -72,24 +65,25 @@ class _PasswordlessInfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const AafiatakCard(
-        child:Row(
-          children: [
-            Icon(Icons.icecream_outlined),
-            SizedBox(width: AafiatakSpacing.space16),
-            
-            Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("دخول بدون كلمة مرور", style: AafiatakTypography.h3),
-                    Text("التحقق يتم برمز لمرة واحدة عبر واتساب الرسمي. لا توجد كلمة مرور أو SMS.",
-                    style: AafiatakTypography.bodyLarge)
-                  ],
-                )
-            )
-          ],
-        )
+      child: Row(
+        children: [
+          Icon(Icons.icecream_outlined),
+          SizedBox(width: AafiatakSpacing.space16),
+
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("دخول بدون كلمة مرور", style: AafiatakTypography.h3),
+                Text(
+                  "التحقق يتم برمز لمرة واحدة عبر واتساب الرسمي. لا توجد كلمة مرور أو SMS.",
+                  style: AafiatakTypography.bodyLarge,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
-

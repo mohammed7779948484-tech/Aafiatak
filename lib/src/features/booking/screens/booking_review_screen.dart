@@ -94,14 +94,12 @@ class _BookingReviewScreenState extends State<BookingReviewScreen> {
               ),
               const SizedBox(height: AafiatakSpacing.space16),
               const AafiatakNotice(
-                message:
-                    'تم إنشاء حجز مؤقت. أكمل الدفع قبل انتهاء المدة لتأكيد الموعد.',
+                message: 'تم إنشاء حجز مؤقت. أكمل الدفع قبل انتهاء المدة لتأكيد الموعد.',
                 tone: AafiatakFeedbackTone.info,
               ),
             ] else
               const AafiatakNotice(
-                message:
-                    'راجع تفاصيل الموعد ثم أنشئ الحجز المؤقت للمتابعة إلى الدفع.',
+                message: 'راجع تفاصيل الموعد ثم أنشئ الحجز المؤقت للمتابعة إلى الدفع.',
                 tone: AafiatakFeedbackTone.info,
               ),
           ],
