@@ -18,6 +18,10 @@ dependencies:
 
 dev_dependencies:
   flutter_lints: ^6.0.0
+  flutter_test:
+    sdk: flutter
+  flutter_launcher_icons: ^0.14.4
+  rename: ^3.1.0
 
 flutter:
   uses-material-design: true
@@ -33,3 +37,13 @@ flutter:
           weight: 600
         - asset: assets/fonts/IBMPlexSansArabic-Bold.ttf
           weight: 700
+
+flutter_launcher_icons:
+  android: true
+  ios: false
+  image_path: "assets/brand/launcher_icon.png"
+  adaptive_icon_background: "#800020"
+  adaptive_icon_foreground: "assets/brand/launcher_foreground.png"
+
+flutter_launcher_name:
+  name: "عافيتك"
