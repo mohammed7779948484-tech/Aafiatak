@@ -67,8 +67,7 @@ class PaymentScreen extends StatelessWidget {
             ),
             const SizedBox(height: AafiatakSpacing.space16),
             const AafiatakNotice(
-              message:
-                  'سيتم الانتقال إلى الدفع الآمن، ولن يتم تأكيد الموعد إلا بعد نجاح عملية الدفع.',
+              message: 'سيتم الانتقال إلى الدفع الآمن، ولن يتم تأكيد الموعد إلا بعد نجاح عملية الدفع.',
               tone: AafiatakFeedbackTone.info,
             ),
           ],

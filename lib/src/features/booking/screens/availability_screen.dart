@@ -6,10 +6,7 @@ import 'package:aafiatak/src/design_system/design_system.dart';
 import '../mock_data.dart';
 
 class AvailabilityScreen extends StatefulWidget {
-  const AvailabilityScreen({
-    super.key,
-    required this.onReviewTap,
-  });
+  const AvailabilityScreen({super.key, required this.onReviewTap});
 
   final ValueChanged<AvailabilityDayMock> onReviewTap;
 
@@ -66,9 +63,11 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
                     spacing: AafiatakSpacing.space8,
                     runSpacing: AafiatakSpacing.space8,
                     children: [
-                      for (int index = 0;
-                          index < BookingMockData.availableDays.length;
-                          index++)
+                      for (
+                        int index = 0;
+                        index < BookingMockData.availableDays.length;
+                        index++
+                      )
                         ChoiceChip(
                           selected: index == _selectedDayIndex,
                           onSelected: (_) => _selectDay(index),

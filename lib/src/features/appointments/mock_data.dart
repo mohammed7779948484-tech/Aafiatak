@@ -35,10 +35,8 @@ class AppointmentMock {
   final String visitStatusLabel;
 }
 
-
 abstract final class AppointmentsMockData {
   static const List<AppointmentMock> upcomingAppointments = [
-
     AppointmentMock(
       id: 'apt-af-28931',
 

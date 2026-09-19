@@ -29,42 +29,21 @@ class AppointmentListCard extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(
-            height: AafiatakSpacing.space8,
-          ),
+          const SizedBox(height: AafiatakSpacing.space8),
 
-          Text(
-            appointment.doctorName,
-            style: AafiatakTypography.h3,
-          ),
+          Text(appointment.doctorName, style: AafiatakTypography.h3),
 
-          const SizedBox(
-            height: AafiatakSpacing.space4,
-          ),
+          const SizedBox(height: AafiatakSpacing.space4),
 
-          Text(
-            appointment.serviceName,
-            style: AafiatakTypography.body,
-          ),
+          Text(appointment.serviceName, style: AafiatakTypography.body),
 
-          const SizedBox(
-            height: AafiatakSpacing.space16,
-          ),
+          const SizedBox(height: AafiatakSpacing.space16),
 
           AafiatakInfoRows(
             rows: [
-              InfoRowItem(
-                label: 'المنشأة',
-                value: appointment.facilityName,
-              ),
-              InfoRowItem(
-                label: 'الفرع',
-                value: appointment.branchName,
-              ),
-              InfoRowItem(
-                label: 'التاريخ',
-                value: appointment.date,
-              ),
+              InfoRowItem(label: 'المنشأة', value: appointment.facilityName),
+              InfoRowItem(label: 'الفرع', value: appointment.branchName),
+              InfoRowItem(label: 'التاريخ', value: appointment.date),
               InfoRowItem(
                 label: 'وقت الدخول',
                 value: appointment.time,
@@ -73,14 +52,9 @@ class AppointmentListCard extends StatelessWidget {
             ],
           ),
 
-          const SizedBox(
-            height: AafiatakSpacing.space20,
-          ),
+          const SizedBox(height: AafiatakSpacing.space20),
 
-          AafiatakButton.secondary(
-            label: 'عرض التفاصيل',
-            onPressed: onTap,
-          ),
+          AafiatakButton.secondary(label: 'عرض التفاصيل', onPressed: onTap),
         ],
       ),
     );

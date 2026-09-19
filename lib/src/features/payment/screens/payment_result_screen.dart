@@ -7,10 +7,7 @@ import '../../booking/mock_data.dart';
 import '../mock_data.dart';
 
 class PaymentResultScreen extends StatelessWidget {
-  const PaymentResultScreen({
-    super.key,
-    required this.onAppointmentTap,
-  });
+  const PaymentResultScreen({super.key, required this.onAppointmentTap});
 
   final VoidCallback onAppointmentTap;
 

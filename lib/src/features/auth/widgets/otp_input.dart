@@ -27,24 +27,17 @@ class _OtpInputState extends State<OtpInput> {
   void initState() {
     super.initState();
 
-    _controllers = List<TextEditingController>.generate(
-      widget.length,
-          (int index) {
-        final String initialCharacter =
-        index < widget.initialValue.length
-            ? widget.initialValue[index]
-            : '';
+    _controllers = List<TextEditingController>.generate(widget.length, (
+      int index,
+    ) {
+      final String initialCharacter = index < widget.initialValue.length
+          ? widget.initialValue[index]
+          : '';
 
-        return TextEditingController(
-          text: initialCharacter,
-        );
-      },
-    );
+      return TextEditingController(text: initialCharacter);
+    });
 
-    _focusNodes = List<FocusNode>.generate(
-      widget.length,
-          (_) => FocusNode(),
-    );
+    _focusNodes = List<FocusNode>.generate(widget.length, (_) => FocusNode());
   }
 
   String get _currentCode {
@@ -53,10 +46,7 @@ class _OtpInputState extends State<OtpInput> {
         .join();
   }
 
-  void _handleChanged(
-      int index,
-      String value,
-      ) {
+  void _handleChanged(int index, String value) {
     if (value.isNotEmpty) {
       if (index < widget.length - 1) {
         _focusNodes[index + 1].requestFocus();
@@ -98,8 +88,7 @@ class _OtpInputState extends State<OtpInput> {
                   controller: _controllers[index],
                   focusNode: _focusNodes[index],
                   keyboardType: TextInputType.number,
-                  textInputAction:
-                  index == widget.length - 1
+                  textInputAction: index == widget.length - 1
                       ? TextInputAction.done
                       : TextInputAction.next,
                   textAlign: TextAlign.center,
@@ -112,9 +101,7 @@ class _OtpInputState extends State<OtpInput> {
                     LengthLimitingTextInputFormatter(1),
                   ],
                   style: AafiatakTypography.h3,
-                  decoration: const InputDecoration(
-                    counterText: '',
-                  ),
+                  decoration: const InputDecoration(counterText: ''),
                   onChanged: (String value) {
                     _handleChanged(index, value);
                   },
@@ -122,9 +109,7 @@ class _OtpInputState extends State<OtpInput> {
               ),
             ),
             if (index < widget.length - 1)
-              const SizedBox(
-                width: AafiatakSpacing.space8,
-              ),
+              const SizedBox(width: AafiatakSpacing.space8),
           ],
         ],
       ),

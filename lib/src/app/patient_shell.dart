@@ -26,13 +26,11 @@ enum PatientTab {
 ///
 /// استخدم وضع الشعار للرئيسية، ووضع العنوان لشاشات مثل «مواعيدي» و«حسابي».
 /// زر الإشعارات [IconButton] أصلي، ويأتي تنسيقه من `IconButtonThemeData`.
-class AafiatakRootAppBar extends StatelessWidget
+class _AafiatakRootAppBar extends StatelessWidget
     implements PreferredSizeWidget {
-  const AafiatakRootAppBar.brand({super.key, this.onNotificationPressed})
-    : title = null;
+  const _AafiatakRootAppBar.brand({this.onNotificationPressed}) : title = null;
 
-  const AafiatakRootAppBar.titled({
-    super.key,
+  const _AafiatakRootAppBar.titled({
     required this.title,
     this.onNotificationPressed,
   });
@@ -88,20 +86,17 @@ class AafiatakRootAppBar extends StatelessWidget
 ///
 /// لا ينفذ التنقل بنفسه عند تمرير [onBackPressed]؛ الشاشة أو الموجّه يحددان
 /// السلوك. يعزل [screenId] باتجاه LTR لأنه معرّف تقني وليس نصًا عربيًا.
-class AafiatakDetailAppBar extends StatelessWidget
+class _AafiatakDetailAppBar extends StatelessWidget
     implements PreferredSizeWidget {
-  const AafiatakDetailAppBar({
-    super.key,
+  const _AafiatakDetailAppBar({
     required this.title,
     this.screenId,
     this.onBackPressed,
-    this.trailing,
   });
 
   final String title;
   final String? screenId;
   final VoidCallback? onBackPressed;
-  final Widget? trailing;
 
   @override
   Size get preferredSize => const Size.fromHeight(69);
@@ -128,7 +123,7 @@ class AafiatakDetailAppBar extends StatelessWidget
           Text(title, maxLines: 1, overflow: TextOverflow.ellipsis),
         ],
       ),
-      actions: <Widget>[trailing ?? const SizedBox(width: 48)],
+      actions: const <Widget>[SizedBox(width: 48)],
       bottom: const PreferredSize(
         preferredSize: Size.fromHeight(1),
         child: Divider(height: 1),
@@ -141,9 +136,8 @@ class AafiatakDetailAppBar extends StatelessWidget
 ///
 /// يعرض الحالة الحالية ويرسل اختيار المستخدم فقط؛ تحويل الاختيار إلى مسار
 /// يبقى في التطبيق أو الشاشة ولا يوضع داخل هذا التركيب المشترك.
-class AafiatakBottomNav extends StatelessWidget {
-  const AafiatakBottomNav({
-    super.key,
+class _AafiatakBottomNav extends StatelessWidget {
+  const _AafiatakBottomNav({
     required this.activeTab,
     required this.onTabSelected,
   });
@@ -172,8 +166,8 @@ class AafiatakBottomNav extends StatelessWidget {
 ///
 /// تعتمد على [BottomAppBar] وتستقبل المحتوى فقط، لذلك لا تفرض منطقًا أو زرًا
 /// بعينه على الشاشة.
-class AafiatakBottomAction extends StatelessWidget {
-  const AafiatakBottomAction({super.key, required this.child});
+class _AafiatakBottomAction extends StatelessWidget {
+  const _AafiatakBottomAction({required this.child});
 
   final Widget child;
 
@@ -207,12 +201,11 @@ class PatientShell extends StatelessWidget {
     this.activeTab,
     this.onTabSelected,
     this.onNotificationPressed,
-    this.bottomAction,
     this.scrollable = false,
   }) : root = true,
        screenId = null,
        onBackPressed = null,
-       trailing = null,
+       bottomAction = null,
        assert(
          (activeTab == null) == (onTabSelected == null),
          'يجب تمرير activeTab وonTabSelected معًا.',
@@ -224,7 +217,6 @@ class PatientShell extends StatelessWidget {
     required this.title,
     this.screenId,
     this.onBackPressed,
-    this.trailing,
     this.bottomAction,
     this.scrollable = false,
   }) : root = false,
@@ -240,16 +232,15 @@ class PatientShell extends StatelessWidget {
   final ValueChanged<PatientTab>? onTabSelected;
   final VoidCallback? onBackPressed;
   final VoidCallback? onNotificationPressed;
-  final Widget? trailing;
   final Widget? bottomAction;
   final bool scrollable;
 
   @override
   Widget build(BuildContext context) {
     final bottomBar = bottomAction != null
-        ? AafiatakBottomAction(child: bottomAction!)
+        ? _AafiatakBottomAction(child: bottomAction!)
         : activeTab != null
-        ? AafiatakBottomNav(
+        ? _AafiatakBottomNav(
             activeTab: activeTab!,
             onTabSelected: onTabSelected!,
           )
@@ -258,18 +249,17 @@ class PatientShell extends StatelessWidget {
     return Scaffold(
       appBar: root
           ? title.isEmpty
-                ? AafiatakRootAppBar.brand(
+                ? _AafiatakRootAppBar.brand(
                     onNotificationPressed: onNotificationPressed,
                   )
-                : AafiatakRootAppBar.titled(
+                : _AafiatakRootAppBar.titled(
                     title: title,
                     onNotificationPressed: onNotificationPressed,
                   )
-          : AafiatakDetailAppBar(
+          : _AafiatakDetailAppBar(
               title: title,
               screenId: screenId,
               onBackPressed: onBackPressed,
-              trailing: trailing,
             ),
       body: SafeArea(
         top: false,

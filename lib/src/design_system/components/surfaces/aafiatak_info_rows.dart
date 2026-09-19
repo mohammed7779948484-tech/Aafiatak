@@ -15,10 +15,7 @@ class InfoRowItem {
 }
 
 class AafiatakInfoRows extends StatelessWidget {
-  const AafiatakInfoRows({
-    super.key,
-    required this.rows,
-  });
+  const AafiatakInfoRows({super.key, required this.rows});
 
   final List<InfoRowItem> rows;
 
@@ -28,12 +25,8 @@ class AafiatakInfoRows extends StatelessWidget {
       children: [
         for (int i = 0; i < rows.length; i++)
           Padding(
-            padding: EdgeInsets.only(
-              top: i == 0 ? 0 : AafiatakSpacing.space12,
-            ),
-            child: _InfoRow(
-              item: rows[i],
-            ),
+            padding: EdgeInsets.only(top: i == 0 ? 0 : AafiatakSpacing.space12),
+            child: _InfoRow(item: rows[i]),
           ),
       ],
     );
@@ -41,9 +34,7 @@ class AafiatakInfoRows extends StatelessWidget {
 }
 
 class _InfoRow extends StatelessWidget {
-  const _InfoRow({
-    required this.item,
-  });
+  const _InfoRow({required this.item});
 
   final InfoRowItem item;
 
@@ -62,19 +53,13 @@ class _InfoRow extends StatelessWidget {
           ),
         ),
 
-        const SizedBox(
-          width: AafiatakSpacing.space12,
-        ),
+        const SizedBox(width: AafiatakSpacing.space12),
 
         Expanded(
           child: Text(
             item.value,
-            textDirection: item.isLtr
-                ? TextDirection.ltr
-                : TextDirection.rtl,
-            textAlign: item.isLtr
-                ? TextAlign.end
-                : TextAlign.start,
+            textDirection: item.isLtr ? TextDirection.ltr : TextDirection.rtl,
+            textAlign: item.isLtr ? TextAlign.end : TextAlign.start,
             style: AafiatakTypography.label.copyWith(
               color: AafiatakColors.textPrimary,
               fontWeight: FontWeight.w600,

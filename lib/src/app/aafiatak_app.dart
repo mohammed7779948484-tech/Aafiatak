@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import '../design_system/design_system.dart';
-import 'routing/app_router.dart';
+import 'patient_flow.dart';
 
 class AafiatakApp extends StatelessWidget {
   const AafiatakApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
+    return MaterialApp(
       title: 'عافيتك',
       debugShowCheckedModeBanner: false,
       theme: AafiatakTheme.light,
@@ -20,7 +20,7 @@ class AafiatakApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      routerConfig: appRouter,
+      home: const PatientFlow(),
     );
   }
 }
