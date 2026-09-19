@@ -302,10 +302,29 @@ class _BrandMark extends StatelessWidget {
           ),
         ],
       ),
-      child: const Icon(
-        Icons.health_and_safety_outlined,
-        color: AafiatakColors.surface,
-        size: 20,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Container(
+            width: 24,
+            height: 24,
+            decoration: const BoxDecoration(
+              color: AafiatakColors.surface,
+              shape: BoxShape.circle,
+            ),
+          ),
+          Positioned(
+            top: 20,
+            child: Container(
+              width: 9,
+              height: 9,
+              decoration: const BoxDecoration(
+                color: AafiatakColors.primary,
+                shape: BoxShape.circle,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
