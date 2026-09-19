@@ -13,9 +13,6 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  # Routing
-  go_router: ^18.0.1
-
 dev_dependencies:
   flutter_lints: ^6.0.0
   flutter_test:
